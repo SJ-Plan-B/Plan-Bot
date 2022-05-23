@@ -9,14 +9,6 @@ module.exports =
 
 	async execute(interaction)
 	{
-<<<<<<< Updated upstream
-		const url = interaction.options.getInteger('url');
-
-		
-
-		interaction.reply({ content: `Successfully pruned \`${url}\` messages.`, ephemeral: true });
-		return true;
-=======
 		const url = interaction.options.getString('url');
 		const voiceChannel = interaction.member.voice.channel;
 		if (!voiceChannel)
@@ -25,6 +17,5 @@ module.exports =
 		  );
 		interaction.reply('playing '+url)
 		return (url, interaction);
->>>>>>> Stashed changes
 	},
 };
