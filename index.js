@@ -27,6 +27,28 @@ for (const file of eventFiles) {
 	}
 }
 
+<<<<<<< Updated upstream
+=======
+
+const client = new Client({intents: [Intents.FLAGS.GUILDS]});
+
+//
+// event-handling
+//
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+	const filePath = path.join(eventsPath, file);
+	const event = require(filePath);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args));
+	}
+}
+
+>>>>>>> Stashed changes
 //
 // command-handling
 //
