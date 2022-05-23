@@ -26,8 +26,7 @@ module.exports =
 					});
 			});
 
-		return interaction.reply(
-			{ content: `Successfully pruned \`${amount}\` messages.`, ephemeral: true 
-				});
+		interaction.reply({ content: `Successfully pruned \`${amount}\` messages.`, ephemeral: true });
+		return true;
 	},
 };

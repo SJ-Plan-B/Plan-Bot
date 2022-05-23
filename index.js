@@ -4,9 +4,19 @@ const { Client, Collection, Intents } = require('discord.js');
 const { MessageEmbed } = require('discord.js');
 const { token } = require('./config.json');
 const ytdl = require('ytdl-core');
+const { get } = require('node:http');
+const { channel } = require('node:diagnostics_channel');
 const queue = new Map();
 
-const client = new Client({intents: [Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILDS]});
+const client = new Client(
+{intents: [
+			Intents.FLAGS.GUILDS,
+			Intents.FLAGS.GUILD_VOICE_STATES,
+			Intents.FLAGS.GUILD_MESSAGES,
+			Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+			Intents.FLAGS.DIRECT_MESSAGES
+		  ]
+});
 
 //
 // event-handling
@@ -45,11 +55,19 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	const command = client.commands.get(interaction.commandName);
-
+	var channel = interaction.channel.id;
 	if (!command) return;
 
 	try {
-		await command.execute(interaction);
+		if (interaction.commandName === 'prune') {
+			let returnvalue = await command.execute(interaction);
+			 console.log('prune!'+ returnvalue);
+			 if (returnvalue===true) {console.log('channelID '+ channel);}
+		} else {
+			await command.execute(interaction);	
+		}
+		channel.send('return to command via idnex')
+		
 	} catch (error) {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
