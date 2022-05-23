@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Intents } = require('discord.js');
+const { Client, Collection, Intents, Message, Channel } = require('discord.js');
 const { MessageEmbed } = require('discord.js');
 const { token } = require('./config.json');
 const ytdl = require('ytdl-core');
@@ -55,24 +55,30 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
 	const command = client.commands.get(interaction.commandName);
-	var channel = interaction.channel.id;
+	const channelID = interaction.channel.id;
 	if (!command) return;
 
 	try {
 		if (interaction.commandName === 'prune') {
 			let returnvalue = await command.execute(interaction);
 			 console.log('prune!'+ returnvalue);
-			 if (returnvalue===true) {console.log('channelID '+ channel);}
+			 if (returnvalue===true) {console.log('channelID '+ channelID); sendMessage(channelID);}
 		} else {
 			await command.execute(interaction);	
 		}
-		channel.send('return to command via idnex')
 		
 	} catch (error) {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
+//
+//send message to channel by id
+//
+async function sendMessage(cID){
+	const channel = cID;
+	 client.channels.cache.get(channel).send("hello world");	
+};
 //
 //Login
 //

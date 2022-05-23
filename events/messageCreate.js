@@ -7,8 +7,6 @@ module.exports = {
 			return messageCreate.reply('Pong!')
 		}else if (messageCreate.content.startsWith("Pong!") && messageCreate.author.id === clientId) {
 			console.log('Bot: Pong!')
-		}else{
-			console.log('false Ping!')
-		}
+		}else{}
 	},
 };
