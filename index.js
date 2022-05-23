@@ -3,8 +3,7 @@ const path = require('node:path');
 const { Client, Collection, Intents } = require('discord.js');
 const { MessageEmbed } = require('discord.js');
 const { token } = require('./config.json');
-const ytdl = require('ytdl-core');
-const queue = new Map();
+
 
 const client = new Client({intents: [Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILDS]});
 
@@ -27,28 +26,6 @@ for (const file of eventFiles) {
 	}
 }
 
-<<<<<<< Updated upstream
-=======
-
-const client = new Client({intents: [Intents.FLAGS.GUILDS]});
-
-//
-// event-handling
-//
-const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
-
-for (const file of eventFiles) {
-	const filePath = path.join(eventsPath, file);
-	const event = require(filePath);
-	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args));
-	} else {
-		client.on(event.name, (...args) => event.execute(...args));
-	}
-}
-
->>>>>>> Stashed changes
 //
 // command-handling
 //
