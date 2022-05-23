@@ -8,13 +8,13 @@ module.exports =
 
 	async execute(interaction) // Funktion des Comands
 	{
-		const zahl = getRandomArbitrary(1,2)
-		
+		const zahl = getRandomArbitrary(2)
+		//console.log(`${zahl}`)
 		switch(zahl){
-			case 1: ausgabe = "Zahl"
-				break
-			case 2: ausgabe = "Kopf"
-				break 
+			case 1:  ausgabe = "Zahl"
+				break;
+			case 2:  ausgabe = "Kopf"
+				break;
 			default: console.log("Fehler beim generiren der Zufals zahl")
 		}
 			
@@ -23,8 +23,6 @@ module.exports =
 	},
 };
 
-function getRandomArbitrary(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
+function getRandomArbitrary( max) {
+	return Math.floor(Math.random() * max);
   }
