@@ -97,7 +97,7 @@ async function musicPlayer(urlinput, serverQueue, messagechannel, voiceChannel) 
 		  url: songInfo.videoDetails.video_url,
 	 };
   
-	if (!serverQueue) {
+	//if (serverQueue) {
 	  const queueContruct = {
 		textChannel: messagechannel,
 		voiceChannel: voiceChannel,
@@ -114,17 +114,16 @@ async function musicPlayer(urlinput, serverQueue, messagechannel, voiceChannel) 
 	} catch (error) {
 		console.log('Error while song push into serverQueue 1')
 	}
-  
 	  try {
-		const connection = joinVoiceChannel({channelId: voiceChannel, guildId: serverQueue, adapterCreator: voiceChannel.guild.voiceAdapterCreator})
-		queueContruct.connection = connection;
+		 const connection = joinVoiceChannel({channelId: voiceChannel, guildId: serverQueue, adapterCreator: voiceChannel.guild.voiceAdapterCreator})
+		 serverQueue.connection = connection;
 		play(serverQueue, queueContruct.songs[0]);
 	  } catch (err) {
 		console.log(err);
 		queue.delete(serverQueue);
 		//return message.channel.send(err);
 	  }
-	} else {
+	/*} else {
 		try {
 			queueContruct.songs.push(song);	
 		} catch (error) {
@@ -132,7 +131,7 @@ async function musicPlayer(urlinput, serverQueue, messagechannel, voiceChannel) 
 		}
 	  
 	  //return message.channel.send(`${song.title} has been added to the queue!`);
-	}
+	}*/
   }
   
   function skip(message, serverQueue) {
@@ -164,9 +163,7 @@ async function musicPlayer(urlinput, serverQueue, messagechannel, voiceChannel) 
 	  queue.delete(guild.id);
 	  return;
 	}
-  
-//try {
-		const dispatcher = queueContruct.connection
+		const dispatcher = serverQueue.connection
 			.play(ytdl(song.url))
 			.on("finish", () => {
 			  serverQueue.songs.shift();
@@ -175,10 +172,7 @@ async function musicPlayer(urlinput, serverQueue, messagechannel, voiceChannel) 
 			.on("error", error => console.error(error));
 		  dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 		  serverQueue.textChannel.send(`Start playing: **${song.title}**`);
-/*
-	} catch (error) {
-		console.log('Error while definening dispatcher')
-	}*/
+
   }  
 //
 //Login
