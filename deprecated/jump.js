@@ -5,11 +5,13 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('jump')
-		.setDescription('jump multiple songs')
-        .addIntegerOption(option => option.setName('number').setDescription('number of songs')),
+		.setDescription('jump multiple songs'),
+        //.addIntegerOption(option => option.setName('number').setDescription('number of songs')),
         
 	async execute(interaction)
 	{
+
+		
 		try {
 			const number = interaction.options.getInteger('number');
 
