@@ -9,7 +9,8 @@ module.exports =
 
 	async execute(interaction) // Funktion des Comands
 	{
-		const amount = interaction.options.getInteger('amount');
+		try {
+			const amount = interaction.options.getInteger('amount');
 
 		if (amount < 1 || amount > 99) 
 		{
@@ -27,5 +28,10 @@ module.exports =
 
 		interaction.reply({ content: `Successfully pruned \`${amount}\` messages.`, ephemeral: true });
 		return true;
+		
+		} catch (error) {
+			console.error('Error while performing prune')
+		}
+		
 	},
 };

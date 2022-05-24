@@ -8,6 +8,11 @@ module.exports =
 
 	async execute(interaction) // Funktion des Comands
 	{
-		return interaction.reply('Boop!');
+		try {
+			return interaction.reply('Boop!');
+		} catch (error) {
+			console.error('Error while performing Beep!');
+		}
+		
 	},
 };

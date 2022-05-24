@@ -8,16 +8,25 @@ module.exports =
 
 	async execute(interaction) // Funktion des Comands
 	{
-        const rolle1 = getRandomArbitrary(1, 20)
-		const rolle2 = getRandomArbitrary(1, 20)
-		const rolle3 = getRandomArbitrary(1, 20)
+		
+		try {
+			const rolle1 = getRandomArbitrary(1, 20)
+			const rolle2 = getRandomArbitrary(1, 20)
+			const rolle3 = getRandomArbitrary(1, 20)
 		return interaction.reply({ content: `du hast eine: ${rolle1} ${rolle2} ${rolle3} Gewürfelt.`,});
+		} catch (error) {
+			console.error('Error while performing 3D20'); 
+		}
+        
 	},
 };
-
-function getRandomArbitrary(min, max)
+try {
+	function getRandomArbitrary(min, max)
 	{
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
 	}
+} catch (error) {
+	console.error('Error while performing Random Calculation In 3D20');
+}

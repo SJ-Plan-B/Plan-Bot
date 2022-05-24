@@ -9,7 +9,12 @@ module.exports =
 
 	async execute(interaction) // Funktion des Comands
 	{
-		const user = interaction.options.getUser('target');
-		return interaction.reply({ content: `You wanted to kick: ${user.username}`, ephemeral: true });
+		try {
+			const user = interaction.options.getUser('target');
+			return interaction.reply({ content: `You wanted to kick: ${user.username}`, ephemeral: true });
+		} catch (error) {
+			console.error('Error while performing Kick'); 
+		}
+
 	},
 };

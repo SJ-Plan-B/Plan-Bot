@@ -8,6 +8,10 @@ module.exports =
 
 	async execute(interaction)  // Funktion des Comands
 	{
-		return interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
+		try {
+			return interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
+		} catch (error) {
+			console.error('Error while performing server')
+		}
 	},
 };

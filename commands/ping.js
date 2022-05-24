@@ -7,6 +7,10 @@ module.exports =
 		.setDescription('Replies with Pong!'),
 	async execute(interaction) 
 	{
-		return interaction.reply(`${interaction.user.username} said Ping!\nPong!`);
+		try {
+			return interaction.reply(`${interaction.user.username} said Ping!\nPong!`);
+		} catch (error) {
+			console.error('Error while performing ping')
+		}
 	},
 };
