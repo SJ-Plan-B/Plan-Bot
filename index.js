@@ -1,11 +1,13 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Intents, Message, Channel, MessageEmbed } = require('discord.js');
-const { token, guildId } = require('./config.json');
+const music = require('@koenie06/discord.js-music')
 const ytdl = require('ytdl-core');
+const { Client, Collection, Intents, Message, Channel, MessageEmbed } = require('discord.js');
+const { VoiceConnection, joinVoiceChannel, } = require('@discordjs/voice');
+const { token, guildId } = require('./config.json');
 const { get } = require('node:http');
 const { channel } = require('node:diagnostics_channel');
-const { VoiceConnection, joinVoiceChannel, } = require('@discordjs/voice');
+
 
 
 const client = new Client(
