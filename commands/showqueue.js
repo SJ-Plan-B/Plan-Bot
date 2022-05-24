@@ -9,12 +9,39 @@ module.exports =
 
 	async execute(interaction)
 	{
-        try {
-            console.log(await(music.getQueue({ interaction: interaction })));
-            return	interaction.reply('Queue hast been pasted into console');
-		} catch (error) {
-			console.error('Error while performing showqueue')
+	
+		var queue = []
+		var result = []
+		queue = await(music.getQueue({ interaction: interaction }));
+		console.log(typeof queue)
+		//console.log(queue)
+		for (let index = 0; index < Object.keys(queue).length; index++) {
+			const myJSON = JSON.stringify(queue[index]);
+			const myArray = myJSON.split(",")
+			const slicerdicer = myArray[0];
+			result[index] = slicerdicer.slice(17);
+			console.log(result)
 		}
-       
+		interaction.reply('\`' + result.join(`\n`) + '\`');
 	},
 };
+
+/*
+var getObjectAsync = async function(bucket,key) {
+	try {
+	  const data = await s3
+		.getObject({ Bucket: bucket, Key: key })
+		.promise();
+		var contents = data.Body.toString('utf-8');
+		return contents;
+	} catch (err) {
+	  console.log(err);
+	}
+  }
+  var getObject = async function(bucket,key) {
+	  const contents = await getObjectAsync(bucket,key);
+	  console.log(contents.length);
+	  return contents;
+  }
+  getObject(bucket,key);
+  */

@@ -18,9 +18,9 @@ module.exports =
                 volume: volume
             })
             interaction.reply('volume set to '+volume);
-            }else{interaction.reply('incorrect volume')}
-                ;
-		   
+            }else{
+                interaction.reply('incorrect volume')
+                };
         } catch (error) {
             console.error('Error while performing volume')
         }
