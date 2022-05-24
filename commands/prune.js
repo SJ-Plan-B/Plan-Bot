@@ -27,7 +27,7 @@ module.exports =
 			});
 
 		interaction.reply({ content: `Successfully pruned \`${amount}\` messages.`, ephemeral: true });
-		return true;
+		return false;
 		
 		} catch (error) {
 			console.error('Error while performing prune')
