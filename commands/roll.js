@@ -3,8 +3,8 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 module.exports = 
 {
 	data: new SlashCommandBuilder() // Comand REG
-		.setName('würfel')
-		.setDescription('Würfelt einen Würfel')
+		.setName('roll')
+		.setDescription('roll a Dice')
         .addIntegerOption(option => option.setName('anzahl').setDescription('anzahl der würfe').setRequired(true))
         .addIntegerOption(option => option.setName('seitenzahl').setDescription('Seitenzahl des würfels').setRequired(true)),
 
