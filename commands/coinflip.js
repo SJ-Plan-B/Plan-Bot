@@ -10,7 +10,8 @@ module.exports =
 	{
 		const zahl = getRandomArbitrary(2)
 		//console.log(`${zahl}`)
-		switch(zahl){
+		switch(zahl)
+		{
 			case 1:  ausgabe = "Zahl"
 				break;
 			case 2:  ausgabe = "Kopf"
@@ -18,11 +19,11 @@ module.exports =
 			default: console.log("Fehler beim generiren der Zufals zahl")
 		}
 			
-
 		  return interaction.reply({ content: `Deine Münze ist auf ${ausgabe} gelandet!`,});
 	},
 };
 
-function getRandomArbitrary( max) {
+function getRandomArbitrary( max) 
+	{
 	return Math.floor(Math.random() * max);
-  }
+	}
