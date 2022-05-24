@@ -1,12 +1,26 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Intents } = require('discord.js');
-const { MessageEmbed } = require('discord.js');
-const { token } = require('./config.json');
+const music = require('@koenie06/discord.js-music')
 const ytdl = require('ytdl-core');
-const queue = new Map();
+const { Client, Collection, Intents, Message, Channel, MessageEmbed } = require('discord.js');
+const { VoiceConnection, joinVoiceChannel, } = require('@discordjs/voice');
+const { token, guildId } = require('./config.json');
+const { get } = require('node:http');
+const { channel } = require('node:diagnostics_channel');
 
-const client = new Client({intents: [Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILDS]});
+
+
+const client = new Client(
+{intents: [
+			Intents.FLAGS.GUILDS,
+			Intents.FLAGS.GUILD_VOICE_STATES,
+			Intents.FLAGS.GUILD_MESSAGES,
+			Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+			Intents.FLAGS.DIRECT_MESSAGES
+		  ]
+});
+
+const queue = new Map();
 
 //
 // event-handling
@@ -43,18 +57,36 @@ for (const file of commandFiles) {
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
-
+	const serverQueue = queue.get(interaction.guild.id);
 	const command = client.commands.get(interaction.commandName);
-
+	const channelID = interaction.channel.id;
+	const channel = interaction.channel;
 	if (!command) return;
 
 	try {
-		await command.execute(interaction);
+		if (interaction.commandName === 'prune') {
+			let returnvalue = await command.execute(interaction);
+			 console.log('prune!'+ returnvalue);
+			 if (returnvalue===true) {console.log('channelID '+ channelID); sendMessage(channelID);}
+		}else if (interaction.commandName === 'play'){
+			let url  = await command.execute(interaction);
+			console.log('play '+ url);
+		}else {
+			await command.execute(interaction);	
+		}
+		
 	} catch (error) {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
+//
+//send message to channel by id
+//
+async function sendMessage(cID){
+	const channel = cID;
+	 client.channels.cache.get(channel).send("hello world");	
+};
 //
 //Login
 //

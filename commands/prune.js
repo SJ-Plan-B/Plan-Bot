@@ -1,4 +1,3 @@
-
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
 module.exports = 
@@ -10,7 +9,8 @@ module.exports =
 
 	async execute(interaction) // Funktion des Comands
 	{
-		const amount = interaction.options.getInteger('amount');
+		try {
+			const amount = interaction.options.getInteger('amount');
 
 		if (amount < 1 || amount > 99) 
 		{
@@ -26,8 +26,12 @@ module.exports =
 					});
 			});
 
-		return interaction.reply(
-			{ content: `Successfully pruned \`${amount}\` messages.`, ephemeral: true 
-				});
+		interaction.reply({ content: `Successfully pruned \`${amount}\` messages.`, ephemeral: true });
+		return true;
+		
+		} catch (error) {
+			console.error('Error while performing prune')
+		}
+		
 	},
 };
