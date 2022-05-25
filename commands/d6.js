@@ -8,13 +8,13 @@ module.exports =
 
 	async execute(interaction) // Funktion des Comands
 	{
-		try {
+		try{
 			const rolle = getRandomArbitrary(1, 6)
 			return interaction.reply({ content: `du hast eine: ${rolle} Gewürfelt.`,});
-		} catch (error) {
-			console.error('Error while performing D6'); 
+		}catch(error){
+			console.warn('Error while performing D6');
+			console.error(error)
 		}
-
 	},
 };
 
@@ -25,6 +25,7 @@ try {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
 	}
-} catch (error) {
-	console.error('Error while performing Random Calculation In D6');
+}catch(error){
+	console.warn('Error while performing Random Calculation In D6');
+	console.error(error)
 }

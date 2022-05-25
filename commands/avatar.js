@@ -9,13 +9,15 @@ module.exports =
 
 	async execute(interaction)  // Funktion des Comands
 	{
-		try {
+		try{
 			const user = interaction.options.getUser('target');
-			if (user) return interaction.reply(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
-			return interaction.reply(`Your avatar: ${interaction.user.displayAvatarURL({ dynamic: true })}`);
-		} catch (error) {
-			console.error('Error while performing avatar'); 
-		}
 
+			if(user)
+			return interaction.reply(`${await(user.username)}'s avatar: ${await(user.displayAvatarURL({ dynamic: true }))}`);
+			return interaction.reply(`Your avatar: ${await(interaction.user.displayAvatarURL({ dynamic: true }))}`);
+		}catch(error){
+			console.warn('Error while performing avatar'); 
+			console.error(error)
+		}
 	},
 };
