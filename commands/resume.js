@@ -15,17 +15,17 @@ module.exports =
 			try{
 				queue = await(music.getQueue({ interaction: interaction }));	
 			}catch(error){
-				console.warn('Error while get music.getQueue in RemoveFromQueue in reapeat')
+				console.warn('Error while get music.getQueue in resume')
 				console.error(error)
 			}
 
 			var songs = Object.keys(queue).length ;
 			
-			if(1 >= songs){
+			if(songs >= 1){
 				music.resume({ interaction: interaction });
 				interaction.reply('resume music');
 			}else{
-				if(1 < songs){ 
+				if(songs < 1){ 
 					interaction.reply('no song in queue');
 				}else{
 					console.info(`${await(interaction.user.username)} destroyed the matrix while performing resume`)	
