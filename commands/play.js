@@ -6,7 +6,7 @@ module.exports =
 	data: new SlashCommandBuilder()
 		.setName('play')
 		.setDescription('play a song')
-		.addStringOption(option => option.setName('song').setDescription('add a song youtube link')),
+		.addStringOption(option => option.setName('song').setDescription('add a song youtube link').setRequired(true)),
 
 	async execute(interaction)
 	{
@@ -34,3 +34,8 @@ module.exports =
 		}
 	},
 };
+
+function noOfQueueElements()
+	{
+
+	};
