@@ -11,7 +11,7 @@ module.exports =
 
 	async execute(interaction) // Funktion des Comands
 	{
-		try {
+		try{
 			const exampleEmbed = new MessageEmbed() // Embedded MSG Creator
 			.setColor('#0099ff') // Titel Farbe
 			.setTitle('Some title') // Titel der Nachricht
@@ -46,8 +46,9 @@ module.exports =
 			.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 		
 		return interaction.reply({ embeds: [exampleEmbed] });
-		} catch (error) {
-			console.error('Error while performing message-embed')
+		}catch(error){
+			console.warn('Error while performing message-embed')
+			console.error(error)
 		}
 	},
 };

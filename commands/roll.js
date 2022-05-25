@@ -10,40 +10,38 @@ module.exports =
 
 	async execute(interaction) // Funktion des Comands
 	{
-        try {
+        try{
             var ergebnis = []
             const anzahl  = interaction.options.getInteger('anzahl');
             const seitenzahl = interaction.options.getInteger('seitenzahl');
-            //console.log(anzahl)
-            //console.log(seitenzahl)
-            for (let index = 0; index < anzahl; index++)
+
+            for(let index = 0; index < anzahl; index++)
                 {
-                ergebnis[index] = getRandomArbitrary(1, seitenzahl);
+                    ergebnis[index] = getRandomArbitrary(1, seitenzahl);
                 }
-            //console.log(ergebnis);
+            try{
+                    let ausgabe = ergebnis.join(', ');  
+                    return interaction.reply({ content: `Du hast : \`${ausgabe}\` gewürfelt.`,});
+            }catch(error) 
+                {
+                    console.warn('Error while joining array')
+                    console.error(error)
+                }
             
-            try {
-                let ausgabe = ergebnis.join(', ');  
-                return interaction.reply({ content: `Du hast : \`${ausgabe}\` gewürfelt.`,});
-            } catch (error) 
-             {
-             console.log('Error while joining array')   
-             }
-            
-		} catch (error) {
-			console.error('Error while performing roll')
-		}
-		
+		}catch(error){
+			console.warn('Error while performing roll')
+            console.error(error)
+		}	
 	},
 };
 
 try {
-	function getRandomArbitrary(min, max) 
-    {
+	function getRandomArbitrary(min, max){
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
     }		
 } catch (error) {
-    console.error('Error while performing Random Calculation in roll')
+    console.warn('Error while performing Random Calculation in roll')
+    console.error(error)
 }

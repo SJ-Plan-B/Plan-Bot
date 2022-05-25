@@ -10,9 +10,9 @@ module.exports =
 
 	async execute(interaction)
 	{
-        try {
+        try{
             const volume = interaction.options.getInteger('volume');
-            if (volume > 0){
+            if(volume > 0){
             music.volume({
                 interaction: interaction,
                 volume: volume
@@ -21,8 +21,9 @@ module.exports =
             }else{
                 interaction.reply('incorrect volume')
                 };
-        } catch (error) {
-            console.error('Error while performing volume')
+        }catch(error){
+            console.warn('Error while performing volume')
+            console.error(error)
         }
         
 	},

@@ -9,12 +9,30 @@ module.exports =
         
 	async execute(interaction)
 	{
-		try {
-			music.pause({ interaction: interaction });
-			return interaction.reply('song paused');
-		} catch (error) {
-			console.error('Error while performing pause')
+		try{
+			var queue = [] ;
+
+			try{
+				queue = await(music.getQueue({interaction: interaction})) ;	
+			}catch(error){
+				console.error(`while get music.getQueue in RemoveFromQueue in skip`)
+			}
+
+			var songs = Object.keys(queue).length ;
+	
+			if(songs >= 1){
+				music.pause({interaction: interaction});
+				return interaction.reply('song paused');
+			}else{
+				if(songs < 1){ 
+					interaction.reply('not enough songs in queue');
+				}else{
+					console.info(`${await(interaction.user.username)} destroyed the matrix while performing pause`)	
+				}
+			}
+		}catch(error){
+			console.warn('Error while performing pause')
+			console.error(error)
 		}
-		
-	},
-};
+	}
+}

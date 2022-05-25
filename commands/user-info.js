@@ -8,10 +8,11 @@ module.exports =
 
 	async execute(interaction) // Funktion des Comands
 	{
-		try {
-			return interaction.reply(`Your username: ${interaction.user.username}\nYour ID: ${interaction.user.id}`);
+		try{
+			return interaction.reply(`Your username: ${await(interaction.user.username)}\nYour ID: ${await(interaction.user.id)}`);
 		} catch (error) {
-			console.error('Error while performing user-info')
+			console.warn('Error while performing user-info')
+			console.error(error)
 		}
 	},
 };

@@ -8,28 +8,27 @@ module.exports =
 
 	async execute(interaction) // Funktion des Comands
 	{
-		try {
+		try{
 			const zahl = getRandomArbitrary(2)
-			//console.log(`${zahl}`)
+
 			switch(zahl)
 			{
-				case 1:  ausgabe = "Zahl"
+				case 1: ausgabe = "Zahl"
 					break;
-				case 2:  ausgabe = "Kopf"
+				case 2: ausgabe = "Kopf"
 					break;
-				default: console.log("Fehler beim generiren der Zufals zahl")
+				default: console.info("Fehler beim generiren der Zufals zahl")
 			}
 				
 			  return interaction.reply({ content: `Deine Münze ist auf ${ausgabe} gelandet!`,});
 		} catch (error) {
-			console.error('Error while performing coinflip'); 
+			console.warn('Error while performing coinflip'); 
+			console.error(error)
 		}
-
-
 	},
 };
 try {
-	function getRandomArbitrary( max) 
+	function getRandomArbitrary(max) 
 	{
 	return Math.floor(Math.random() * max);
 	}

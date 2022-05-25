@@ -9,29 +9,24 @@ module.exports =
 
 	async execute(interaction) // Funktion des Comands
 	{
-		try {
+		try{
 			const amount = interaction.options.getInteger('amount');
 
-		if (amount < 1 || amount > 99) 
-		{
-			return interaction.reply(
-				{ content: 'You need to input a number between 1 and 99.', ephemeral: true 
-					});
+		if(amount < 1 || amount > 99){
+			return interaction.reply({content: 'You need to input a number between 1 and 99.', ephemeral: true});
 		}
 		await interaction.channel.bulkDelete(amount, true).catch(error => 
 			{
 			console.error(error);
 			interaction.reply(
-				{ content: 'There was an error trying to prune messages in this channel!', ephemeral: true 
-					});
-			});
+				{content: 'There was an error trying to prune messages in this channel!', ephemeral: true});});
 
-		interaction.reply({ content: `Successfully pruned \`${amount}\` messages.`, ephemeral: true });
+		interaction.reply({content: `Successfully pruned \`${amount}\` messages.`, ephemeral: true});
 		return false;
-		
-		} catch (error) {
-			console.error('Error while performing prune')
+
+		}catch(error){
+			console.warn('Error while performing prune');
+			console.error(error)
 		}
-		
 	},
 };

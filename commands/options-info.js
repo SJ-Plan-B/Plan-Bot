@@ -9,12 +9,15 @@ module.exports =
 
 	async execute(interaction) // Funktion des Comands
 	{
-		try {
+		try{
 			const value = interaction.options.getString('input');
-			if (value) return interaction.reply(`The options value is: \`${value}\``);
+
+			if(value)
+			return interaction.reply(`The options value is: \`${value}\``);
 			return interaction.reply('No option was provided!');
-		} catch (error) {
-			console.error('Error while performing options-info')
+		}catch(error){
+			console.warn('Error while performing options-info')
+			console.error(error)
 		}
 	},
 };
