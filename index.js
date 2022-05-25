@@ -83,9 +83,9 @@ client.on('interactionCreate', async interaction => {
 //
 //send message to channel by id
 //
-async function sendMessage(cID){
+async function sendMessage(cID,message){
 	const channel = cID;
-	 client.channels.cache.get(channel).send("hello world");	
+	 client.channels.cache.get(channel).send(message);	
 };
 //
 //Login

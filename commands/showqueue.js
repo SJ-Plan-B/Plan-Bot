@@ -13,8 +13,6 @@ module.exports =
 		var queue = []
 		var result = []
 		queue = await(music.getQueue({ interaction: interaction }));
-		console.log(typeof queue)
-		//console.log(queue)
 		for (let index = 0; index < Object.keys(queue).length; index++) {
 			const myJSON = JSON.stringify(queue[index]);
 			const myArray = myJSON.split(",")
