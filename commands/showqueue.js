@@ -9,21 +9,25 @@ module.exports =
 
 	async execute(interaction)
 	{
-		try{
-			var queue = []
-			var result = []
-				queue = await(music.getQueue({ interaction: interaction }));
-				for (let index = 0; index < Object.keys(queue).length; index++) {
-					const myJSON = JSON.stringify(queue[index]);
-					const myArray = myJSON.split(",")
-					const slicerdicer = myArray[0];
-					result[index] = slicerdicer.slice(17);
-					console.log(result)
-				}
-				interaction.reply('\`' + result.join(`\n`) + '\`');
-		}catch(error){
+		try {
+			try{
+				var queue = []
+				var result = []
+					queue = await(music.getQueue({ interaction: interaction }));
+					for (let index = 0; index < Object.keys(queue).length; index++) {
+						const myJSON = JSON.stringify(queue[index]);
+						const myArray = myJSON.split(",")
+						const slicerdicer = myArray[0];
+						result[index] = slicerdicer.slice(17);
+						console.log(result)
+					}
+					return interaction.reply('\`' + result.join(`\n`) + '\`');
+			}catch(error){
+				interaction.reply('no song in queue')
+			}
+		} catch (error) {
 			console.warn('Error while performing showqueue')
 			console.error(error)
 		}
-	},
+	}
 };
