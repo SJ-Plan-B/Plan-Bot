@@ -16,7 +16,7 @@ module.exports =
 			try {
 				queue = await(music.getQueue({ interaction: interaction })) ;	
 			} catch (error) {
-				console.error('Error while get musich.getQueue')
+				console.error('Error while get musich.getQueue in jump')
 			}
 
 			var songs = Object.keys(queue).length ;
@@ -26,7 +26,7 @@ module.exports =
 				interaction.reply('jump '+number+ ' songs');
 			}else{
 				if (songs < 2 || songs <= 1) { //DAS MUSS SO / DAS HABEN WIR IMMER SO GEMACHT
-					interaction.reply('not enough song in queue' );
+					interaction.reply('not enough songs in queue' );
 				} else {
 					interaction.reply('max jumps: ' + (songs-1) );	
 				}
