@@ -18,7 +18,6 @@ module.exports =
 					queue = await(music.getQueue({ interaction: interaction })) ;	
 				}catch(error){
 					console.warn('Error while get musich.getQueue in RemoveFromQueue');
-					console.error(error)
 				}
 	
 				var songs = Object.keys(queue).length ;

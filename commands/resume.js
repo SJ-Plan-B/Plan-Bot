@@ -16,7 +16,6 @@ module.exports =
 				queue = await(music.getQueue({ interaction: interaction }));	
 			}catch(error){
 				console.warn('Error while get music.getQueue in resume')
-				console.error(error)
 			}
 
 			var songs = Object.keys(queue).length ;
