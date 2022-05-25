@@ -1,1 +1,5 @@
-node_modules
+# Ignore the node_modules directory
+node_modules/
+
+#ignore the Config.json because of privacy
+config.json
