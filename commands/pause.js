@@ -20,11 +20,11 @@ module.exports =
 
 			var songs = Object.keys(queue).length ;
 	
-			if(songs <= 1){
+			if(songs >= 1){
 				music.pause({interaction: interaction});
 				return interaction.reply('song paused');
 			}else{
-				if(songs > 1){ 
+				if(songs < 1){ 
 					interaction.reply('not enough songs in queue');
 				}else{
 					console.info(`${await(interaction.user.username)} destroyed the matrix while performing pause`)	

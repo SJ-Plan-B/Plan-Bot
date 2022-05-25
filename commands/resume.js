@@ -21,11 +21,11 @@ module.exports =
 
 			var songs = Object.keys(queue).length ;
 			
-			if(1 <= songs){
+			if(1 >= songs){
 				music.resume({ interaction: interaction });
 				interaction.reply('resume music');
 			}else{
-				if(1 > songs){ 
+				if(1 < songs){ 
 					interaction.reply('no song in queue');
 				}else{
 					console.info(`${await(interaction.user.username)} destroyed the matrix while performing resume`)	
