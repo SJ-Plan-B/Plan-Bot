@@ -3,11 +3,8 @@ const path = require('node:path');
 const music = require('@koenie06/discord.js-music')
 const ytdl = require('ytdl-core');
 const { Client, Collection, Intents, Message, Channel, MessageEmbed } = require('discord.js');
-const { VoiceConnection, joinVoiceChannel, } = require('@discordjs/voice');
 const { token, guildId } = require('./config.json');
-const { get } = require('node:http');
-const { channel } = require('node:diagnostics_channel');
-
+const {Worker} = require("worker_threads");
 
 
 const client = new Client(
@@ -69,8 +66,19 @@ client.on('interactionCreate', async interaction => {
 			 console.log('prune!'+ returnvalue);
 			 if (returnvalue===true) {console.log('channelID '+ channelID); sendMessage(channelID);}
 		}else if (interaction.commandName === 'play'){
-			let url  = await command.execute(interaction);
-			console.log('play '+ url);
+			
+				const worker = new Worker('./commands/play.js', {workerData: await(command.execute(interaction))});
+
+				//worker.postMessage(interaction);
+
+				worker.on('message', result => {console.log('worker'+ result)});
+		
+				worker.on('error', error => {console.log('worker error'+ error)});
+		
+				worker.on('exit', exitCode => {
+				if(exitCode != 0)
+				{console.log(exitCode)}
+				;})
 		}else {
 			await command.execute(interaction);	
 		}
