@@ -19,7 +19,7 @@ module.exports =
 						const myArray = myJSON.split(",")
 						const slicerdicer = myArray[0];
 						result[index] = slicerdicer.slice(17);
-						console.log(result)
+						//console.log(result)
 					}
 					return interaction.reply('\`' + result.join(`\n`) + '\`');
 			}catch(error){
