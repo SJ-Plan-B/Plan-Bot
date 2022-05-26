@@ -3,10 +3,7 @@ const path = require('node:path');
 const music = require('@koenie06/discord.js-music')
 const ytdl = require('ytdl-core');
 const { Client, Collection, Intents, Message, Channel, MessageEmbed } = require('discord.js');
-const { VoiceConnection, joinVoiceChannel, } = require('@discordjs/voice');
 const { token, guildId } = require('./config.json');
-const { get } = require('node:http');
-const { channel } = require('node:diagnostics_channel');
 const {Worker} = require("worker_threads");
 
 
@@ -81,7 +78,10 @@ client.on('interactionCreate', async interaction => {
 		
 				worker.on('error', error => {console.log('worker error'+ error)});
 		
-				worker.on('exit', exitCode => {console.log(exitCode);})
+				worker.on('exit', exitCode => {
+				if(exitCode != 0)
+				{console.log(exitCode)}
+				;})
 		}else {
 			await command.execute(interaction);	
 		}
