@@ -10,7 +10,7 @@ module.exports =
 	{
 		try{
 			const zahl = getRandomArbitrary(2)
-
+			let ausgabe;
 			switch(zahl)
 			{
 				case 1: ausgabe = "Zahl"
