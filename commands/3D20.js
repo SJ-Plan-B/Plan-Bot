@@ -1,7 +1,8 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('@discordjs/builders'); 
 
 module.exports = 
 {
+	
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('3d20')
 		.setDescription('rolls 3D20 Dice'),
