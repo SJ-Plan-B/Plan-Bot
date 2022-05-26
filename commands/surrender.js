@@ -11,12 +11,7 @@ module.exports =
 	{
 		try {
 			const channel = interaction.member.voice.channel;
-			const song = 'https://youtu.be/K04aZ90Vo4A'
-	
-			if(song === null){
-				music.resume({ interaction: interaction });
-				interaction.reply('Resume Playing');
-			}
+			const song = 'https://www.youtube.com/watch?v=K04aZ90Vo4A'
 			try{
 				music.play({
 					interaction: interaction,
