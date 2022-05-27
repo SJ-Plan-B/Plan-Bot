@@ -18,7 +18,7 @@ module.exports =
 					channel: channel,
 					song: song
 					});
-				interaction.reply(`${await(interaction.user.username)} hast die Gans gestohlen`);
+				interaction.reply(`${await(interaction.user.username)} hat die Gans gestohlen`);
 				return song;
 			}catch(error){
 				interaction.reply('Invalide Song Link');
