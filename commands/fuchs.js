@@ -4,21 +4,21 @@ const music = require('@koenie06/discord.js-music');
 module.exports = 
 {
 	data: new SlashCommandBuilder()
-		.setName('surrender')
-		.setDescription('surrenders (musik)'),
+		.setName('fuchs')
+		.setDescription('HBz x IIVEN x Bekkaa - Fuchs du hast die Gans gestohlen'),
 
 	async execute(interaction)
 	{
 		try {
 			const channel = interaction.member.voice.channel;
-			const song = 'https://www.youtube.com/watch?v=K04aZ90Vo4A'
+			const song = 'https://www.youtube.com/watch?v=QwZRRsh6khA'
 			try{
 				music.play({
 					interaction: interaction,
 					channel: channel,
 					song: song
 					});
-				interaction.reply(`${await(interaction.user.username)} surrendered`);
+				interaction.reply(`${await(interaction.user.username)} hat die Gans gestohlen`);
 				return song;
 			}catch(error){
 				interaction.reply('Invalide Song Link');

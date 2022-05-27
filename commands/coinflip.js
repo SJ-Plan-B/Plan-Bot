@@ -10,12 +10,12 @@ module.exports =
 	{
 		try{
 			const zahl = getRandomArbitrary(2)
-
+			let ausgabe;
 			switch(zahl)
 			{
-				case 1: ausgabe = "Zahl"
+				case 0: ausgabe = "Zahl"
 					break;
-				case 2: ausgabe = "Kopf"
+				case 1: ausgabe = "Kopf"
 					break;
 				default: console.info("Fehler beim generiren der Zufals zahl")
 			}
