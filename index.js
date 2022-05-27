@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const {Worker} = require("worker_threads");
-const {Client, Collection, Intents, Message, Channel, MessageEmbed} = require('discord.js');
+const {Client, Collection, Intents, Message, Channel, MessageEmbed, GuildMember} = require('discord.js');
 const {token} = require('./data/config.json');
 
 
@@ -12,11 +12,10 @@ const client = new Client(
 			Intents.FLAGS.GUILD_VOICE_STATES,
 			Intents.FLAGS.GUILD_MESSAGES,
 			Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-			Intents.FLAGS.DIRECT_MESSAGES
+			Intents.FLAGS.DIRECT_MESSAGES,
+			Intents.FLAGS.GUILD_MEMBERS,
 		  ]
 });
-
-const queue = new Map();
 
 //
 // event-handling
@@ -29,10 +28,7 @@ for (const file of eventFiles) {
 	const event = require(filePath);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));	
-	}else if(event.messageCreate){
-		console.log(`message is created -> ${message}`);
-	}
-	else{
+	}else{
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
