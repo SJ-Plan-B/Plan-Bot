@@ -13,7 +13,7 @@ module.exports = {
 			.setAuthor({
 					name: nickname
 			})
-			.setDescription(message_leave_1+nickname+message_leave_2)
+			.setDescription(message_leave_1+nickname+' '+message_leave_2)
 			.setThumbnail(member.user.displayAvatarURL())
 			.setTimestamp();
 		
