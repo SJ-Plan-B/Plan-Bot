@@ -35,8 +35,8 @@ try {
 			const myJSON = JSON.stringify(memberarry);
 			const myArray = myJSON.split(",")
 			const slicerdicer = myArray[4];
-			let membername = slicerdicer.slice(11);
-			let result = membername.replace(/["]/g, '')
+			let slicerdicerplus = slicerdicer.slice(11);
+			let result = slicerdicerplus.replace(/["]/g, '')
 			return result;	
 	}	
 } catch (error) {
