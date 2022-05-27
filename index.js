@@ -1,10 +1,9 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const music = require('@koenie06/discord.js-music')
-const ytdl = require('ytdl-core');
-const { Client, Collection, Intents, Message, Channel, MessageEmbed } = require('discord.js');
-const { token, guildId } = require('./config.json');
 const {Worker} = require("worker_threads");
+const {Client, Collection, Intents, Message, Channel, MessageEmbed} = require('discord.js');
+const {token} = require('./data/config.json');
+
 
 
 const client = new Client(
@@ -45,6 +44,7 @@ client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
+
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
 	const command = require(filePath);
@@ -54,7 +54,6 @@ for (const file of commandFiles) {
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
-	const serverQueue = queue.get(interaction.guild.id);
 	const command = client.commands.get(interaction.commandName);
 	const channelID = interaction.channel.id;
 	const channel = interaction.channel;
@@ -65,22 +64,19 @@ client.on('interactionCreate', async interaction => {
 			let returnvalue = await command.execute(interaction);
 			 console.log('prune!'+ returnvalue);
 			 if (returnvalue===true) {console.log('channelID '+ channelID); sendMessage(channelID);}
-		}else if (interaction.commandName === 'play'){
-			
-				const worker = new Worker('./commands/play.js', {workerData: await(command.execute(interaction))});
-
-				//worker.postMessage(interaction);
-
-				worker.on('message', result => {console.log('worker'+ result)});
-		
-				worker.on('error', error => {console.log('worker error'+ error)});
-		
-				worker.on('exit', exitCode => {
-				if(exitCode != 0)
-				{console.log(exitCode)}
-				;})
 		}else {
-			await command.execute(interaction);	
+			const worker = new Worker('./commands/'+interaction.commandName+'.js', {workerData: await(command.execute(interaction))});
+
+			//worker.postMessage(interaction);
+
+			worker.on('message', result => {console.log('worker'+ result)});
+	
+			worker.on('error', error => {console.log('worker error'+ error)});
+	
+			worker.on('exit', exitCode => {
+			if(exitCode != 0)
+			{console.log(exitCode)}
+			;})
 		}
 		
 	} catch (error) {

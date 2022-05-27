@@ -1,4 +1,4 @@
-const { clientId } = require('../config.json');
+const { clientId } = require('../data/config.json');
 module.exports = {
 	name: 'messageCreate',
 	execute(messageCreate) {

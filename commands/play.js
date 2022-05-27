@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const music = require('@koenie06/discord.js-music');
-const {parentPort, workerData} = require("worker_threads");
 
 module.exports = 
 {
