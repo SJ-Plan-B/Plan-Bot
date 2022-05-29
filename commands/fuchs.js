@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const music = require('@koenie06/discord.js-music');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = 
 {
@@ -13,6 +14,12 @@ module.exports =
 			const channel = interaction.member.voice.channel;
 			const song = 'https://www.youtube.com/watch?v=QwZRRsh6khA'
 
+			const FuchsEmbed = new MessageEmbed()
+			.setColor('#e30926')
+			.setTitle('Fuchs')
+			.setDescription(`${await(interaction.user.username)} hat die Gans gestohlen`)
+			.setThumbnail('https://www.planet-wissen.de/natur/tierwelt/tiere_im_wald/canidefuchsmauritiusgjpg100~_v-HintergrundL.jpg')
+
 			switch(true){
 				case(channel === null):
 					interaction.reply('You must be in a Voicechannel');
@@ -25,8 +32,7 @@ module.exports =
 				default:
 					try{
 						music.play({ interaction: interaction, channel: channel, song: song});
-						interaction.reply(`${await(interaction.user.username)} hat die Gans gestohlen`);
-						return song;
+						return interaction.reply({ embeds: [FuchsEmbed] })
 					}catch(error){
 						console.info('Error while performing play')
 						interaction.reply('Invalide Song Link');
