@@ -26,6 +26,9 @@
     "mariadb": "^3.0.0",
     "opusscript": "^0.0.8",
     "sodium": "^3.0.2",
+    "@types/yt-search": "^2.3.2",
     "ytdl-core": "^4.11.0"
+  },
+  "devDependencies": {
   }
 }
