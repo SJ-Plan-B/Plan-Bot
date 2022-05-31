@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const logger = require('../util/logger').log
 const music = require('@koenie06/discord.js-music');
 
 module.exports = 
@@ -14,7 +15,7 @@ module.exports =
 			try{
 				queue = await(music.getQueue({ interaction: interaction })) ;	
 			}catch (error){
-				console.warn('while get music.getQueue in RemoveFromQueue in skip')
+				logger.warn('while get music.getQueue in RemoveFromQueue in skip')
 			}
 
 			var songs = Object.keys(queue).length ;
@@ -26,12 +27,12 @@ module.exports =
 				if(songs < 1){ 
 					interaction.reply('not enough songs in queue');
 				}else{
-					console.info( `${await(interaction.user.username)} destroyed the matrix while performing skip` )	
+					logger.info( `${await(interaction.user.username)} destroyed the matrix while performing skip` )	
 				}
 			}
 		}catch(error){
-				console.warn('while performing skip'); 
-				console.error(error)
+				logger.warn('while performing skip'); 
+				logger.error(error)
 		}
 	},
 };

@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const logger = require('../util/logger').log;
 
 module.exports = 
 {
@@ -14,8 +15,8 @@ module.exports =
 
 			return interaction.reply({ content: `You wanted to kick: ${await(user.username)}`, ephemeral: true });
 		} catch (error) {
-			console.warn('Error while performing Kick');
-			console.error(error)
+			logger.warn('Error while performing Kick');
+			logger.error(error)
 		}
 	},
 };

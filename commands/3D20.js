@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders'); 
+const logger = require('../util/logger').log;
 
 module.exports = 
 {
@@ -16,8 +17,8 @@ module.exports =
 			const rolle3 = getRandomArbitrary(1, 20)
 			return interaction.reply({content: `you have rolld: ${rolle1} ${rolle2} ${rolle3}.`});
 		}catch(error){
-			console.warn('Error while performing 3D20'); 
-			console.error(error)
+			logger.warn('Error while performing 3D20'); 
+			logger.error(error)
 		} 
 	},
 };
@@ -30,6 +31,6 @@ module.exports =
 		return Math.floor(Math.random() * ( max - min )) + min;
 		}
 	}catch(error){
-		console.warn('Error while performing Random Calculation In 3D20');
-		console.error(error)
+		logger.warn('Error while performing Random Calculation In 3D20');
+		logger.error(error)
 	}

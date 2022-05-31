@@ -19,7 +19,7 @@ var logger = new (winston.createLogger)({
 });
 
 module.exports = {
-  'errorlog': logger
+  'log': logger
 };
 /*
 error: 0,

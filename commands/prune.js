@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const logger = require('../util/logger').log
 
 module.exports = 
 {
@@ -17,7 +18,7 @@ module.exports =
 		}
 		await interaction.channel.bulkDelete(amount, true).catch(error => 
 			{
-			console.error(error);
+			logger.error(error);
 			interaction.reply(
 				{content: 'There was an error trying to prune messages in this channel!', ephemeral: true});});
 
@@ -25,8 +26,8 @@ module.exports =
 		return false;
 
 		}catch(error){
-			console.warn('Error while performing prune');
-			console.error(error)
+			logger.warn('Error while performing prune');
+			logger.error(error)
 		}
 	},
 };

@@ -3,7 +3,7 @@ const path = require('node:path');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId, token } = require('./data/config.json');
-const logger = require('./util/logger').errorlog;
+const logger = require('./util/logger').log;
 
 
 module.exports = {

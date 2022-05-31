@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const logger = require('../util/logger').log
 
 module.exports = 
 {
@@ -16,8 +17,8 @@ module.exports =
 			return interaction.reply(`The options value is: \`${value}\``);
 			return interaction.reply('No option was provided!');
 		}catch(error){
-			console.warn('Error while performing options-info')
-			console.error(error)
+			logger.warn('Error while performing options-info')
+			logger.error(error)
 		}
 	},
 };

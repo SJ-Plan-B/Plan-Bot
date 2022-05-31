@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
+const logger = require('../util/logger').log
 const music = require('@koenie06/discord.js-music');
 
 module.exports = 
@@ -51,8 +52,8 @@ module.exports =
 						interaction.reply('Invalide Song Link');
 					}}
 		}catch(error){
-			console.warn('Error while performing ping');
-			console.error(error)
+			logger.warn('Error while performing ping');
+			logger.error(error)
 		}
 	}
 };

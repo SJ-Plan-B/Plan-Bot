@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const music = require('@koenie06/discord.js-music');
 const { MessageEmbed } = require('discord.js');
+const logger = require('../util/logger').log;
 
 module.exports = 
 {
@@ -34,12 +35,12 @@ module.exports =
 						music.play({ interaction: interaction, channel: channel, song: song});
 						return interaction.reply({ embeds: [GansEmbed] })
 					}catch(error){
-						console.info('Error while performing play')
+						logger.info('Error while performing play')
 						interaction.reply('Invalide Song Link');
 					}}
 		} catch (error) {
-			console.warn('Error while performing play')
-			console.error(error)
+			logger.warn('Error while performing play')
+			logger.error(error)
 		}
 	},
 };

@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const logger = require('../util/logger').log
 
 module.exports = 
 {
@@ -11,8 +12,8 @@ module.exports =
 		try{
 			return interaction.reply(`Server name: ${await(interaction.guild.name)}\nTotal members: ${await(interaction.guild.memberCount)}`);
 		}catch(error){
-			console.warn('Error while performing server')
-			console.error(error)
+			logger.warn('Error while performing server')
+			logger.error(error)
 		}
 	},
 };

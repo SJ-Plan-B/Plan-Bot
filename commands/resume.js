@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const logger = require('../util/logger').log
 const music = require('@koenie06/discord.js-music');
 
 module.exports = 
@@ -15,7 +16,7 @@ module.exports =
 			try{
 				queue = await(music.getQueue({ interaction: interaction }));	
 			}catch(error){
-				console.warn('Error while get music.getQueue in resume')
+				logger.warn('Error while get music.getQueue in resume')
 			}
 
 			var songs = Object.keys(queue).length ;
@@ -27,12 +28,12 @@ module.exports =
 				if(songs < 1){ 
 					interaction.reply('no song in queue');
 				}else{
-					console.info(`${await(interaction.user.username)} destroyed the matrix while performing resume`)	
+					logger.info(`${await(interaction.user.username)} destroyed the matrix while performing resume`)	
 				}	
 			}
 		}catch(error){
-				console.warn('Error while performing resume');
-				console.error(error)
+				logger.warn('Error while performing resume');
+				logger.error(error)
 		}
 	}
 };

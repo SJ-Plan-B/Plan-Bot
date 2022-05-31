@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const logger = require('../util/logger').log
 
 module.exports = 
 {
@@ -24,13 +25,13 @@ module.exports =
                     return interaction.reply({ content: `Du hast : \`${ausgabe}\` gewürfelt.`,});
             }catch(error) 
                 {
-                    console.warn('Error while joining array')
-                    console.error(error)
+                    logger.warn('Error while joining array')
+                    logger.error(error)
                 }
             
 		}catch(error){
-			console.warn('Error while performing roll')
-            console.error(error)
+			logger.warn('Error while performing roll')
+            logger.error(error)
 		}	
 	},
 };

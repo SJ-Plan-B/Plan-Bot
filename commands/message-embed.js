@@ -1,7 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
-
-
+const logger = require('../util/logger').log
 
 module.exports = 
 {
@@ -47,8 +46,8 @@ module.exports =
 		
 		return interaction.reply({ embeds: [exampleEmbed] });
 		}catch(error){
-			console.warn('Error while performing message-embed')
-			console.error(error)
+			logger.warn('Error while performing message-embed')
+			logger.error(error)
 		}
 	},
 };

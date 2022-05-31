@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const logger = require('../util/logger').log;
 
 module.exports = 
 {
@@ -12,8 +13,8 @@ module.exports =
 			const rolle = getRandomArbitrary(1, 6)
 			return interaction.reply({ content: `du hast eine: ${rolle} Gewürfelt.`,});
 		}catch(error){
-			console.warn('Error while performing D6');
-			console.error(error)
+			logger.warn('Error while performing D6');
+			logger.error(error)
 		}
 	},
 };
@@ -26,6 +27,6 @@ try {
     return Math.floor(Math.random() * (max - min)) + min;
 	}
 }catch(error){
-	console.warn('Error while performing Random Calculation In D6');
-	console.error(error)
+	logger.warn('Error while performing Random Calculation In D6');
+	logger.error(error)
 }
