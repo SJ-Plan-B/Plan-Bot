@@ -1,8 +1,10 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const {Worker} = require("worker_threads");
+const logger = require('./util/logger').log;
 const {Client, Collection, Intents, Message, Channel, MessageEmbed, GuildMember} = require('discord.js');
 const {token} = require('./data/config.json');
+
 
 module.exports = {
 async startbot(){
@@ -59,25 +61,25 @@ client.on('interactionCreate', async interaction => {
 	try {
 		if (interaction.commandName === 'prune') {
 			let returnvalue = await command.execute(interaction);
-			 console.log('prune!'+ returnvalue);
-			 if (returnvalue===true) {console.log('channelID '+ channelID); sendMessage(channelID);}
+			 logger.info('prune!'+ returnvalue);
+			 if (returnvalue===true) {logger.info('channelID '+ channelID); sendMessage(channelID);}
 		}else {
 			const worker = new Worker('./commands/'+interaction.commandName+'.js', {workerData: await(command.execute(interaction))});
 
 			//worker.postMessage(interaction);
 
-			worker.on('message', result => {console.log('worker'+ result)});
+			worker.on('message', result => {logger.debug('worker'+ result)});
 	
-			worker.on('error', error => {console.log('worker error'+ error)});
+			worker.on('error', error => {logger.error('worker error'+ error)});
 	
 			worker.on('exit', exitCode => {
 			if(exitCode != 0)
-			{console.log(exitCode)}
+			{logger.verbose(exitCode)}
 			;})
 		}
 		
 	} catch (error) {
-		console.error(error);
+		logger.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
