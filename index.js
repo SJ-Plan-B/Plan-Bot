@@ -4,7 +4,8 @@ const {Worker} = require("worker_threads");
 const {Client, Collection, Intents, Message, Channel, MessageEmbed, GuildMember} = require('discord.js');
 const {token} = require('./data/config.json');
 
-
+module.exports = {
+async startbot(){
 
 const client = new Client(
 {intents: [
@@ -91,3 +92,5 @@ async function sendMessage(cID,message){
 //Login
 //
 client.login(token);
+}
+}
