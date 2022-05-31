@@ -1,4 +1,5 @@
 const {Message, MessageEmbed} = require('discord.js');
+const logger = require('../util/logger').log
 const { message_leave_1, message_leave_2, message_leave_header, message_leave_chanel, message_leave_embed_collor } =require('../data/config.json')
 
 module.exports = {
@@ -21,8 +22,8 @@ module.exports = {
 				embeds: [newMemberEmbed] 
 			})
 		} catch (error) {
-			console.warn('Error while performing guildMemberRemove')
-			console.error(error)
+			logger.warn('Error while performing guildMemberRemove')
+			logger.error(error)
 		}	
 
 	}
@@ -40,6 +41,6 @@ try {
 			return result;	
 	}	
 } catch (error) {
-	console.warn('Error while performing getname in guildMemberRemove')
-	console.error(error)
+	logger.warn('Error while performing getname in guildMemberRemove')
+	logger.error(error)
 }
