@@ -16,7 +16,7 @@ var transportallevents = new (winston.transports.DailyRotateFile)({
 
 var transportinfolog = new (winston.transports.DailyRotateFile)({
   name: 'info-file',
-  level: 'warn',
+  level: 'info',
   filename: './logs/info-log-%DATE%.log',
   json: false,
   datePattern: 'yyyy-MM-dd',
