@@ -10,7 +10,7 @@
     "type": "git",
     "url": "Plan-Bot"
   },
-  "author": "Sidney Schmidt",
+  "author": "Sidney Schmidt, Joshua Leon Keggenhoff",
   "license": "ISC",
   "dependencies": {
     "@discordjs/builders": "^0.13.0",
