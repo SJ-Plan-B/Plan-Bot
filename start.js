@@ -6,4 +6,5 @@ const logger = require('./util/logger').log;
 logger.info('Deploying Bot');
 deploybot()
 logger.info('Starting Bot');
+logger.error('test');
 startbot()
