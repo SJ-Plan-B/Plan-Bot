@@ -83,6 +83,32 @@ client.on('interactionCreate', async interaction => {
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
+
+
+//
+// chanel-logger-handling
+//
+try {
+	const loggerPath = path.join(__dirname, 'logger');
+	const loggerFiles = fs.readdirSync(loggerPath).filter(file => file.endsWith('.js'));
+
+	for (const file of loggerFiles) {
+		const filePath = path.join(loggerPath, file);
+		const logger = require(filePath);
+		if (logger.once) {
+			client.once(logger.name, (...args) => logger.execute(...args));	
+		}else{
+			client.on(logger.name, (...args) => logger.execute(...args));
+		}
+	}
+
+	
+} catch (error) {
+	logger.error(error)
+	logger.warn('Error Wile Using Logger Funktions')
+}
+
+
 //
 //send message to channel by id
 //
