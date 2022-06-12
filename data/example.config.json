@@ -3,7 +3,7 @@
 	"guildId": "Server ID",
     "token" : "Your Acces Token",
 
-    "log_messages_in_consol" : true,
+    "log_messages_in_consol" : false,
 
     "message_welcome_chanel" : "chanel id",
     "message_welcome_embed_collor" :"Color Hex code",
