@@ -1,6 +1,7 @@
+const logger = require('../util/logger').log
 module.exports = {
 	name: 'reconnecting',
 	execute(client) {
-		console.log("Reconnecting!");
+		logger.http("Reconnecting!");
     },
 };

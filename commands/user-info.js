@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const logger = require('../util/logger').log
 
 module.exports = 
 {
@@ -11,8 +12,8 @@ module.exports =
 		try{
 			return interaction.reply(`Your username: ${await(interaction.user.username)}\nYour ID: ${await(interaction.user.id)}`);
 		} catch (error) {
-			console.warn('Error while performing user-info')
-			console.error(error)
+			logger.warn('Error while performing user-info')
+			logger.error(error)
 		}
 	},
 };

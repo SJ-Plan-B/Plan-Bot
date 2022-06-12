@@ -1,4 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const logger = require('../util/logger').log;
+
 
 module.exports = 
 {
@@ -11,8 +13,8 @@ module.exports =
 		try{
 			return interaction.reply('Boop!');
 		}catch (error){
-			console.warn('Error while performing Beep!');
-			console.error(error)
+			logger.warn('Error while performing Beep!');
+			logger.error(error)
 		}
 	},
 };

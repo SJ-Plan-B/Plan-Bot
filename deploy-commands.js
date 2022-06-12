@@ -3,6 +3,11 @@ const path = require('node:path');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId, token } = require('./data/config.json');
+const logger = require('./util/logger').log;
+
+
+module.exports = {
+deploybot(){
 
 const commands = [];
 const commandsPath = path.join(__dirname, 'commands');
@@ -17,5 +22,7 @@ for (const file of commandFiles) {
 const rest = new REST({ version: '9' }).setToken(token);
 
 rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
-	.then(() => console.log('Successfully registered application commands.'))
+	.then(() => logger.info('Successfully registered application commands.'))
 	.catch(console.error);
+}
+}

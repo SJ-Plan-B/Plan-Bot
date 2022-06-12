@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const music = require('@koenie06/discord.js-music');
+const logger = require('../util/logger').log;
 
 module.exports = 
 {
@@ -17,8 +18,8 @@ module.exports =
 			try{
 				queue = await(music.getQueue({ interaction: interaction })) ;	
 			}catch(error){
-				console.warn('Error while get musich.getQueue in jump');
-				console.error(error)
+				logger.warn('Error while get musich.getQueue in jump');
+				logger.error(error)
 			}
 
 			var songs = Object.keys(queue).length;
@@ -36,8 +37,8 @@ module.exports =
 			}
 		
 		} catch (error) {
-			console.warn('Error while performing jump');
-			console.error(error)
+			logger.warn('Error while performing jump');
+			logger.error(error)
 		}
 	},
 };

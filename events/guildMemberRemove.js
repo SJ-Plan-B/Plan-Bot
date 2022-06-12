@@ -1,4 +1,5 @@
 const {Message, MessageEmbed} = require('discord.js');
+const logger = require('../util/logger').log
 const { message_leave_1, message_leave_2, message_leave_header, message_leave_chanel, message_leave_embed_collor } =require('../data/config.json')
 
 module.exports = {
@@ -13,7 +14,7 @@ module.exports = {
 			.setAuthor({
 					name: nickname
 			})
-			.setDescription(message_leave_1+nickname+message_leave_2)
+			.setDescription(message_leave_1+nickname+' '+message_leave_2)
 			.setThumbnail(member.user.displayAvatarURL())
 			.setTimestamp();
 		
@@ -21,8 +22,8 @@ module.exports = {
 				embeds: [newMemberEmbed] 
 			})
 		} catch (error) {
-			console.warn('Error while performing guildMemberRemove')
-			console.error(error)
+			logger.warn('Error while performing guildMemberRemove')
+			logger.error(error)
 		}	
 
 	}
@@ -35,11 +36,11 @@ try {
 			const myJSON = JSON.stringify(memberarry);
 			const myArray = myJSON.split(",")
 			const slicerdicer = myArray[4];
-			let membername = slicerdicer.slice(11);
-			let result = membername.replace(/["]/g, '')
+			let slicerdicerplus = slicerdicer.slice(11);
+			let result = slicerdicerplus.replace(/["]/g, '')
 			return result;	
 	}	
 } catch (error) {
-	console.warn('Error while performing getname in guildMemberRemove')
-	console.error(error)
+	logger.warn('Error while performing getname in guildMemberRemove')
+	logger.error(error)
 }

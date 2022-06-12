@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const logger = require('../util/logger').log
 const music = require('@koenie06/discord.js-music');
 
 module.exports = 
@@ -19,15 +20,15 @@ module.exports =
 						const myArray = myJSON.split(",")
 						const slicerdicer = myArray[0];
 						result[index] = slicerdicer.slice(17);
-						//console.log(result)
+						logger.debug(result)
 					}
 					return interaction.reply('\`' + result.join(`\n`) + '\`');
 			}catch(error){
 				interaction.reply('no song in queue')
 			}
 		} catch (error) {
-			console.warn('Error while performing showqueue')
-			console.error(error)
+			logger.warn('Error while performing showqueue')
+			logger.error(error)
 		}
 	}
 };

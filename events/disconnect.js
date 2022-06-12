@@ -1,6 +1,7 @@
+const logger = require('../util/logger').log
 module.exports = {
 	name: 'disconnect',
 	execute(client) {
-		console.log("Disconnect!");
+		logger.info("Disconnect!");
     },
 };

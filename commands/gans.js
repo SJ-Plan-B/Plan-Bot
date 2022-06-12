@@ -1,26 +1,26 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const music = require('@koenie06/discord.js-music');
-const logger = require('../util/logger').log
 const { MessageEmbed } = require('discord.js');
+const logger = require('../util/logger').log;
 
 module.exports = 
 {
 	data: new SlashCommandBuilder()
-		.setName('surrender')
-		.setDescription('surrenders (musik)'),
+		.setName('gans')
+		.setDescription('The Holy Santa Barbara - Dance mit de Gänse'),
 
 	async execute(interaction)
 	{
 		try {
 			const channel = interaction.member.voice.channel;
-			const song = 'https://www.youtube.com/watch?v=K04aZ90Vo4A'
+			const song = 'https://www.youtube.com/watch?v=_LGXSnHtq8Q'
 
-			const surrenderEmbed = new MessageEmbed()
-						.setColor('#e30926')
-						.setTitle('Surrender')
-						.setDescription(`${await(interaction.user.username)} hat surrenderd`)
-						.setThumbnail('https://cdn.sanity.io/images/ccckgjf9/production/0f881cfc9a1c8da6c9bb464c621c9f55d0d87462-1098x752.png?max-h=1080&max-w=1920&fit=scale&auto=format')
-
+			const GansEmbed = new MessageEmbed()
+			.setColor('#e30926')
+			.setTitle('Gans')
+			.setDescription(`${await(interaction.user.username)} wird vom fuchs gestolen`)
+			.setThumbnail('https://media.4-paws.org/b/6/3/d/b63d0abfe39e4dcae26568ef10abc59d3844c0e7/VIER%20PFOTEN-1918x1328.jpg')
+			
 			switch(true){
 				case(channel === null):
 					interaction.reply('You must be in a Voicechannel');
@@ -33,13 +33,11 @@ module.exports =
 				default:
 					try{
 						music.play({ interaction: interaction, channel: channel, song: song});
-						return interaction.reply({ embeds: [surrenderEmbed] });
-
+						return interaction.reply({ embeds: [GansEmbed] })
 					}catch(error){
 						logger.info('Error while performing play')
 						interaction.reply('Invalide Song Link');
 					}}
-					
 		} catch (error) {
 			logger.warn('Error while performing play')
 			logger.error(error)

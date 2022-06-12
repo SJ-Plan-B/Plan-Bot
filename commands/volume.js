@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const logger = require('../util/logger').log
 const music = require('@koenie06/discord.js-music');
 
 module.exports = 
@@ -22,8 +23,8 @@ module.exports =
                 interaction.reply('incorrect volume')
                 };
         }catch(error){
-            console.warn('Error while performing volume')
-            console.error(error)
+            logger.warn('Error while performing volume')
+            logger.error(error)
         }
         
 	},

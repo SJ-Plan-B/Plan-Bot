@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const logger = require('../util/logger').log;
 
 module.exports = 
 {
@@ -22,8 +23,8 @@ module.exports =
 				
 			  return interaction.reply({ content: `Deine Münze ist auf ${ausgabe} gelandet!`,});
 		} catch (error) {
-			console.warn('Error while performing coinflip'); 
-			console.error(error)
+			logger.warn('Error while performing coinflip'); 
+			logger.error(error)
 		}
 	},
 };
@@ -33,5 +34,6 @@ try {
 	return Math.floor(Math.random() * max);
 	}
 } catch (error) {
-	console.error('Error while performing Random Calculation In coinflip');
+	logger.warn('Error while performing Random Calculation In coinflip');
+	logger.error(error)
 }

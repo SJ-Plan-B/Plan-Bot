@@ -4,7 +4,7 @@ module.exports = {
 	once: true,
 	execute(client) {
 		try {
-			logger.info(`Ready! Logged in as ${client.user.tag}`);
+			logger.info(`das ist der logger test`);
 		} catch (error) {
 			logger.warn('Error while performing ready')
 			logger.error(error)

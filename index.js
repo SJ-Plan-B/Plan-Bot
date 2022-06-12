@@ -1,10 +1,13 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const {Worker} = require("worker_threads");
+const logger = require('./util/logger').log;
 const {Client, Collection, Intents, Message, Channel, MessageEmbed, GuildMember} = require('discord.js');
 const {token} = require('./data/config.json');
 
 
+module.exports = {
+async startbot(){
 
 const client = new Client(
 {intents: [
@@ -58,28 +61,54 @@ client.on('interactionCreate', async interaction => {
 	try {
 		if (interaction.commandName === 'prune') {
 			let returnvalue = await command.execute(interaction);
-			 console.log('prune!'+ returnvalue);
-			 if (returnvalue===true) {console.log('channelID '+ channelID); sendMessage(channelID);}
+			 logger.info('prune!'+ returnvalue);
+			 if (returnvalue===true) {logger.info('channelID '+ channelID); sendMessage(channelID);}
 		}else {
 			const worker = new Worker('./commands/'+interaction.commandName+'.js', {workerData: await(command.execute(interaction))});
 
 			//worker.postMessage(interaction);
 
-			worker.on('message', result => {console.log('worker'+ result)});
+			worker.on('message', result => {logger.debug('worker'+ result)});
 	
-			worker.on('error', error => {console.log('worker error'+ error)});
+			worker.on('error', error => {logger.error('worker error'+ error)});
 	
 			worker.on('exit', exitCode => {
 			if(exitCode != 0)
-			{console.log(exitCode)}
+			{logger.verbose(exitCode)}
 			;})
 		}
 		
 	} catch (error) {
-		console.error(error);
+		logger.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
+
+
+//
+// chanel-logger-handling
+//
+try {
+	const loggerPath = path.join(__dirname, 'logger');
+	const loggerFiles = fs.readdirSync(loggerPath).filter(file => file.endsWith('.js'));
+
+	for (const file of loggerFiles) {
+		const filePath = path.join(loggerPath, file);
+		const logger = require(filePath);
+		if (logger.once) {
+			client.once(logger.name, (...args) => logger.execute(...args));	
+		}else{
+			client.on(logger.name, (...args) => logger.execute(...args));
+		}
+	}
+
+	
+} catch (error) {
+	logger.error(error)
+	logger.warn('Error Wile Using Logger Funktions')
+}
+
+
 //
 //send message to channel by id
 //
@@ -91,3 +120,5 @@ async function sendMessage(cID,message){
 //Login
 //
 client.login(token);
+}
+}

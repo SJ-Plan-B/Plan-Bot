@@ -3,13 +3,15 @@
 	"guildId": "Server ID",
     "token" : "Your Acces Token",
 
+    "log_messages_in_consol" : false,
+
     "message_welcome_chanel" : "chanel id",
     "message_welcome_embed_collor" :"Color Hex code",
-    "message_welcome_header" :  "New Member!",
+    "message_welcome_header" : "New Member!",
     "message_welcome" : "welcome",
 
     "message_leave_chanel" : "chanel id",
     "message_leave_embed_collor" :"Color Hex code",
-    "message_leave_header" :  "New Member!",
+    "message_leave_header" : "New Member!",
     "message_leave" : "goode bye"
 }

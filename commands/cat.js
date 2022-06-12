@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const music = require('@koenie06/discord.js-music');
+const logger = require('../util/logger').log;
 
 module.exports = 
 {
@@ -18,14 +19,14 @@ module.exports =
 					channel: channel,
 					song: song
 					});
-				interaction.reply(`${await(interaction.user.username)} is a Purring cat`);
-				return song;
+				
+				return interaction.reply(`${await(interaction.user.username)} is a Purring cat`);
 			}catch(error){
 				interaction.reply('Invalide Song Link');
 			}
 		} catch (error) {
-			console.warn('Error while performing play')
-			console.error(error)
+			logger.warn('Error while performing play')
+			logger.error(error)
 		}
 	},
 };
