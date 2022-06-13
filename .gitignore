@@ -8,3 +8,4 @@ logs/
 config.json
 db.json
 event.json
+comand.json

@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const music = require('@koenie06/discord.js-music');
 const { MessageEmbed } = require('discord.js');
 const logger = require('../util/logger').log;
+const { command_fuchs_song_link, command_fuchs_picture_link } =require('../data/comand.json')
 
 module.exports = 
 {
@@ -13,13 +14,13 @@ module.exports =
 	{
 		try {
 			const channel = interaction.member.voice.channel;
-			const song = 'https://www.youtube.com/watch?v=QwZRRsh6khA'
+			const song = command_fuchs_song_link
 
 			const FuchsEmbed = new MessageEmbed()
 			.setColor('#e30926')
 			.setTitle('Fuchs')
 			.setDescription(`${await(interaction.user.username)} hat die Gans gestohlen`)
-			.setThumbnail('https://www.planet-wissen.de/natur/tierwelt/tiere_im_wald/canidefuchsmauritiusgjpg100~_v-HintergrundL.jpg')
+			.setThumbnail(command_fuchs_picture_link)
 
 			switch(true){
 				case(channel === null):
