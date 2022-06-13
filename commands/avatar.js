@@ -17,8 +17,7 @@ module.exports =
 			return interaction.reply(`${await(user.username)}'s avatar: ${await(user.displayAvatarURL({ dynamic: true }))}`);
 			return interaction.reply(`Your avatar: ${await(interaction.user.displayAvatarURL({ dynamic: true }))}`);
 		}catch(error){
-			logger.warn('Error while performing avatar'); 
-			logger.error(error)
+			logger.error('Error while performing avatar'); 
 		}
 	},
 };

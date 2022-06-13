@@ -84,7 +84,7 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 
-
+/*
 //
 // chanel-logger-handling
 //
@@ -107,7 +107,7 @@ try {
 	logger.error(error)
 	logger.warn('Error Wile Using Logger Funktions')
 }
-
+*/
 
 //
 //send message to channel by id

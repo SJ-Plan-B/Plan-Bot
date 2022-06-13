@@ -16,11 +16,11 @@ module.exports = {
     cascadingChannels_DB(){
         con.connect(function(err) {
             if (err) throw err;
-              logger.http(`connected to database:${cascadingChannels_DB_database}`);
+              logger.http(`connected to database: ${cascadingChannels_DB_database}`);
               var sql = "CREATE TABLE IF NOT EXISTS channels (name VARCHAR(255), id BIGINT PRIMARY KEY,  isOriginal BOOLEAN, copyOf VARCHAR(255))";
               con.query(sql, function (err, result) {
                 if (err) throw err;
-                logger.http(`Table channels created in database:${cascadingChannels_DB_database}`);
+                logger.http(`Table channels created in database: ${cascadingChannels_DB_database}`);
               });
         });
     }

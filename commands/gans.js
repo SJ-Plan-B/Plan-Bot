@@ -40,8 +40,7 @@ module.exports =
 						interaction.reply('Invalide Song Link');
 					}}
 		} catch (error) {
-			logger.warn('Error while performing play')
-			logger.error(error)
+			logger.error('Error while performing play')
 		}
 	},
 };

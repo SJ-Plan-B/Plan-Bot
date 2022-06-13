@@ -18,7 +18,6 @@ module.exports =
 		}
 		await interaction.channel.bulkDelete(amount, true).catch(error => 
 			{
-			logger.error(error);
 			interaction.reply(
 				{content: 'There was an error trying to prune messages in this channel!', ephemeral: true});});
 
@@ -26,8 +25,7 @@ module.exports =
 		return false;
 
 		}catch(error){
-			logger.warn('Error while performing prune');
-			logger.error(error)
+			logger.error('Error while performing prune');
 		}
 	},
 };

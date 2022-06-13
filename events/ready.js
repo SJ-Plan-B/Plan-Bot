@@ -6,8 +6,7 @@ module.exports = {
 		try {
 			logger.info(`Ready! Logged in as ${client.user.tag}`);
 		} catch (error) {
-			logger.warn('Error while performing ready')
-			logger.error(error)
+			logger.error('Error while performing ready')
 		}
 	},
 };

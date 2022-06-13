@@ -34,6 +34,5 @@ try {
 	return Math.floor(Math.random() * max);
 	}
 } catch (error) {
-	logger.warn('Error while performing Random Calculation In coinflip');
-	logger.error(error)
+	logger.error('Error while performing Random Calculation In coinflip');
 }

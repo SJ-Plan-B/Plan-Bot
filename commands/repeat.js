@@ -18,7 +18,7 @@ module.exports =
 			try{
 				queue = await(music.getQueue({ interaction: interaction }));	
 			}catch(error){
-				logger.warn('Error while get music.getQueue in reapeat')
+				logger.error('Error while get music.getQueue in reapeat')
 			}
 
 			var songs = Object.keys(queue).length ;
@@ -38,8 +38,7 @@ module.exports =
 				
 			}
 		}catch(error){
-				logger.warn('Error while performing reapeat');
-				logger.error(error)
+				logger.error('Error while performing reapeat');
 		}
 	},
 };

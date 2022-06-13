@@ -46,8 +46,7 @@ module.exports =
 		
 		return interaction.reply({ embeds: [exampleEmbed] });
 		}catch(error){
-			logger.warn('Error while performing message-embed')
-			logger.error(error)
+			logger.error('Error while performing message-embed')
 		}
 	},
 };

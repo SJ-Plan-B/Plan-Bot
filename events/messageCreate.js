@@ -11,8 +11,7 @@ module.exports = {
 				//console.log('Bot: Pong!')
 			}else{}
 		}catch(error){
-			logger.warn('Error while performing interactionCreate')
-			logger.error(error)
+			logger.error('Error while performing interactionCreate')
 		}
 	}
 };

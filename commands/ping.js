@@ -11,8 +11,7 @@ module.exports =
 		try{
 			return interaction.reply(`${interaction.user.username} said Ping!\nPong!`);
 		}catch(error){
-			logger.warn('Error while performing ping')
-			logger.log(error)
+			logger.error('Error while performing ping')
 		}
 	},
 };

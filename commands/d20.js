@@ -13,8 +13,7 @@ module.exports =
 			const rolle = getRandomArbitrary(1, 20)
 			return interaction.reply({ content: `du hast eine: ${rolle} Gewürfelt.`,});
 		}catch(error){
-			logger.warn('Error while performing D20'); 
-			logger.error(error)
+			logger.error('Error while performing D20');
 		}
 	},
 };
@@ -27,6 +26,5 @@ try {
     return Math.floor(Math.random() * (max - min)) + min;
 	}
 	} catch (error) {
-		logger.warn('Error while performing Random Calculation In D20');
-		logger.error(error)
+		logger.error('Error while performing Random Calculation In D20');
 	}

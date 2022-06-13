@@ -39,8 +39,7 @@ module.exports =
 					});
 
 				} catch (error) {
-				logger.warn(`Error while performing the database: ${cascadingChannels_DB_database}, Conection in addchannlcascade`); 
-				logger.error(error)
+				logger.error(`Error while performing the database: ${cascadingChannels_DB_database}, Conection in addchannlcascade`); 
 				}	
 
 			}else{
@@ -48,8 +47,7 @@ module.exports =
 			}
 
 		}catch(error){
-			logger.warn('Error while performing addchannlcascade'); 
-			console.log(error)
+			logger.error('Error while performing addchannlcascade'); 
 		}
 	},
 };

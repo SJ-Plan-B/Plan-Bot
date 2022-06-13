@@ -17,8 +17,7 @@ module.exports =
 			return interaction.reply(`The options value is: \`${value}\``);
 			return interaction.reply('No option was provided!');
 		}catch(error){
-			logger.warn('Error while performing options-info')
-			logger.error(error)
+			logger.error('Error while performing options-info')
 		}
 	},
 };

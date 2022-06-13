@@ -14,8 +14,7 @@ module.exports =
 
 			return interaction.reply({ content: `du hast eine: ${rolle} Gewürfelt.`,});
 		}catch(error){
-			logger.warn('Error while performing D4'); 
-			logger.error(error)
+			logger.error('Error while performing D4'); 
 		}
 	},
 };
@@ -29,5 +28,4 @@ try {
 	}
 } catch (error) {
 	logger.warn('Error while performing Random Calculation In D4');
-	logger.error(error)
 }

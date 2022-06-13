@@ -13,8 +13,7 @@ module.exports =
 		try{
 			return interaction.reply('Boop!');
 		}catch (error){
-			logger.warn('Error while performing Beep!');
-			logger.error(error)
+			logger.error('Error while performing Beep!');
 		}
 	},
 };

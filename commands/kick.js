@@ -15,8 +15,7 @@ module.exports =
 
 			return interaction.reply({ content: `You wanted to kick: ${await(user.username)}`, ephemeral: true });
 		} catch (error) {
-			logger.warn('Error while performing Kick');
-			logger.error(error)
+			logger.error('Error while performing Kick');
 		}
 	},
 };

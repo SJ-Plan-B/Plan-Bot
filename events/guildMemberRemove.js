@@ -22,8 +22,7 @@ module.exports = {
 				embeds: [newMemberEmbed] 
 			})
 		} catch (error) {
-			logger.warn('Error while performing guildMemberRemove')
-			logger.error(error)
+			logger.error('Error while performing guildMemberRemove')
 		}	
 
 	}
@@ -41,6 +40,5 @@ try {
 			return result;	
 	}	
 } catch (error) {
-	logger.warn('Error while performing getname in guildMemberRemove')
-	logger.error(error)
+	logger.error('Error while performing getname in guildMemberRemove')
 }

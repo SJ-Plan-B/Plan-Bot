@@ -12,8 +12,7 @@ module.exports =
 		try{
 			return interaction.reply(`Server name: ${await(interaction.guild.name)}\nTotal members: ${await(interaction.guild.memberCount)}`);
 		}catch(error){
-			logger.warn('Error while performing server')
-			logger.error(error)
+			logger.error('Error while performing server')
 		}
 	},
 };
