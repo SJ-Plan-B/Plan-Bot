@@ -34,8 +34,8 @@ module.exports =
 								var Inserts = [name, channelid,]
 								sql = mysql.format(sql, Inserts);
 								con.query(sql, function (err, result) {
-								if (err) throw err;
-								logger.http(`Inserted ${name} into database: ${cascadingChannels_DB_database}, table: channels result: ${result}`)
+									if (err) throw err;
+									logger.http(`Inserted ${name} into database: ${cascadingChannels_DB_database}, table: channels`)
 								});
 			
 							} catch (error) {
