@@ -1,22 +1,24 @@
 const logger = require('../util/logger').log
+const client = require('../index')
+const {Client, Guild, GuildChannel, GuildChannelManager} = require('discord.js');
+
+const channelName = 'test-voice-anders'
+
 module.exports = {
 	name: 'voiceStateUpdate',
-	execute(oldMember, newMember) {
-		try {
-		
+	execute(oldMember, newMember,) {
+
+        try {
+        
+
         var newUserChannel = newMember.channelId //new channel
         var oldUserChannel = oldMember.channelId //old channel
 
         if(oldUserChannel === null && newUserChannel !== null) {
 
             // User Joins a voice channel
-            if (newUserChannel == '985613132619735052') {
-                newUserChannel.clone(undefined, true, false, 'Needed a clone')
-                .then(clone => console.log(`Cloned ${channel.name} to make a channel called ${clone.name}`))
-                .catch(console.error);
-            } else {
-                
-            }
+     
+
 
         } else if(oldUserChannel !== null && newUserChannel === null){
 
@@ -38,3 +40,87 @@ module.exports = {
 	},
 };
 
+  
+/*
+if(command === 'setup'){
+    var botname= 'DJ Musica' // setup messaggio con reazioni
+    message.guild.channels.create(botname,{ //Create a channel
+      
+      type: 'text', //Make sure the channel is a text channel
+      permissionOverwrites: [{ //Set permission overwrites
+          id: message.guild.id,
+          allow: ['VIEW_CHANNEL'],              
+      }]
+      
+  }).then(channel => channel.send('eccoci ' + message.channel.id))}
+
+
+const channelName = 'test-voice-anders'
+
+const getVoiceChannels = (guild) => {
+  return guild.channels.cache.filter((channel) => {
+    return channel.type === 'voice' && channel.name === channelName
+  })
+}
+
+module.exports = {
+    name: 'voiceStateUpdate',
+	execute(oldMember, newMember) {
+  
+    const { guild } = oldMember
+    const joined = !!newMember.channelID
+
+    const channelId = joined ? newMember.channelID : oldMember.channelID
+    let channel = newMember;
+  console.log(channel);
+
+    if (channel.name === channelName) {
+      if (joined) {
+        const channels = getVoiceChannels(guild)
+
+        let hasEmpty = false
+
+        channels.forEach((channel) => {
+          if (!hasEmpty && channel.members.size === 0) {
+            hasEmpty = true
+          }
+        })
+
+        if (!hasEmpty) {
+          const {
+            type,
+            userLimit,
+            bitrate,
+            parentID,
+            permissionOverwrites,
+            rawPosition,
+          } = channel
+
+          guild.channels.create(channelName, {
+            type,
+            bitrate,
+            userLimit,
+            parent: parentID,
+            permissionOverwrites,
+            position: rawPosition,
+          })
+        }
+      } else if (
+        channel.members.size === 0 &&
+        getVoiceChannels(guild).size > 1
+      ) {
+        channel.delete()
+      }
+    } else if (oldMember.channelID) {
+      channel = guild.channels.cache.get(oldMember.channelID)
+      if (
+        channel.name === channelName &&
+        channel.members.size === 0 &&
+        getVoiceChannels(guild).size > 1
+      ) {
+        channel.delete()
+      }
+    }
+  },
+};
+*/
