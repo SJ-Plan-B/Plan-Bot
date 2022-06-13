@@ -1,14 +1,14 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const logger = require('../util/logger').log;
-//mysql v.5.5
+const { cascadingChannels_DB_host, cascadingChannels_DB_port, cascadingChannels_DB_user, cascadingChannels_DB_password, cascadingChannels_DB_database } =require('../data/db.json')
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-    host: 'host', 
-    port: 'port',
-    user:'user', 
-    password: 'password',
-    database:  'database',
+    host: cascadingChannels_DB_host, 
+    port: cascadingChannels_DB_port,
+    user: cascadingChannels_DB_user, 
+    password: cascadingChannels_DB_password,
+    database: cascadingChannels_DB_database,
 });
 
 module.exports = 
