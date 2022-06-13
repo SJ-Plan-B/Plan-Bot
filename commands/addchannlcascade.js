@@ -15,30 +15,40 @@ module.exports =
 {
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('addchannlcascade')
-		.setDescription('add channl to cascade'),
+		.setDescription('add channl to cascade')
+		.addStringOption(option => option.setName('channelid').setDescription('Enter a Voice Chanel id')),
 
 	async execute(interaction) // Funktion des Comands
 	{
 		try{
-			try {
-				con.connect(function(err) {
-					if (err) throw err;
-					console.log("Connected!");
-					var sql = "INSERT INTO channels (name, id) VALUES ('General', '863102864342908941')";
-					con.query(sql, function (err, result) {
-					  if (err) throw err;
-					  console.log("Table created");
-					});
-				  });
-			} catch (error) {
-				logger.warn('Error while performing the database Conection in addchannlcascade'); 
-				logger.error(error)
-			}
+			const channelid = interaction.options.getString('channelid');
+			const channelObject = interaction.guild.channels.cache.get(channelid); // Gets the channel object
+			var name = channelObject.name
+
+			if (channelObject.type === 'GUILD_VOICE'){
+
+							try {
+								// Insert Voice into Database
+								var sql = "INSERT INTO  channels (name, id, isOriginal, copyOf) SELECT * FROM ( SELECT ? AS channelName, ?, true, '') AS dataQuery ON DUPLICATE KEY UPDATE name=channelName";
+								var Inserts = [name, channelid,]
+								sql = mysql.format(sql, Inserts);
+								con.query(sql, function (err, result) {
+								if (err) throw err;
+								logger.http(`Inserted ${name} into database: ${cascadingChannels_DB_database}, table: channels result: ${result}`)
+								});
 			
+							} catch (error) {
+							logger.warn('Error while performing the database Conection in addchannlcascade'); 
+							logger.error(error)
+							}	
+
+			}else{
+				interaction.reply('The selectetd channel is no voice channel')
+			}
 
 		}catch(error){
 			logger.warn('Error while performing addchannlcascade'); 
-			logger.error(error)
+			console.log(error)
 		}
 	},
 };
