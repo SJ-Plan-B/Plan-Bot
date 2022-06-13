@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const {Worker} = require("worker_threads");
 const logger = require('./util/logger').log;
-const {Client, Collection, Intents, Message, Channel, MessageEmbed, GuildMember} = require('discord.js');
+const {Client, Collection, Intents, Message, Channel, MessageEmbed, GuildMember, } = require('discord.js');
 const {token} = require('./data/config.json');
 
 
@@ -108,6 +108,26 @@ try {
 	logger.warn('Error Wile Using Logger Funktions')
 }
 */
+
+//
+// Chanel Create
+//
+
+const voiceCollection = new Collection()
+
+client.on("voiceStateUpdate", (oldState, newState) => {
+	const user = newState.user.id;
+	const member = newState.guild.members(user);
+	console.log(member)
+})
+
+
+
+
+
+
+
+
 
 //
 //send message to channel by id

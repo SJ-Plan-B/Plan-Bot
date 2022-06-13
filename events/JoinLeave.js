@@ -1,18 +1,17 @@
 const logger = require('../util/logger').log
 const client = require('../index')
-const {Client, Guild, GuildChannel, GuildChannelManager} = require('discord.js');
+const { Collection } = require('discord.js');
+const voiceCollection = new Collection()
 
-const channelName = 'test-voice-anders'
 
 module.exports = {
-	name: 'voiceStateUpdate',
-	execute(oldMember, newMember,) {
-
+	name: "voiceStateUpdate",
+async	execute(oldstate, newstate,) {
         try {
         
 
-        var newUserChannel = newMember.channelId //new channel
-        var oldUserChannel = oldMember.channelId //old channel
+        var newUserChannel = newstate.channelId //new channel
+        var oldUserChannel = oldstate.channelId //old channel
 
         if(oldUserChannel === null && newUserChannel !== null) {
 
