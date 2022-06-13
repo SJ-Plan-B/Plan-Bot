@@ -7,6 +7,7 @@ module.exports =
 	data: new SlashCommandBuilder()
 		.setName('volume')
 		.setDescription('change volume')
+        .setDMPermission(false)
         .addIntegerOption(option => option.setName('volume').setDescription('enter volume').setRequired(true)),
 
 	async execute(interaction)

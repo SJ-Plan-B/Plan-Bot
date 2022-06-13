@@ -7,6 +7,7 @@ module.exports =
 	data: new SlashCommandBuilder()
 		.setName('repeat')
 		.setDescription('repeat song')
+		.setDMPermission(false)
         .addBooleanOption(option => option.setName('onoff').setDescription('repeat a song').setRequired(true)),
 
 	async execute(interaction)

@@ -6,7 +6,9 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('stop')
-		.setDescription('stop a song'),
+		.setDescription('stop a song')
+		.setDMPermission(false),
+		
 	async execute(interaction)
 	{
 		try{

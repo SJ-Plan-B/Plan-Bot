@@ -7,6 +7,7 @@ module.exports =
 	data: new SlashCommandBuilder()
 		.setName('removefromqueue')
 		.setDescription('Removes a given song from a queue')
+		.setDMPermission(false)
         .addIntegerOption(option => option.setName('positon').setDescription('enter the position of the song to remove').setRequired(true)),
 
 	async execute(interaction)

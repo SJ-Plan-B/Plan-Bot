@@ -6,7 +6,8 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('showqueue')
-		.setDescription('shows the queue'),
+		.setDescription('shows the queue')
+		.setDMPermission(false),
 
 	async execute(interaction)
 	{
