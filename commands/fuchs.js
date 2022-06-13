@@ -8,8 +8,7 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('fuchs')
-		.setDescription('HBz x IIVEN x Bekkaa - Fuchs du hast die Gans gestohlen')
-		.setDMPermission(false),
+		.setDescription('HBz x IIVEN x Bekkaa - Fuchs du hast die Gans gestohlen'),
 
 	async execute(interaction)
 	{

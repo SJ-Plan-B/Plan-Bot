@@ -6,7 +6,6 @@ module.exports =
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('kick')
 		.setDescription('Select a member and kick them (but not really).')
-		.setDMPermission(false)
 		.addUserOption(option => option.setName('target').setDescription('The member to kick')),
 
 	async execute(interaction) // Funktion des Comands

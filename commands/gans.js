@@ -8,8 +8,7 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('gans')
-		.setDescription('The Holy Santa Barbara - Dance mit de Gänse')
-		.setDMPermission(false),
+		.setDescription('The Holy Santa Barbara - Dance mit de Gänse'),
 
 	async execute(interaction)
 	{

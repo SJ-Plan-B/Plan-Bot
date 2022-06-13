@@ -8,8 +8,7 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('surrender')
-		.setDescription('surrenders (musik)')
-		.setDMPermission(false),
+		.setDescription('surrenders (musik)'),
 
 	async execute(interaction)
 	{

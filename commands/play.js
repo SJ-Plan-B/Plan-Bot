@@ -8,7 +8,6 @@ module.exports =
 	data: new SlashCommandBuilder()
 		.setName('play')
 		.setDescription('play a song')
-		.setDMPermission(false)
 		.addStringOption(option => option.setName('song').setDescription('add a song youtube link').setRequired(true)),
 
 	async execute(interaction)
