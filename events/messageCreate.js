@@ -1,5 +1,5 @@
 const logger = require('../util/logger').log
-const { clientId, log_messages_in_consol } = require('../data/config.json');
+const { clientId, log_messages_in_consol } = require('../data/event.json');
 module.exports = {
 	name: 'messageCreate',
 	execute(messageCreate){

@@ -7,3 +7,4 @@ logs/
 #ignore the Config.json because of privacy
 config.json
 db.json
+event.json
