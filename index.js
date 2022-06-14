@@ -107,7 +107,7 @@ try {
 	logger.error(error)
 	logger.warn('Error Wile Using Logger Funktions')
 }
-*/
+
 
 //
 // Chanel Create
@@ -120,13 +120,7 @@ client.on("voiceStateUpdate", (oldState, newState) => {
 	const member = newState.guild.members(user);
 	console.log(member)
 })
-
-
-
-
-
-
-
+*/
 
 
 //

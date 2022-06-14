@@ -16,7 +16,7 @@ module.exports =
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('addchannlcascade')
 		.setDescription('add channl to cascade')
-		.addStringOption(option => option.setName('channelid').setDescription('Enter a Voice Chanel id')),
+		.addStringOption(option => option.setName('channelid').setDescription('Enter a Voice Chanel id').setRequired(true)),
 
 	async execute(interaction) // Funktion des Comands
 	{
