@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const logger = require('../util/logger').log;
 
+
 module.exports = 
 {
 	data: new SlashCommandBuilder() // Comand REG

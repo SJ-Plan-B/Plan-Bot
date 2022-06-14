@@ -20,6 +20,7 @@ const client = new Client(
 		  ]
 });
 
+
 //
 // event-handling
 //
@@ -31,10 +32,14 @@ for (const file of eventFiles) {
 	const event = require(filePath);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));	
+	}else if(event.name === 'JoinLeave'){
+		let returnvalue = await event.execute();
+		console.log('return '+returnvalue);
 	}else{
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
+
 
 //
 // command-handling
@@ -60,9 +65,11 @@ client.on('interactionCreate', async interaction => {
 
 	try {
 		if (interaction.commandName === 'prune') {
+			
 			let returnvalue = await command.execute(interaction);
 			 logger.info('prune!'+ returnvalue);
 			 if (returnvalue===true) {logger.info('channelID '+ channelID); sendMessage(channelID);}
+
 		}else {
 			const worker = new Worker('./commands/'+interaction.commandName+'.js', {workerData: await(command.execute(interaction))});
 
@@ -83,6 +90,25 @@ client.on('interactionCreate', async interaction => {
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
+
+
+//
+// Channel Creator
+//
+
+async function createchannel(channelname, parentId, settings){	
+	let channel = interaction.guild.channels.create(channelname, {
+		type: "GUILD_VOICE",
+		parent: parentId,
+		permissionOverwrites: [
+			{
+			id: interaction.guild.id,
+			deny: ["VIEW_CHANNEL"],
+			},
+		],
+		})
+}
+
 
 /*
 //
@@ -107,19 +133,6 @@ try {
 	logger.error(error)
 	logger.warn('Error Wile Using Logger Funktions')
 }
-
-
-//
-// Chanel Create
-//
-
-const voiceCollection = new Collection()
-
-client.on("voiceStateUpdate", (oldState, newState) => {
-	const user = newState.user.id;
-	const member = newState.guild.members(user);
-	console.log(member)
-})
 */
 
 
@@ -134,5 +147,5 @@ async function sendMessage(cID,message){
 //Login
 //
 client.login(token);
-}
+},
 }

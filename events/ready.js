@@ -8,7 +8,7 @@ module.exports = {
 		} catch (error) {
 			logger.error('Error while performing ready')
 		}
-		const Guilds = client.channels.cache.map(guild => guild.id);
-		console.log(Guilds);
+		//const Guilds = client.channels.cache.map(guild => guild.id);
+		//console.log(Guilds);
 	},
 };
