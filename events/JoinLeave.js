@@ -50,65 +50,22 @@ module.exports = {
 
 function querychannel(channelId){
       try {
-        var sql = "SELECT COUNT(id)*10 FROM channels Where id = ?";
-        var Inserts = [channelId]
-        sql = mysql.format(sql, Inserts);
-        return new Promise((resolve, reject) => {
-          con.query(sql, (err, result) => {
-              return err ? reject(err) : resolve(result);
-            }
-          );
-        });
-          
-      } catch (error) {
-      logger.error(`Error while performing the database: ${cascadingChannels_DB_database}, Conection in addchannlcascade`); 
-      }	
-  };
-
-
-
-
-  function toString(object) {
-    let ergebnis = JSON.stringify(object)
-    let ichhassemeinleben = (ergebnis.length)
-    let ichhasseauchmeinleben = (ichhassemeinleben-20)
-    return ichhasseauchmeinleben;
-  }
-
-
-
-
-
-
-
-
-
-
-
-  /*
-function querychannel(channelId){
-      try {
-          // read if Chanel id exists
-          //var sql = "SELECT COUNT(id) FROM channels Where id = ?";
-          return new Promise((resolve, reject) => {
-              var sql = "SELECT COUNT(id)*10 FROM channels Where id = ?";
+          var sql = "SELECT COUNT(id)*10 FROM channels Where id = ?";
           var Inserts = [channelId]
           sql = mysql.format(sql, Inserts);
-          con.query(sql, function (err, result) {
-              if (err) throw err;
-                logger.http(`into database: ${cascadingChannels_DB_database}, table: channels`)
-                let ergebnis = JSON.stringify(result)
-                let ichhassemeinleben = (ergebnis.length)
-                let ichhasseauchmeinleben = (ichhassemeinleben-20)
-                console.log("change " + ichhasseauchmeinleben);
-              
-          });
-          })
-        
-  
-          
+          return new Promise((resolve, reject) => {
+            con.query(sql, (err, result) => {
+                return err ? reject(err) : resolve(result);
+              }
+            );
+          }
+        );
       } catch (error) {
-      logger.error(`Error while performing the database: ${cascadingChannels_DB_database}, Conection in addchannlcascade`); 
+      logger.error(`Error while performing 'SELECT' in the database: ${cascadingChannels_DB_database}, in Event JoinLeave`); 
       }	
   };
-*/
+
+function toString(object) {
+    let ergebnis = (JSON.stringify(object).length-20)
+    return ergebnis;
+  }
