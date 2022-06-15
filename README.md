@@ -1,24 +1,25 @@
 # Plan-Bot DE
-Plan bot ist der discord bot der sie alle vereinen soll ! <br>
-Diser Bot soll alle funktionen bekommen die alle server Brauchen: <br>
-- Selbst Replizierende Kanäle
-- Begrüßung und Verabschidung von Nutzner
-- einen Musik bot
-- einen Dice Bot
-- ind viles mehr
+Plan Bot ist der Discord Bot, der sie alle vereinen soll ! <br>
+Dieser Bot soll alle Funktionen bekommen, die alle Server brauchen: <br>
+- selbst duplizierende Kanäle
+- Begrüßung und Vorabscheidung von Nutzern
+- einen Musikbot
+- einen Musikbot
+- und vieles mehr
 
 # Plan-Bot EN
 Plan bot is the discord bot that should unite them all ! <br>
-This bot should have all the functions that all servers need: <br>
-- Self replicating Chanel
-- Greeting and farewell of users
-- A Music bot
-- A Dice bot
+ This bot should have all the functions that all servers need: <br>
+- self replicating Channel
+- greeting and farewell of users
+- a music bot
+- a dice bot
 - and much more
 
 ## Instalation DE
-zur istalation des Bots Einfach **`npm install`** im verzeichnis des Bots ausfüren. <br>
-zum Starten des Bots **`node .\start.js`** im verzeichnis des Bots ausfüren. <br>
+1. Zur Installation des Bots einfach **`npm install`** im Verzeichnis des Bots ausführen. <br>
+3. Zum Starten des Bots **`node .\start.js`**  im Verzeichnis des Bots ausführen.  <br>
+2. Trage Deine Konfigurationen in die **`.json`** Dateien im **`data`** Ordner ein
 
 ### Dependencies
  - [Discord.js](https://discord.js.org/ "Discord.js site")
