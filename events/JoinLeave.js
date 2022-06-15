@@ -13,7 +13,7 @@ var con = mysql.createConnection({
 
 module.exports = {
 	name: "voiceStateUpdate",
-	execute(oldstate, newstate,) {
+	async execute(oldstate, newstate,) {
         try {
             
         var newUserChannel = newstate.channelId //new channel
@@ -21,24 +21,20 @@ module.exports = {
 
         if(oldUserChannel === null && newUserChannel !== null) {
             
-            let isRelevent = querychannel(newUserChannel);
-            console.log("Joins "+ isRelevent);
+            console.log("join " + toString(await querychannel(newUserChannel)));
             // User Joins a voice channel
      
 
         } else if(oldUserChannel !== null && newUserChannel === null){
             
-            let isRelevent = querychannel(newUserChannel);
-            console.log("leaves "+ isRelevent);
+            console.log("leave " + toString(await querychannel(oldUserChannel)));
             // User leaves a voice channel
 
 
         } else if(oldUserChannel !== null && newUserChannel !== null){
-            console.log(querychannel(newUserChannel))
-            let ergebnis = JSON.stringify()
-            let ichhassemeinleben = (ergebnis.length)
-            let ichhasseauchmeinleben = (ichhassemeinleben-20)
-            console.log("change " + ichhasseauchmeinleben);
+
+            console.log("change " + toString(await querychannel(newUserChannel)));
+
             // User change a voice channel
 
         }else{
@@ -54,28 +50,65 @@ module.exports = {
 
 function querychannel(channelId){
       try {
-          // read if Chanel id exists
-          //var sql = "SELECT COUNT(id) FROM channels Where id = ?";
-          var sql = "SELECT COUNT(id)*10 FROM channels Where id = ?";
-          var Inserts = [channelId]
-          sql = mysql.format(sql, Inserts);
-          con.query(sql, function (err, result) {
-              if (err) throw err;
-                logger.http(`into database: ${cascadingChannels_DB_database}, table: channels`)
-                return result;
-          });
-          
+        var sql = "SELECT COUNT(id)*10 FROM channels Where id = ?";
+        var Inserts = [channelId]
+        sql = mysql.format(sql, Inserts);
+        return new Promise((resolve, reject) => {
+          con.query(sql, (err, result) => {
+              return err ? reject(err) : resolve(result);
+            }
+          );
+        });
           
       } catch (error) {
       logger.error(`Error while performing the database: ${cascadingChannels_DB_database}, Conection in addchannlcascade`); 
       }	
   };
 
-  function fetchID(data, callback) {
-    connection.query('SELECT id_user FROM USERS WHERE username = ?', data.username, function(err, rows) {
-        if (err) {
-            callback(err, null);
-        } else 
-            callback(null, rows[0].id_user);
-    });
-}
+
+
+
+  function toString(object) {
+    let ergebnis = JSON.stringify(object)
+    let ichhassemeinleben = (ergebnis.length)
+    let ichhasseauchmeinleben = (ichhassemeinleben-20)
+    return ichhasseauchmeinleben;
+  }
+
+
+
+
+
+
+
+
+
+
+
+  /*
+function querychannel(channelId){
+      try {
+          // read if Chanel id exists
+          //var sql = "SELECT COUNT(id) FROM channels Where id = ?";
+          return new Promise((resolve, reject) => {
+              var sql = "SELECT COUNT(id)*10 FROM channels Where id = ?";
+          var Inserts = [channelId]
+          sql = mysql.format(sql, Inserts);
+          con.query(sql, function (err, result) {
+              if (err) throw err;
+                logger.http(`into database: ${cascadingChannels_DB_database}, table: channels`)
+                let ergebnis = JSON.stringify(result)
+                let ichhassemeinleben = (ergebnis.length)
+                let ichhasseauchmeinleben = (ichhassemeinleben-20)
+                console.log("change " + ichhasseauchmeinleben);
+              
+          });
+          })
+        
+  
+          
+      } catch (error) {
+      logger.error(`Error while performing the database: ${cascadingChannels_DB_database}, Conection in addchannlcascade`); 
+      }	
+  };
+*/
