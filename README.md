@@ -17,8 +17,8 @@
        - and much more
 
 ## Instalation DE
-    zur istalation des Bots Einfach **"npm install"** im verzeichnis des Bots ausfüren.
-    zum Starten des Bots **"node .\start.js"** im verzeichnis des Bots ausfüren.
+    zur istalation des Bots Einfach **`npm install`** im verzeichnis des Bots ausfüren.
+    zum Starten des Bots **`node .\start.js`** im verzeichnis des Bots ausfüren.
 
 ### Dependencies
  - [Discord.js](https://discord.js.org/ "Discord.js site")
