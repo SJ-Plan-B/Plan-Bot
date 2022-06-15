@@ -14,8 +14,8 @@ var con = mysql.createConnection({
 module.exports = 
 {
 	data: new SlashCommandBuilder() // Comand REG
-		.setName('addchannlcascade')
-		.setDescription('add channl to cascade')
+		.setName('removechanneldupe')
+		.setDescription('removes channel from cascade')
 		.addStringOption(option => option.setName('channelid').setDescription('Enter a Voice Chanel id').setRequired(true)),
 
 	async execute(interaction) // Funktion des Comands
@@ -29,17 +29,22 @@ module.exports =
 
 				try {
 					// Insert Voice into Database
-					var sql = "INSERT INTO  channels (name, id, isOriginal, copyOf) SELECT * FROM ( SELECT ? AS channelName, ?, true, '') AS dataQuery ON DUPLICATE KEY UPDATE name=channelName";
-					var Inserts = [name, channelid,]
+					var sql = "DELETE FROM channels Where id = ?";
+					var Inserts = [channelid]
 					sql = mysql.format(sql, Inserts);
 					con.query(sql, function (err, result) {
 						if (err) throw err;
-						logger.http(`Inserted ${name} into database: ${cascadingChannels_DB_database}, table: channels`)
-						interaction.reply(`Channel ${name} was added to channlcascade`);
+						logger.http(`Deleting Channel ${name} from database: ${cascadingChannels_DB_database}, table: channels`)
+						if (result.affectedRows === 1) {
+							interaction.reply(`Channel \`${name}\` was removed from channeldupe`);
+						} else {
+							interaction.reply(`Channel \`${name}\` was not in channeldupe`);
+						}
+	
 					});
 
 				} catch (error) {
-				logger.error(`Error while performing the database: ${cascadingChannels_DB_database}, Conection in addchannlcascade`); 
+				logger.error(`Error while performing the database: ${cascadingChannels_DB_database}, Conection in removechanneldupe`); 
 				}	
 
 			}else{
@@ -47,8 +52,7 @@ module.exports =
 			}
 
 		}catch(error){
-			logger.error('Error while performing addchannlcascade'); 
+			logger.error('Error while performing removechanneldupe'); 
 		}
 	},
 };
-

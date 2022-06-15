@@ -12,12 +12,13 @@ var con = mysql.createConnection({
 
 module.exports = {
 	name: "voiceStateUpdate",
-	async execute(oldstate, newstate,) {
+	async execute(oldChannel, newChannel) {
         try {
-            
-        var newUserChannel = newstate.channelId //new channel
-        var oldUserChannel = oldstate.channelId //old channel
 
+        var newUserChannel = newChannel.channelId //new channel
+        var oldUserChannel = oldChannel.channelId //old channel
+        
+        
         if(oldUserChannel === null && newUserChannel !== null) {
             
             console.log("join " + toString(await querychannel(newUserChannel)));
@@ -30,14 +31,16 @@ module.exports = {
             // User leaves a voice channel
 
 
-        } else if(oldUserChannel !== null && newUserChannel !== null){
+        } else if(oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel){
 
             console.log("change " + toString(await querychannel(newUserChannel)));
 
             // User change a voice channel
 
+        }else if(oldUserChannel === newUserChannel){
+          // Jemand macht in dem channel etwas
         }else{
-            logger.warn('Cannot identify join/leave Event')
+              logger.warn('Cannot identify join/leave Event')
         }
 
 		} catch (error) {
@@ -67,4 +70,4 @@ function querychannel(channelId){
 function toString(object) {
     let ergebnis = (JSON.stringify(object).length-20)
     return ergebnis;
-  }
+  }  
