@@ -22,7 +22,7 @@ This bot should have all the functions that all servers need: <br>
 - a dice bot
 - and much more
 
-## Instalation DE
+## Instalation EN
 1. To install the dependencies simply run **`npm install`** in the bot's directory. <br>
 2. Enter your configurations in the **`.json`** Files in the **`data`** directory. <br>
 3. Remove the **`example.`** at the beginning of the **`.json`** Files in the **`data`** directory. <br>
