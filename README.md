@@ -1,20 +1,20 @@
 # Plan-Bot DE
 Plan bot ist der discord bot der sie alle vereinen soll ! <br>
 Diser Bot soll alle funktionen bekommen die alle server Brauchen: <br>
-    - Selbst Replizierende Kanäle
-    - Begrüßung und Verabschidung von Nutzner
-    - einen Musik bot
-    - einen Dice Bot
-    - ind viles mehr
+- Selbst Replizierende Kanäle
+- Begrüßung und Verabschidung von Nutzner
+- einen Musik bot
+- einen Dice Bot
+- ind viles mehr
 
 # Plan-Bot EN
 Plan bot is the discord bot that should unite them all ! <br>
 This bot should have all the functions that all servers need: <br>
-    - Self replicating Chanel
-    - Greeting and farewell of users
-    - A Music bot
-    - A Dice bot
-    - and much more
+- Self replicating Chanel
+- Greeting and farewell of users
+- A Music bot
+- A Dice bot
+- and much more
 
 ## Instalation DE
 zur istalation des Bots Einfach **`npm install`** im verzeichnis des Bots ausfüren. <br>
