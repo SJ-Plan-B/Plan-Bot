@@ -7,9 +7,15 @@ Dieser Bot soll alle Funktionen bekommen, die alle Server brauchen: <br>
 - einen Musikbot
 - und vieles mehr
 
+## Instalation DE
+1. Zur Installation der Dependencies einfach **`npm install`** im Verzeichnis des Bots ausführen. <br>
+2. Trage Deine Konfigurationen in die **`.json`** Dateien im **`data`** Ordner ein. <br>
+3. Entferne das **`example.`** am Anfang der **`.json`** Dateien im **`data`** Ordner. <br>
+4. Zum Starten des Bots **`node .\start.js`**  im Verzeichnis des Bots ausführen.  <br>
+
 # Plan-Bot EN
 Plan bot is the discord bot that should unite them all ! <br>
- This bot should have all the functions that all servers need: <br>
+This bot should have all the functions that all servers need: <br>
 - self replicating Channel
 - greeting and farewell of users
 - a music bot
@@ -17,9 +23,10 @@ Plan bot is the discord bot that should unite them all ! <br>
 - and much more
 
 ## Instalation DE
-1. Zur Installation des Bots einfach **`npm install`** im Verzeichnis des Bots ausführen. <br>
-3. Zum Starten des Bots **`node .\start.js`**  im Verzeichnis des Bots ausführen.  <br>
-2. Trage Deine Konfigurationen in die **`.json`** Dateien im **`data`** Ordner ein
+1. To install the dependencies simply run **`npm install`** in the bot's directory. <br>
+2. Enter your configurations in the **`.json`** Files in the **`data`** directory. <br>
+3. Remove the **`example.`** at the beginning of the **`.json`** Files in the **`data`** directory. <br>
+4. To start the bot run **`node .\start.js`** in the bot's directory.  <br>
 
 ### Dependencies
  - [Discord.js](https://discord.js.org/ "Discord.js site")
