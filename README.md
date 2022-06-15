@@ -10,11 +10,11 @@
 # Plan-Bot EN
     plan bot is the discord bot that should unite them all
     This bot should have all the functions that all servers need:
-        Self replicating Chanel
-        Greeting and farewell of users
-        A music bot
-        A dice bot
-        and much more
+       - Self replicating Chanel
+       - Greeting and farewell of users
+       - A music bot
+       - A dice bot
+       - and much more
 
 # Instalation DE
     zur istalation des Bots Einfach "npm install" im verzeichnis des Bots ausfüren.
@@ -22,7 +22,9 @@
 
 # Dependencies
 [Discord.js](https://discord.js.org/#/ "Discord.js site")
+
 [mysql](https://github.com/mysqljs/mysql "mysql Git Repo")
+
 [winston](https://github.com/winstonjs/winston "winston-daily-rotate-file Git Repo")
 [winston-daily-rotate-file](https://github.com/winstonjs/winston-daily-rotate-file "mysql Git Repo")
 [@discordjs/builders](https://www.npmjs.com/package/@discordjs/builders "@discordjs/builders site")
