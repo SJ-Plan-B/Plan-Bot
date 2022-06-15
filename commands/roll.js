@@ -25,11 +25,11 @@ module.exports =
                     return interaction.reply({ content: `Du hast : \`${ausgabe}\` gewürfelt.`,});
             }catch(error) 
                 {
-                    logger.error('Error while joining array')
+                    logger.error('Error while joining array in roll Command')
                 }
             
 		}catch(error){
-			logger.error('Error while performing roll')
+			logger.error('Error while performing roll Command')
 		}	
 	},
 };
@@ -41,5 +41,5 @@ try {
     return Math.floor(Math.random() * (max - min)) + min;
     }		
 } catch (error) {
-    console.error('Error while performing Random Calculation in roll')
+    console.error('Error while performing Random Calculation in roll Command')
 }

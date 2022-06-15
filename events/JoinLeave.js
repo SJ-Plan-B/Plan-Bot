@@ -1,5 +1,4 @@
 const logger = require('../util/logger').log
-const client = require('../index')
 const { cascadingChannels_DB_host, cascadingChannels_DB_port, cascadingChannels_DB_user, cascadingChannels_DB_password, cascadingChannels_DB_database } =require('../data/db.json')
 var mysql = require('mysql');
 
