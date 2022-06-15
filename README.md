@@ -18,6 +18,9 @@ This bot should have all the functions that all servers need:
 
 # Dependencies
 [Discord.js](https://discord.js.org/#/ "Discord.js site")
+[mysql](https://github.com/mysqljs/mysql "mysql Git Repo")
+[winston](https://github.com/winstonjs/winston "winston-daily-rotate-file Git Repo")
+[winston-daily-rotate-file](https://github.com/winstonjs/winston-daily-rotate-file "mysql Git Repo")
 [@discordjs/builders](https://www.npmjs.com/package/@discordjs/builders "@discordjs/builders site")
 [@discordjs/opus](https://www.npmjs.com/package/@discordjs/opus "@discordjs/opus site")
 [@discordjs/rest](https://www.npmjs.com/package/@discordjs/rest "@discordjs/rest site")
