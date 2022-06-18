@@ -14,27 +14,28 @@ module.exports = {
 	name: "voiceStateUpdate",
 	async execute(oldChannel, newChannel) {
         try {
-
+          //console.log(newChannel)
         var newUserChannel = newChannel.channelId //new channel
         var oldUserChannel = oldChannel.channelId //old channel
-        
+        //console.log(newUserChannel.channel.parent)
         
         if(oldUserChannel === null && newUserChannel !== null) {
             
-            console.log("join " + toString(await querychannel(newUserChannel)));
+            console.log("join " + toString(await querychannelcount(newUserChannel)));
             // User Joins a voice channel
-     
+          
 
         } else if(oldUserChannel !== null && newUserChannel === null){
             
-            console.log("leave " + toString(await querychannel(oldUserChannel)));
+            console.log("leave " + toString(await querychannelcount(oldUserChannel)));
             // User leaves a voice channel
 
 
         } else if(oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel){
 
-            console.log("change " + toString(await querychannel(newUserChannel)));
-
+          channelCreate(newChannel);
+          console.log("change " + toString(await querychannelcount(newUserChannel)));
+            
             // User change a voice channel
 
         }else if(oldUserChannel === newUserChannel){
@@ -50,7 +51,7 @@ module.exports = {
 	},
 };
 
-function querychannel(channelId){
+function querychannelcount(channelId){
       try {
           var sql = "SELECT COUNT(id)*10 FROM channels Where id = ?";
           var Inserts = [channelId]
@@ -71,3 +72,31 @@ function toString(object) {
     let ergebnis = (JSON.stringify(object).length-20)
     return ergebnis;
   }  
+
+function channelCreate(channelobj){
+  console.log('ich bin aus')
+  try {
+      channelobj.clone()
+    /*[console.log(channelobj.channel.permissionOverwrites.fetch)
+      console.log(channelobj.channel.name)
+      let test = "864160500371685396"
+      let parent = channelobj.channel.parent.id
+      let channel = channelobj.guild.channels.create("test-voice-anders", {
+        type: "GUILD_VOICE",
+        parent: parent,
+        permissionOverwrites: channelobj.permissionOverwrites
+            {
+              id: test,
+              allow: ["VIEW_CHANNEL"]
+            },            
+            {
+            id: channelobj.guild.id,
+            deny: ["VIEW_CHANNEL"],
+            },
+        ],
+        })*/
+  } catch (error) {
+    console.log(error)
+  }
+
+}
