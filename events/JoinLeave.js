@@ -12,11 +12,11 @@ var con = mysql.createConnection({
 
 module.exports = {
 	name: "voiceStateUpdate",
-	async execute(oldChannel, newChannel) {
+	async execute(oldState, newState) {
         try {
-          //console.log(newChannel)
-        var newUserChannel = newChannel.channelId //new channel
-        var oldUserChannel = oldChannel.channelId //old channel
+          //console.log(newState)
+        var newUserChannel = newState.channelId //new channel
+        var oldUserChannel = oldState.channelId //old channel
         //console.log(newUserChannel.channel.parent)
         
         if(oldUserChannel === null && newUserChannel !== null) {
@@ -33,7 +33,7 @@ module.exports = {
 
         } else if(oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel){
 
-          channelCreate(newChannel);
+          channelCreate(newState);
           console.log("change " + toString(await querychannelcount(newUserChannel)));
             
             // User change a voice channel
@@ -73,28 +73,12 @@ function toString(object) {
     return ergebnis;
   }  
 
-function channelCreate(channelobj){
-  console.log('ich bin aus')
+async function channelCreate(channelobj){
+  let oldState = channelobj;
   try {
-      channelobj.clone()
-    /*[console.log(channelobj.channel.permissionOverwrites.fetch)
-      console.log(channelobj.channel.name)
-      let test = "864160500371685396"
-      let parent = channelobj.channel.parent.id
-      let channel = channelobj.guild.channels.create("test-voice-anders", {
-        type: "GUILD_VOICE",
-        parent: parent,
-        permissionOverwrites: channelobj.permissionOverwrites
-            {
-              id: test,
-              allow: ["VIEW_CHANNEL"]
-            },            
-            {
-            id: channelobj.guild.id,
-            deny: ["VIEW_CHANNEL"],
-            },
-        ],
-        })*/
+
+   oldState.channel?.clone()
+     
   } catch (error) {
     console.log(error)
   }
