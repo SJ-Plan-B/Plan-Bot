@@ -50,11 +50,13 @@ var logger = new (winston.createLogger)({
 module.exports = {
   'log': logger
 };
+
+
 /*
 error: 0, error codes
 warn: 1, error text
 info: 2, 
-http: 3,
+http: 3, Datenbank Requsts/ API Hocks
 verbose: 4, Nachrichten im chat
 debug: 5, Debug
 silly: 6 only console
