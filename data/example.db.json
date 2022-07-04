@@ -3,5 +3,11 @@
     "cascadingChannels_DB_port": "",
     "cascadingChannels_DB_user": "",
     "cascadingChannels_DB_password": "",
-    "cascadingChannels_DB_database": ""
+    "cascadingChannels_DB_database": "",
+
+    "role_reaction_DB_host": "",
+    "role_reaction_DB_port": "",
+    "role_reaction_DB_user": "",
+    "role_reaction_DB_password": "",
+    "role_reaction_DB_database": ""
 }
