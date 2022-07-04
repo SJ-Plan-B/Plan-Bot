@@ -14,6 +14,7 @@ module.exports = {
 	name: "voiceStateUpdate",
 	async execute(oldState, newState) {
         try {
+          hate(newState)
           //console.log(newState)
         var newUserChannel = newState.channelId //new channel
         var oldUserChannel = oldState.channelId //old channel
@@ -33,8 +34,10 @@ module.exports = {
 
         } else if(oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel){
 
-          channelCreate(newState);
+         //channelCreate(newState);
           console.log("change " + toString(await querychannelcount(newUserChannel)));
+          let user = await(newState.fetch)
+          console.log(user);
             
             // User change a voice channel
 
@@ -78,9 +81,17 @@ async function channelCreate(channelobj){
   try {
 
    oldState.channel?.clone()
-     
+
   } catch (error) {
     console.log(error)
   }
+
+}
+
+async function hate(channelobj){
+  let guild = channelobj.guild 
+  let users = await(channelobj.channel.fetch.memberCount);
+  console.log(users)
+  
 
 }

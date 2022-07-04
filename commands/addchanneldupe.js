@@ -35,11 +35,11 @@ module.exports =
 					con.query(sql, function (err, result) {
 						if (err) throw err;
 						logger.http(`Inserted ${name} into database: ${cascadingChannels_DB_database}, table: channels`)
-						interaction.reply(`Channel ${name} was added to channel dupe`);
+						interaction.reply(`Channel \`${name}\` was added to channel dupe`);
 					});
 
 				} catch (error) {
-				logger.error(`Error while performing the database: \`${cascadingChannels_DB_database}\`, Conection in addchanneldupe`); 
+				logger.error(`Error while performing the database: ${cascadingChannels_DB_database}, Conection in addchanneldupe`); 
 				}	
 
 			}else{
