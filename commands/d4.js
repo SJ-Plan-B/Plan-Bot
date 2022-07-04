@@ -12,7 +12,7 @@ module.exports =
         try{
 			const rolle = getRandomArbitrary(1, 4)
 
-			return interaction.reply({ content: `du hast eine: ${rolle} Gewürfelt.`,});
+			return interaction.reply({ content: `you have rolled a: ${rolle}.`,});
 		}catch(error){
 			logger.error('Error while performing D4'); 
 		}

@@ -22,7 +22,7 @@ module.exports =
                 }
             try{
                     let ausgabe = ergebnis.join(', ');  
-                    return interaction.reply({ content: `Du hast : \`${ausgabe}\` gewürfelt.`,});
+                    return interaction.reply({ content: `you have rolled : \`${ausgabe}\`.`,});
             }catch(error) 
                 {
                     logger.error('Error while joining array in roll Command')
