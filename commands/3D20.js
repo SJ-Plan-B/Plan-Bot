@@ -15,7 +15,7 @@ module.exports =
 			const rolle1 = getRandomArbitrary(1, 20)
 			const rolle2 = getRandomArbitrary(1, 20)
 			const rolle3 = getRandomArbitrary(1, 20)
-			return interaction.reply({content: `you have rolld: ${rolle1} ${rolle2} ${rolle3}.`});
+			return interaction.reply({content: `you have rolled: ${rolle1} ${rolle2} ${rolle3}.`});
 		}catch(error){
 			logger.error('Error while performing 3D20'); 
 		} 
