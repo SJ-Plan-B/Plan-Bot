@@ -1,6 +1,7 @@
 const logger = require('../util/logger').log
 const { cascadingChannels_DB_host, cascadingChannels_DB_port, cascadingChannels_DB_user, cascadingChannels_DB_password, cascadingChannels_DB_database } =require('../data/db.json')
 var mysql = require('mysql');
+const { Interaction, Collection, Client } = require('discord.js');
 
 var con = mysql.createConnection({
     host: cascadingChannels_DB_host, 
@@ -14,7 +15,7 @@ module.exports = {
 	name: "voiceStateUpdate",
 	async execute(oldState, newState) {
         try {
-          hate(newState)
+          usercount(newState)
           //console.log(newState)
         var newUserChannel = newState.channelId //new channel
         var oldUserChannel = oldState.channelId //old channel
@@ -36,8 +37,7 @@ module.exports = {
 
          //channelCreate(newState);
           console.log("change " + toString(await querychannelcount(newUserChannel)));
-          let user = await(newState.fetch)
-          console.log(user);
+
             
             // User change a voice channel
 
@@ -88,10 +88,11 @@ async function channelCreate(channelobj){
 
 }
 
-async function hate(channelobj){
-  let guild = channelobj.guild 
-  let users = await(channelobj.channel.fetch.memberCount);
-  console.log(users)
-  
+async function usercount(channelobj){
+
+  let { members } = channelobj.channel;
+  console.log("members");
+  console.log(members);
+  return members.size;
 
 }
