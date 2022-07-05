@@ -15,40 +15,50 @@ module.exports = {
 	name: "voiceStateUpdate",
 	async execute(oldState, newState) {
         try {
-          usercount(newState)
-          //console.log(newState)
         var newUserChannel = newState.channelId //new channel
         var oldUserChannel = oldState.channelId //old channel
-        //console.log(newUserChannel.channel.parent)
         
         if(oldUserChannel === null && newUserChannel !== null) {
-            
-            console.log("join " + toString(await querychannelcount(newUserChannel)));
+
             // User Joins a voice channel
+            if (toString(await querychannelcount(newUserChannel)) === 1) {
+              channeldupe(newState)
+            } else {
+             //irrelevant channel 
+            }
+            
           
 
         } else if(oldUserChannel !== null && newUserChannel === null){
-            
-            console.log("leave " + toString(await querychannelcount(oldUserChannel)));
+          
             // User leaves a voice channel
+            if (toString(await querychannelcount(oldUserChannel)) === 1) {
+              channeldupe(oldState)
+            } else {
+             //irrelevant channel 
+            }
+
 
 
         } else if(oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel){
 
-         //channelCreate(newState);
-          console.log("change " + toString(await querychannelcount(newUserChannel)));
-
-            
             // User change a voice channel
+            if (toString(await querychannelcount(newUserChannel)) === 1) {
+              channeldupe(newState)
+            } else {
+             //irrelevant channel 
+            }
 
         }else if(oldUserChannel === newUserChannel){
+
           // Jemand macht in dem channel etwas
+
         }else{
               logger.warn('Cannot identify join/leave Event')
         }
 
 		} catch (error) {
-			logger.warn('Error while performing interactionCreate')
+			logger.warn('Error while performing JoinLeave')
 			console.log(error)
 		}
 	},
@@ -71,19 +81,35 @@ function querychannelcount(channelId){
       }	
   };
 
+function checkforemptychannel(channelName){
+    try {
+        var sql = "SELECT id FROM channels Where name = ?";
+        var Inserts = [channelName]
+        sql = mysql.format(sql, Inserts);
+        return new Promise((resolve, reject) => {
+          con.query(sql, (err, result) => {
+              return err ? reject(err) : resolve(result);
+            }
+          );
+        }
+      );
+    } catch (error) {
+    logger.error(`Error while performing 'SELECT' in the database: ${cascadingChannels_DB_database}, in Event JoinLeave`); 
+    }	
+};
+
 function toString(object) {
     let ergebnis = (JSON.stringify(object).length-20)
     return ergebnis;
   }  
 
-async function channelCreate(channelobj){
-  let oldState = channelobj;
+async function channelCreate(voiceState){
   try {
 
-   oldState.channel?.clone()
+    voiceState.channel?.clone()
 
   } catch (error) {
-    console.log(error)
+    logger.error("Error while performing channelCreate in JoinLeave")
   }
 
 }
@@ -91,8 +117,31 @@ async function channelCreate(channelobj){
 async function usercount(channelobj){
 
   let { members } = channelobj.channel;
-  console.log("members");
-  console.log(members);
   return members.size;
+
+}
+
+function splitobj(obj){
+  let myJSON = JSON.stringify(obj);
+  //myJSON = myJSON.replace(id,' ');
+  const myArray = myJSON.split(",")
+  for (let index = 0; index < Object.keys(myArray).length; index++) {
+
+      myArray[index] = myArray[index].replace(/{"id":"/g, '');
+      myArray[index] = myArray[index].replace(/"}/g, '')
+  }
+  myArray[0] = myArray[0].replace('[', '')
+  myArray[(Object.keys(myArray).length-1)] = myArray[(Object.keys(myArray).length-1)].replace(']', '')
+}
+
+async function channeldupe(voiceState){
+  try {
+   let channelIds = await(checkforemptychannel(voiceState.channel.name))
+   console.log(channelIds);
+   splitobj(channelIds)
+  } catch (error) {
+    logger.error("Error while performing channeldupe in JoinLeave")
+    console.log(error)
+  }
 
 }
