@@ -1,7 +1,7 @@
 const logger = require('../util/logger').log
 const { cascadingChannels_DB_host, cascadingChannels_DB_port, cascadingChannels_DB_user, cascadingChannels_DB_password, cascadingChannels_DB_database } =require('../data/db.json')
 var mysql = require('mysql');
-const { Interaction, Collection, Client } = require('discord.js');
+const { Interaction, Collection, Client, VoiceChannel } = require('discord.js');
 
 var con = mysql.createConnection({
     host: cascadingChannels_DB_host, 
@@ -81,7 +81,7 @@ function querychannelcount(channelId){
       }	
   };
 
-function checkforemptychannel(channelName){
+function checkForCloneOf(channelName){
     try {
         var sql = "SELECT id FROM channels Where name = ?";
         var Inserts = [channelName]
@@ -121,24 +121,29 @@ async function usercount(channelobj){
 
 }
 
-function splitobj(obj){
+function splitObjIntoArrayOfString(obj){
+
   let myJSON = JSON.stringify(obj);
-  //myJSON = myJSON.replace(id,' ');
-  const myArray = myJSON.split(",")
+  let myArray = myJSON.split(",")
+
   for (let index = 0; index < Object.keys(myArray).length; index++) {
 
       myArray[index] = myArray[index].replace(/{"id":"/g, '');
       myArray[index] = myArray[index].replace(/"}/g, '')
   }
+
   myArray[0] = myArray[0].replace('[', '')
   myArray[(Object.keys(myArray).length-1)] = myArray[(Object.keys(myArray).length-1)].replace(']', '')
+
+  return myArray;
 }
 
 async function channeldupe(voiceState){
   try {
-   let channelIds = await(checkforemptychannel(voiceState.channel.name))
-   console.log(channelIds);
-   splitobj(channelIds)
+
+   var channelIds = splitObjIntoArrayOfString(await(checkForCloneOf(voiceState.channel.name)))
+   console.log(channelIds)
+
   } catch (error) {
     logger.error("Error while performing channeldupe in JoinLeave")
     console.log(error)
