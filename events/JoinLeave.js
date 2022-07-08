@@ -1,7 +1,9 @@
 const logger = require('../util/logger').log
 const { cascadingChannels_DB_host, cascadingChannels_DB_port, cascadingChannels_DB_user, cascadingChannels_DB_password, cascadingChannels_DB_database } =require('../data/db.json')
 var mysql = require('mysql');
-const { Interaction, Collection, Client, VoiceChannel } = require('discord.js');
+const {guildId} = require('../data/config.json')
+const {client} = require('../index.js')
+
 
 var con = mysql.createConnection({
     host: cascadingChannels_DB_host, 
@@ -63,6 +65,24 @@ module.exports = {
 		}
 	},
 };
+
+async function channeldupe(voiceState){
+  try {  
+   var channelIds = splitObjIntoArrayOfString(await(checkForCloneOf(voiceState.channel.name)))
+   console.log("channelIds")
+   console.log(channelIds)
+   for (let index = 0; index < Object.keys(channelIds).length; index++) {
+    console.log("usercount")
+    console.log(channelIds[index])
+    console.log(await(userCountByID(voiceState, channelIds[index])))
+   }
+
+  } catch (error) {
+    logger.error("Error while performing channeldupe in JoinLeave")
+    console.log(error)
+  }
+
+}
 
 function querychannelcount(channelId){
       try {
@@ -138,15 +158,15 @@ function splitObjIntoArrayOfString(obj){
   return myArray;
 }
 
-async function channeldupe(voiceState){
+async function userCountByID(voiceState, channelId){
   try {
+   
+    let {guild} = voiceState;
+    let voiceChannel = await guild.channels?.fetch(channelId, { force: true });
 
-   var channelIds = splitObjIntoArrayOfString(await(checkForCloneOf(voiceState.channel.name)))
-   console.log(channelIds)
-
+    return voiceChannel.members?.size;
   } catch (error) {
-    logger.error("Error while performing channeldupe in JoinLeave")
-    console.log(error)
+    logger.error('Error while performing usercount');
+    console.log(error);
   }
-
 }

@@ -3,7 +3,7 @@ const path = require('node:path');
 const {Worker} = require("worker_threads");
 const logger = require('./util/logger').log;
 const {Client, Collection, Intents, Message, Channel, MessageEmbed, GuildMember, } = require('discord.js');
-const {token} = require('./data/config.json');
+const {token, guildId} = require('./data/config.json');
 
 
 module.exports = {
@@ -19,6 +19,8 @@ const client = new Client(
 			Intents.FLAGS.GUILD_MEMBERS,
 		  ]
 });
+
+client.guilds.cache.get(guildId);
 
 
 //
