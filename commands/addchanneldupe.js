@@ -29,7 +29,7 @@ module.exports =
 
 				try {
 					// Insert Voice into Database
-					var sql = "INSERT INTO  channels (name, id, isOriginal, copyOf) SELECT * FROM ( SELECT ? AS channelName, ?, true, '') AS dataQuery ON DUPLICATE KEY UPDATE name=channelName";
+					var sql = "INSERT INTO  channels (name, id) SELECT * FROM ( SELECT ? AS channelName, ?) AS dataQuery ON DUPLICATE KEY UPDATE name=channelName";
 					var Inserts = [name, channelid,]
 					sql = mysql.format(sql, Inserts);
 					con.query(sql, function (err, result) {

@@ -29,13 +29,13 @@ module.exports =
 
 				try {
 					// Insert Voice into Database
-					var sql = "DELETE FROM channels Where id = ?";
-					var Inserts = [channelid]
+					var sql = "DELETE FROM channels Where name = ?";
+					var Inserts = [name]
 					sql = mysql.format(sql, Inserts);
 					con.query(sql, function (err, result) {
 						if (err) throw err;
 						logger.http(`Deleting Channel ${name} from database: ${cascadingChannels_DB_database}, table: channels`)
-						if (result.affectedRows === 1) {
+						if (result.affectedRows > 0) {
 							interaction.reply(`Channel \`${name}\` was removed from channeldupe`);
 						} else {
 							interaction.reply(`Channel \`${name}\` was not in channeldupe`);

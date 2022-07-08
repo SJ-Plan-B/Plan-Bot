@@ -45,9 +45,11 @@ module.exports = {
         } else if(oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel){
 
             // User change a voice channel
-            if (toString(await querychannelcount(newUserChannel)) === 1) {
+            if ( toString(await querychannelcount(newUserChannel)) === 1 ) {
               channeldupe(newState)
-            } else {
+            }else if ( toString(await querychannelcount(oldUserChannel)) === 1){
+              channeldupe(oldState)
+            }else {
              //irrelevant channel 
             }
 
@@ -69,19 +71,37 @@ module.exports = {
 async function channeldupe(voiceState){
   try {  
    var channelIds = splitObjIntoArrayOfString(await(checkForCloneOf(voiceState.channel.name)))
-   console.log("channelIds")
-   console.log(channelIds)
+   var emptyChannelsId = []
    for (let index = 0; index < Object.keys(channelIds).length; index++) {
-    console.log("usercount")
-    console.log(channelIds[index])
-    console.log(await(userCountByID(voiceState, channelIds[index])))
+    if (await(userCountByID(voiceState, channelIds[index])) === 0) {
+      emptyChannelsId[index] = channelIds[index]
+    } else {
+      //NaN
+    }  
+   }
+   var emptyChannelsId = emptyChannelsId.filter(function (el) {
+    return el != null;
+  });
+   console.log(emptyChannelsId)
+   console.log(emptyChannelsId.length)
+
+   if (emptyChannelsId.length < 1) {
+    channelCreate(voiceState)
+   }else if(emptyChannelsId.length === 1){
+    logger.silly("all fine")
+   }else if(emptyChannelsId.length > 1){
+    console.log("zu viele channel")
+    for (let index = 1; index < emptyChannelsId.length; index++) {
+      channelDelete(voiceState, emptyChannelsId[index])
+    }
+  }else {
+    logger.error("strange channel behaivor in channeldupe")
    }
 
   } catch (error) {
     logger.error("Error while performing channeldupe in JoinLeave")
     console.log(error)
   }
-
 }
 
 function querychannelcount(channelId){
@@ -118,6 +138,38 @@ function checkForCloneOf(channelName){
     }	
 };
 
+function addChannel(name, channelid){
+  try {
+    var sql = "INSERT INTO  channels (name, id) SELECT * FROM ( SELECT ? AS channelName, ?) AS dataQuery ON DUPLICATE KEY UPDATE name=channelName";
+    var Inserts = [name, channelid,]
+    sql = mysql.format(sql, Inserts);
+    con.query(sql, function (err, result) {
+      if (err) throw err;
+      logger.http(`Inserted a new chanel into database: ${cascadingChannels_DB_database}, table: channels`)
+          }
+        );
+  } catch (error) {
+  logger.error(`Error while performing 'SELECT' in the database: ${cascadingChannels_DB_database}, in Event JoinLeave`); 
+  }	
+};
+
+function removeChannel(channelid){
+  try {
+      var sql = "DELETE FROM channels Where id = ?";
+      var Inserts = [channelid]
+      sql = mysql.format(sql, Inserts);
+      return new Promise((resolve, reject) => {
+        con.query(sql, (err, result) => {
+            return err ? reject(err) : resolve(result);
+          }
+        );
+      }
+    );
+  } catch (error) {
+  logger.error(`Error while performing 'SELECT' in the database: ${cascadingChannels_DB_database}, in Event JoinLeave`); 
+  }	
+};
+
 function toString(object) {
     let ergebnis = (JSON.stringify(object).length-20)
     return ergebnis;
@@ -126,7 +178,8 @@ function toString(object) {
 async function channelCreate(voiceState){
   try {
 
-    voiceState.channel?.clone()
+    let newChannel = await(voiceState.channel?.clone())
+    addChannel(newChannel.name, newChannel.id)
 
   } catch (error) {
     logger.error("Error while performing channelCreate in JoinLeave")
@@ -134,12 +187,20 @@ async function channelCreate(voiceState){
 
 }
 
-async function usercount(channelobj){
+async function channelDelete(voiceState, channelId){
+  try {
 
-  let { members } = channelobj.channel;
-  return members.size;
+    let {guild} = voiceState;
+    let voiceChannel = await guild.channels?.fetch(channelId, { force: true });
+    let deltedChannel = await voiceChannel.delete();
+    removeChannel(deltedChannel.id)
+  } catch (error) {
+    logger.error("Error while performing channelDelete in JoinLeave")
+    console.log(error)
+  }
 
 }
+
 
 function splitObjIntoArrayOfString(obj){
 

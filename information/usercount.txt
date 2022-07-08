@@ -1,0 +1,7 @@
+
+async function usercount(channelobj){
+
+  let { members } = channelobj.channel;
+  return members.size;
+
+}
