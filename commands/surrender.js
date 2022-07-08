@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const music = require('@koenie06/discord.js-music');
 const logger = require('../util/logger').log
 const { MessageEmbed } = require('discord.js');
+const { command_surrender_song_link, command_surrender_picture_link } =require('../data/comand.json')
 
 module.exports = 
 {
@@ -13,13 +14,13 @@ module.exports =
 	{
 		try {
 			const channel = interaction.member.voice.channel;
-			const song = 'https://www.youtube.com/watch?v=K04aZ90Vo4A'
+			const song = command_surrender_song_link
 
 			const surrenderEmbed = new MessageEmbed()
 						.setColor('#e30926')
 						.setTitle('Surrender')
 						.setDescription(`${await(interaction.user.username)} hat surrenderd`)
-						.setThumbnail('https://cdn.sanity.io/images/ccckgjf9/production/0f881cfc9a1c8da6c9bb464c621c9f55d0d87462-1098x752.png?max-h=1080&max-w=1920&fit=scale&auto=format')
+						.setThumbnail(command_surrender_picture_link)
 
 			switch(true){
 				case(channel === null):
@@ -41,8 +42,7 @@ module.exports =
 					}}
 					
 		} catch (error) {
-			logger.warn('Error while performing play')
-			logger.error(error)
+			logger.error('Error while performing play')
 		}
 	},
 };

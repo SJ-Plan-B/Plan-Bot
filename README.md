@@ -1,32 +1,47 @@
 # Plan-Bot DE
-plan bot ist der discord bot der sie alle vereinen soll
-Diser Bot soll alle funktionen bekommen die alle server Brauchen:
-    Selbst Replizierende Chanel
-    Begrüßung und Verabschidung von usern
-    Einen Musik bot
-    Einen dice Bot
-    ind viles mehr
+Plan Bot ist der Discord Bot, der sie alle vereinen soll ! <br>
+Dieser Bot soll alle Funktionen bekommen, die alle Server brauchen: <br>
+- selbst duplizierende Kanäle
+- Begrüßung und Vorabscheidung von Nutzern
+- einen Musikbot
+- einen Musikbot
+- und vieles mehr
 
-# Plan- Bot EN
-plan bot is the discord bot that should unite them all
-This bot should have all the functions that all servers need:
-    Self replicating Chanel
-    Greeting and farewell of users
-    A music bot
-    A dice bot
-    and much more
+## Installation DE
+1. Zur Installation der Dependencies einfach **`npm install`** im Verzeichnis des Bots ausführen. <br>
+2. Trage Deine Konfigurationen in die **`.json`** Dateien im **`data`** Ordner ein. <br>
+3. Entferne das **`example.`** am Anfang der **`.json`** Dateien im **`data`** Ordner. <br>
+4. Zum Starten des Bots **`node .\start.js`**  im Verzeichnis des Bots ausführen.  <br>
 
-# Dependencies
-[Discord.js](https://discord.js.org/#/ "Discord.js site")
-[@discordjs/builders](https://www.npmjs.com/package/@discordjs/builders "@discordjs/builders site")
-[@discordjs/opus](https://www.npmjs.com/package/@discordjs/opus "@discordjs/opus site")
-[@discordjs/rest](https://www.npmjs.com/package/@discordjs/rest "@discordjs/rest site")
-[@discordjs/voice](https://www.npmjs.com/package/@discordjs/voice "@discordjs/voice site")
-[@koenie06/discord.js-music](https://www.npmjs.com/package/@koenie06/discord.js-music "@koenie06/discord.js-music site")
-[discord-api-types](https://www.npmjs.com/package/discord-api-types "discord-api-types site")
-[ffmpeg](https://ffmpeg.org/ "ffmpeg site")
-[ffmpeg-static](https://www.npmjs.com/package/ffmpeg-static "ffmpeg-static site")
-[sodium](https://www.npmjs.com/package/sodium "sodium site")
-[libsodium-wrappers](https://www.npmjs.com/package/libsodium-wrappers "libsodium-wrappers site")
-[opusscript](https://www.npmjs.com/package/opusscript "opusscript site")
-[ytdl-core](https://www.npmjs.com/package/ytdl-core "ytdl-core site")
+# Plan-Bot EN
+Plan bot is the discord bot that should unite them all ! <br>
+This bot should have all the functions that all servers need: <br>
+- self replicating Channel
+- greeting and farewell of users
+- a music bot
+- a dice bot
+- and much more
+
+## Installation EN
+1. To install the dependencies, simply run **`npm install`** in the bot's directory. <br>
+2. Enter your configurations in the **`.json`** Files in the **`data`** directory. <br>
+3. Remove the **`example.`** at the beginning of the **`.json`** Files in the **`data`** directory. <br>
+4. To start the bot, run **`node .\start.js`** in the bot's directory.  <br>
+
+### Dependencies
+ - [Discord.js](https://discord.js.org/ "Discord.js site")
+ - [mysql](https://github.com/mysqljs/mysql "mysql Git Repo")
+ - [winston](https://github.com/winstonjs/winston "winston-daily-rotate-file Git Repo")
+ - [winston-daily-rotate-file](https://github.com/winstonjs/winston-daily-rotate-file "mysql Git Repo")
+ - [@discordjs/builders](https://www.npmjs.com/package/@discordjs/builders "@discordjs/builders site")
+ - [@discordjs/opus](https://www.npmjs.com/package/@discordjs/opus "@discordjs/opus npm site")
+ - [@discordjs/rest](https://www.npmjs.com/package/@discordjs/rest "@discordjs/rest npm site")
+ - [@discordjs/voice](https://www.npmjs.com/package/@discordjs/voice "@discordjs/voice npm site")
+ - [@koenie06/discord.js-music](https://www.npmjs.com/package/@koenie06/discord.js-music "@koenie06/discord.js-music npm site")
+ - [discord-api-types](https://www.npmjs.com/package/discord-api-types "discord-api-types npm site")
+ - [ffmpeg](https://ffmpeg.org/ "ffmpeg npm site")
+ - [ffmpeg-static](https://www.npmjs.com/package/ffmpeg-static "ffmpeg-static npm site")
+ - [sodium](https://www.npmjs.com/package/sodium "sodium npm site")
+ - [libsodium-wrappers](https://www.npmjs.com/package/libsodium-wrappers "libsodium-wrappers npm site")
+ - [opusscript](https://www.npmjs.com/package/opusscript "opusscript npm site")
+ - [ytdl-core](https://www.npmjs.com/package/ytdl-core "ytdl-core npm site")

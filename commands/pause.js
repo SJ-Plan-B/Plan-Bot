@@ -32,8 +32,7 @@ module.exports =
 				}
 			}
 		}catch(error){
-			logger.warn('Error while performing pause')
-			logger.error(error)
+			logger.error('Error while performing pause')
 		}
 	}
 }

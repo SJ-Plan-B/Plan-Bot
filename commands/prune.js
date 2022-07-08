@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { PermissionFlagsBits } = require('discord-api-types/v10');
 const logger = require('../util/logger').log
 
 module.exports = 
@@ -6,7 +7,8 @@ module.exports =
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('prune')
 		.setDescription('Prune up to 99 messages.')
-		.addIntegerOption(option => option.setName('amount').setDescription('Number of messages to prune')),
+		.addIntegerOption(option => option.setName('amount').setDescription('Number of messages to prune'))
+		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
 	async execute(interaction) // Funktion des Comands
 	{
@@ -18,7 +20,6 @@ module.exports =
 		}
 		await interaction.channel.bulkDelete(amount, true).catch(error => 
 			{
-			logger.error(error);
 			interaction.reply(
 				{content: 'There was an error trying to prune messages in this channel!', ephemeral: true});});
 
@@ -26,8 +27,7 @@ module.exports =
 		return false;
 
 		}catch(error){
-			logger.warn('Error while performing prune');
-			logger.error(error)
+			logger.error('Error while performing prune');
 		}
 	},
 };

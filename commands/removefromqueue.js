@@ -18,7 +18,7 @@ module.exports =
 				try{
 					queue = await(music.getQueue({ interaction: interaction })) ;	
 				}catch(error){
-					logger.warn('Error while get musich.getQueue in RemoveFromQueue');
+					logger.error('Error while get musich.getQueue in RemoveFromQueue');
 				}
 	
 				var songs = Object.keys(queue).length ;
@@ -38,8 +38,7 @@ module.exports =
 				}
 			
 		}catch(error){
-				logger.warn('Error while performing removefromqueue'); 
-				logger.error(error)
+				logger.error('Error while performing removefromqueue');
 		}
 	},
 };

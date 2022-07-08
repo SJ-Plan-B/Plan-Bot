@@ -7,6 +7,7 @@ module.exports =
 	data: new SlashCommandBuilder()
 		.setName('stop')
 		.setDescription('stop a song'),
+		
 	async execute(interaction)
 	{
 		try{
@@ -31,8 +32,7 @@ module.exports =
 				}
 			}
 		}catch(error){
-				logger.warn('Error while performing volume'); 
-				logger.error(error)
+				logger.error('Error while performing volume'); 
 		}
 	},
 };

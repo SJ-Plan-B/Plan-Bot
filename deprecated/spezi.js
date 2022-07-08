@@ -6,19 +6,19 @@ const logger = require('../util/logger').log;
 module.exports = 
 {
 	data: new SlashCommandBuilder()
-		.setName('Spezi')
-		.setDescription('Nico du Spast'),
+		.setName('spezi')
+		.setDescription('Nico trinkt sein Spezi aus oder auch nicht'),
 
 	async execute(interaction)
 	{
 		try {
 			const channel = interaction.member.voice.channel;
-			const song = 'https://www.youtube.com/watch?v=QwZRRsh6khA'
+			const song = 'https://youtu.be/Lp1o3jOmc3I'
 
 			const FuchsEmbed = new MessageEmbed()
 			.setColor('#073682')
 			.setTitle('Spezi')
-			.setDescription(`${await(interaction.user.username)} hat die Gans gestohlen`)
+			.setDescription(`${await(interaction.user.username)} Trinkt etwas von seinem Spezi, Legenden besagen dass er bis heute noch nicht fertig ist.`)
 			.setThumbnail('https://cdn.discordapp.com/attachments/371668449987919873/985488556707422258/2455-1672-max.jpg')
 
 			switch(true){
@@ -36,7 +36,7 @@ module.exports =
 						return interaction.reply({ embeds: [FuchsEmbed] })
 					}catch(error){
 						logger.info('Error while performing play')
-						interaction.reply('Invalide Song Link');
+						logger.info('Invalide Song Link');
 					}}
 		} catch (error) {
 			logger.warn('Error while performing Spezi')

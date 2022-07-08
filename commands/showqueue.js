@@ -27,8 +27,7 @@ module.exports =
 				interaction.reply('no song in queue')
 			}
 		} catch (error) {
-			logger.warn('Error while performing showqueue')
-			logger.error(error)
+			logger.error('Error while performing showqueue')
 		}
 	}
 };

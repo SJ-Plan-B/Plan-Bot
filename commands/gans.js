@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const music = require('@koenie06/discord.js-music');
 const { MessageEmbed } = require('discord.js');
 const logger = require('../util/logger').log;
+const { command_gans_song_link, command_gans_picture_link } =require('../data/comand.json')
 
 module.exports = 
 {
@@ -13,13 +14,13 @@ module.exports =
 	{
 		try {
 			const channel = interaction.member.voice.channel;
-			const song = 'https://www.youtube.com/watch?v=_LGXSnHtq8Q'
+			const song = command_gans_song_link
 
 			const GansEmbed = new MessageEmbed()
 			.setColor('#e30926')
 			.setTitle('Gans')
 			.setDescription(`${await(interaction.user.username)} wird vom fuchs gestolen`)
-			.setThumbnail('https://media.4-paws.org/b/6/3/d/b63d0abfe39e4dcae26568ef10abc59d3844c0e7/VIER%20PFOTEN-1918x1328.jpg')
+			.setThumbnail(command_gans_picture_link)
 			
 			switch(true){
 				case(channel === null):
@@ -39,8 +40,7 @@ module.exports =
 						interaction.reply('Invalide Song Link');
 					}}
 		} catch (error) {
-			logger.warn('Error while performing play')
-			logger.error(error)
+			logger.error('Error while performing play')
 		}
 	},
 };

@@ -1,5 +1,5 @@
 const logger = require('../util/logger').log
-const { clientId, log_messages_in_consol } = require('../data/config.json');
+const { clientId, log_messages_in_consol } = require('../data/event.json');
 module.exports = {
 	name: 'messageCreate',
 	execute(messageCreate){
@@ -11,8 +11,7 @@ module.exports = {
 				//console.log('Bot: Pong!')
 			}else{}
 		}catch(error){
-			logger.warn('Error while performing interactionCreate')
-			logger.error(error)
+			logger.error('Error while performing interactionCreate')
 		}
 	}
 };

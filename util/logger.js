@@ -1,11 +1,12 @@
 const winston = require('winston');
 require('winston-daily-rotate-file');
+const {console_log_lvl} = require('../data/config.json')
 
 
 var transportallevents = new (winston.transports.DailyRotateFile)({
   name: 'log-file',
-  level: 'silly',
-  filename: './logs/log-%DATE%.log',
+  level: 'debug',
+  filename: './logs/debug-log-%DATE%.log',
   json: false,
   datePattern: 'yyyy-MM-dd',
   prepend: true,
@@ -40,7 +41,7 @@ var transporterrorlog = new (winston.transports.DailyRotateFile)({
 
 var logger = new (winston.createLogger)({
   transports: [
-    new winston.transports.Console({colorize : true, timestamp:true, level: 'silly'}),
+    new winston.transports.Console({colorize : true, timestamp:true, level: console_log_lvl}),
     transportallevents,
     transportinfolog,
     transporterrorlog
@@ -50,12 +51,14 @@ var logger = new (winston.createLogger)({
 module.exports = {
   'log': logger
 };
+
+
 /*
-error: 0,
-warn: 1,
-info: 2,
-http: 3,
-verbose: 4,
-debug: 5,
-silly: 6
+error: 0, error codes
+warn: 1, error text
+info: 2, 
+http: 3, Datenbank Requsts/ API Hocks
+verbose: 4, Nachrichten im chat
+debug: 5, Debug
+silly: 6 only console
 */

@@ -7,6 +7,7 @@ module.exports =
 	data: new SlashCommandBuilder()
 		.setName('skip')
 		.setDescription('skip a song'),
+		
 	async execute(interaction)
 	{
 		try{
@@ -15,7 +16,7 @@ module.exports =
 			try{
 				queue = await(music.getQueue({ interaction: interaction })) ;	
 			}catch (error){
-				logger.warn('while get music.getQueue in RemoveFromQueue in skip')
+				logger.error('error while get music.getQueue in RemoveFromQueue in skip')
 			}
 
 			var songs = Object.keys(queue).length ;
@@ -31,8 +32,7 @@ module.exports =
 				}
 			}
 		}catch(error){
-				logger.warn('while performing skip'); 
-				logger.error(error)
+				logger.error('while performing skip'); 
 		}
 	},
 };

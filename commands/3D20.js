@@ -15,10 +15,9 @@ module.exports =
 			const rolle1 = getRandomArbitrary(1, 20)
 			const rolle2 = getRandomArbitrary(1, 20)
 			const rolle3 = getRandomArbitrary(1, 20)
-			return interaction.reply({content: `you have rolld: ${rolle1} ${rolle2} ${rolle3}.`});
+			return interaction.reply({content: `you have rolled: ${rolle1} ${rolle2} ${rolle3}.`});
 		}catch(error){
-			logger.warn('Error while performing 3D20'); 
-			logger.error(error)
+			logger.error('Error while performing 3D20'); 
 		} 
 	},
 };
@@ -31,6 +30,5 @@ module.exports =
 		return Math.floor(Math.random() * ( max - min )) + min;
 		}
 	}catch(error){
-		logger.warn('Error while performing Random Calculation In 3D20');
-		logger.error(error)
+		logger.error('Error while performing Random Calculation In 3D20');
 	}

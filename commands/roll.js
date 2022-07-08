@@ -22,16 +22,14 @@ module.exports =
                 }
             try{
                     let ausgabe = ergebnis.join(', ');  
-                    return interaction.reply({ content: `Du hast : \`${ausgabe}\` gewürfelt.`,});
+                    return interaction.reply({ content: `you have rolled : \`${ausgabe}\`.`,});
             }catch(error) 
                 {
-                    logger.warn('Error while joining array')
-                    logger.error(error)
+                    logger.error('Error while joining array in roll Command')
                 }
             
 		}catch(error){
-			logger.warn('Error while performing roll')
-            logger.error(error)
+			logger.error('Error while performing roll Command')
 		}	
 	},
 };
@@ -43,6 +41,5 @@ try {
     return Math.floor(Math.random() * (max - min)) + min;
     }		
 } catch (error) {
-    console.warn('Error while performing Random Calculation in roll')
-    console.error(error)
+    console.error('Error while performing Random Calculation in roll Command')
 }

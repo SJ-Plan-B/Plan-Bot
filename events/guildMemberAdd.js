@@ -1,6 +1,6 @@
 const {Message, MessageEmbed} = require('discord.js');
 const logger = require('../util/logger').log
-const { message_welcome ,message_welcome_header, message_welcome_chanel, message_welcome_embed_collor } =require('../data/config.json')
+const { message_welcome ,message_welcome_header, message_welcome_chanel, message_welcome_embed_collor } =require('../data/event.json')
 
 module.exports = {
 	name: "guildMemberAdd",
@@ -22,8 +22,7 @@ module.exports = {
 				embeds: [newMemberEmbed] 
 			})
 		} catch (error) {
-			logger.warn('Error while performing guildMemberAdd')
-			logger.error(error)
+			logger.error('Error while performing guildMemberAdd')
 		}	
 
 	}
@@ -41,8 +40,7 @@ try {
 			return result;	
 	}	
 } catch (error) {
-	logger.warn('Error while performing getname in guildMemberAdd')
-	logger.error(error)
+	logger.error('Error while performing getname in guildMemberAdd')
 }
 
 

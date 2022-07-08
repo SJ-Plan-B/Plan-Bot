@@ -11,10 +11,9 @@ module.exports =
 	{
 		try{
 			const rolle = getRandomArbitrary(1, 6)
-			return interaction.reply({ content: `du hast eine: ${rolle} Gewürfelt.`,});
+			return interaction.reply({ content: `you have rolled a: ${rolle}.`,});
 		}catch(error){
-			logger.warn('Error while performing D6');
-			logger.error(error)
+			logger.error('Error while performing D6');
 		}
 	},
 };
@@ -27,6 +26,5 @@ try {
     return Math.floor(Math.random() * (max - min)) + min;
 	}
 }catch(error){
-	logger.warn('Error while performing Random Calculation In D6');
-	logger.error(error)
+	logger.error('Error while performing Random Calculation In D6');
 }

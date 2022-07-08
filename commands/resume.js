@@ -16,7 +16,7 @@ module.exports =
 			try{
 				queue = await(music.getQueue({ interaction: interaction }));	
 			}catch(error){
-				logger.warn('Error while get music.getQueue in resume')
+				logger.error('Error while get music.getQueue in resume')
 			}
 
 			var songs = Object.keys(queue).length ;
@@ -32,8 +32,7 @@ module.exports =
 				}	
 			}
 		}catch(error){
-				logger.warn('Error while performing resume');
-				logger.error(error)
+				logger.error('Error while performing resume');
 		}
 	}
 };
