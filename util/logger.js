@@ -1,5 +1,6 @@
 const winston = require('winston');
 require('winston-daily-rotate-file');
+const {console_log_lvl} = require('../data/config.json')
 
 
 var transportallevents = new (winston.transports.DailyRotateFile)({
@@ -40,7 +41,7 @@ var transporterrorlog = new (winston.transports.DailyRotateFile)({
 
 var logger = new (winston.createLogger)({
   transports: [
-    new winston.transports.Console({colorize : true, timestamp:true, level: 'silly'}),
+    new winston.transports.Console({colorize : true, timestamp:true, level: console_log_lvl}),
     transportallevents,
     transportinfolog,
     transporterrorlog
