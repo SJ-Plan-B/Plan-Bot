@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { PermissionFlagsBits } = require('discord-api-types/v10');
 const logger = require('../util/logger').log
 
 module.exports = 
@@ -6,7 +7,8 @@ module.exports =
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('options-info')
 		.setDescription('Information about the options provided.')
-		.addStringOption(option => option.setName('input').setDescription('The input to echo back')),
+		.addStringOption(option => option.setName('input').setDescription('The input to echo back'))
+		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
 	async execute(interaction) // Funktion des Comands
 	{

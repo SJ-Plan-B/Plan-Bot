@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { PermissionFlagsBits } = require('discord-api-types/v10');
 const logger = require('../util/logger').log;
 const { cascadingChannels_DB_host, cascadingChannels_DB_port, cascadingChannels_DB_user, cascadingChannels_DB_password, cascadingChannels_DB_database } =require('../data/db.json')
 var mysql = require('mysql');
@@ -16,7 +17,8 @@ module.exports =
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('removechanneldupe')
 		.setDescription('removes channel from cascade')
-		.addStringOption(option => option.setName('channelid').setDescription('Enter a Voice Chanel id').setRequired(true)),
+		.addStringOption(option => option.setName('channelid').setDescription('Enter a Voice Chanel id').setRequired(true))
+		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
 	async execute(interaction) // Funktion des Comands
 	{

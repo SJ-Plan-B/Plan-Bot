@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { PermissionFlagsBits } = require('discord-api-types/v10');
 const logger = require('../util/logger').log;
 
 module.exports = 
@@ -6,7 +7,8 @@ module.exports =
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('kick')
 		.setDescription('Select a member and kick them (but not really).')
-		.addUserOption(option => option.setName('target').setDescription('The member to kick')),
+		.addUserOption(option => option.setName('target').setDescription('The member to kick'))
+		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
 	async execute(interaction) // Funktion des Comands
 	{
