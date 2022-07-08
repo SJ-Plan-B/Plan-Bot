@@ -10,7 +10,5 @@ deploybot()
 //Init DB'S
 cascadingChannels_DB()
 
-
-
 logger.info('Starting Bot');
 startbot()
