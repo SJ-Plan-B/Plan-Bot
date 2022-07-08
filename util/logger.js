@@ -5,8 +5,8 @@ const {console_log_lvl} = require('../data/config.json')
 
 var transportallevents = new (winston.transports.DailyRotateFile)({
   name: 'log-file',
-  level: 'silly',
-  filename: './logs/log-%DATE%.log',
+  level: 'debug',
+  filename: './logs/debug-log-%DATE%.log',
   json: false,
   datePattern: 'yyyy-MM-dd',
   prepend: true,
