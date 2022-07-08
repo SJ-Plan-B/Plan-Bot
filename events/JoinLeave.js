@@ -4,7 +4,6 @@ var mysql = require('mysql');
 const {guildId} = require('../data/config.json')
 const {client} = require('../index.js')
 
-
 var con = mysql.createConnection({
     host: cascadingChannels_DB_host, 
     port: cascadingChannels_DB_port,
@@ -17,6 +16,7 @@ module.exports = {
 	name: "voiceStateUpdate",
 	async execute(oldState, newState) {
         try {
+
         var newUserChannel = newState.channelId //new channel
         var oldUserChannel = oldState.channelId //old channel
         
@@ -29,8 +29,6 @@ module.exports = {
              //irrelevant channel 
             }
             
-          
-
         } else if(oldUserChannel !== null && newUserChannel === null){
           
             // User leaves a voice channel
@@ -39,8 +37,6 @@ module.exports = {
             } else {
              //irrelevant channel 
             }
-
-
 
         } else if(oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel){
 
@@ -62,45 +58,41 @@ module.exports = {
         }
 
 		} catch (error) {
-			logger.warn('Error while performing JoinLeave')
-			console.log(error)
+			logger.error('Error while performing JoinLeave')
 		}
 	},
 };
 
 async function channeldupe(voiceState){
   try {  
+
    var channelIds = splitObjIntoArrayOfString(await(checkForCloneOf(voiceState.channel.name)))
    var emptyChannelsId = []
+
    for (let index = 0; index < Object.keys(channelIds).length; index++) {
     if (await(userCountByID(voiceState, channelIds[index])) === 0) {
       emptyChannelsId[index] = channelIds[index]
     } else {
-      //NaN
+      //Not Relevent
     }  
    }
-   var emptyChannelsId = emptyChannelsId.filter(function (el) {
-    return el != null;
-  });
-   console.log(emptyChannelsId)
-   console.log(emptyChannelsId.length)
+
+   var emptyChannelsId = emptyChannelsId.filter(function (el) {return el != null;});
 
    if (emptyChannelsId.length < 1) {
     channelCreate(voiceState)
    }else if(emptyChannelsId.length === 1){
     logger.silly("all fine")
    }else if(emptyChannelsId.length > 1){
-    console.log("zu viele channel")
     for (let index = 1; index < emptyChannelsId.length; index++) {
       channelDelete(voiceState, emptyChannelsId[index])
     }
   }else {
-    logger.error("strange channel behaivor in channeldupe")
+    logger.error("strange channel behaivor in JoinLeave")
    }
 
   } catch (error) {
     logger.error("Error while performing channeldupe in JoinLeave")
-    console.log(error)
   }
 }
 
@@ -149,7 +141,7 @@ function addChannel(name, channelid){
           }
         );
   } catch (error) {
-  logger.error(`Error while performing 'SELECT' in the database: ${cascadingChannels_DB_database}, in Event JoinLeave`); 
+  logger.error(`Error while performing 'Insert' in the database: ${cascadingChannels_DB_database}, in Event JoinLeave`); 
   }	
 };
 
@@ -166,7 +158,7 @@ function removeChannel(channelid){
       }
     );
   } catch (error) {
-  logger.error(`Error while performing 'SELECT' in the database: ${cascadingChannels_DB_database}, in Event JoinLeave`); 
+  logger.error(`Error while performing 'DELETE' in the database: ${cascadingChannels_DB_database}, in Event JoinLeave`); 
   }	
 };
 
@@ -189,16 +181,14 @@ async function channelCreate(voiceState){
 
 async function channelDelete(voiceState, channelId){
   try {
-
     let {guild} = voiceState;
     let voiceChannel = await guild.channels?.fetch(channelId, { force: true });
     let deltedChannel = await voiceChannel.delete();
+
     removeChannel(deltedChannel.id)
   } catch (error) {
     logger.error("Error while performing channelDelete in JoinLeave")
-    console.log(error)
   }
-
 }
 
 
@@ -208,14 +198,12 @@ function splitObjIntoArrayOfString(obj){
   let myArray = myJSON.split(",")
 
   for (let index = 0; index < Object.keys(myArray).length; index++) {
-
       myArray[index] = myArray[index].replace(/{"id":"/g, '');
       myArray[index] = myArray[index].replace(/"}/g, '')
   }
 
   myArray[0] = myArray[0].replace('[', '')
   myArray[(Object.keys(myArray).length-1)] = myArray[(Object.keys(myArray).length-1)].replace(']', '')
-
   return myArray;
 }
 
