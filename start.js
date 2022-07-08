@@ -8,6 +8,7 @@ logger.info('Deploying Bot');
 deploybot()
 
 //Init DB'S
+logger.info('initializing Databases');
 cascadingChannels_DB()
 
 logger.info('Starting Bot');
