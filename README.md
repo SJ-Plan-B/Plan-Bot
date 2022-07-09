@@ -4,7 +4,7 @@ Dieser Bot soll alle Funktionen bekommen, die alle Server brauchen: <br>
 - selbst duplizierende Kanäle
 - Begrüßung und Vorabscheidung von Nutzern
 - einen Musikbot
-- einen Musikbot
+- einen Würfelbot
 - und vieles mehr
 
 ## Installation DE
