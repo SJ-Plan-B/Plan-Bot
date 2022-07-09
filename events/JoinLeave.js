@@ -37,15 +37,16 @@ module.exports = {
             }
 
         } else if(oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel){
-
             // User change a voice channel
-            if ( toString(await querychannelcount(newUserChannel)) === 1 && toString(await querychannelcount(oldUserChannel)) === 0) {
+            if (toString(await querychannelcount(newUserChannel)) === 1 && toString(await querychannelcount(oldUserChannel)) === 0){
               channeldupe(newState)
-            }else if ( toString(await querychannelcount(oldUserChannel)) === 1 && toString(await querychannelcount(newUserChannel)) === 1){
-              channeldupe(newState)
-              channeldupe(oldState)
             }else if(toString(await querychannelcount(newUserChannel)) === 0 && toString(await querychannelcount(oldUserChannel)) === 1){
               channeldupe(oldState)
+            }else if (toString((await querychannelcount(oldUserChannel)) === 1 && toString(await querychannelcount(newUserChannel)) === 1) && oldState.channel.name !== newState.channel.name){
+              channeldupe(newState)
+              channeldupe(oldState)
+            }else if(toString((await querychannelcount(oldUserChannel)) === 1 && toString(await querychannelcount(newUserChannel)) === 1) && oldState.channel.name == newState.channel.name){
+             channeldupe(oldState)
             }else{
              //irrelevant channel 
             }

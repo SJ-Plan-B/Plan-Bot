@@ -34,10 +34,10 @@ for (const file of eventFiles) {
 	const event = require(filePath);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));	
-	}else if(event.name === 'JoinLeave'){
+	}/*else if(event.name === 'JoinLeave'){
 		let returnvalue = await event.execute();
 		console.log('return '+returnvalue);
-	}else{
+	}*/else{
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
