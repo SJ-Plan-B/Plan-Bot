@@ -28,7 +28,7 @@ This bot should have all the functions that all servers need: <br>
 3. Remove the **`example.`** at the beginning of the **`.json`** Files in the **`data`** directory. <br>
 4. To start the bot, run **`node .\start.js`** in the bot's directory.  <br>
 
-### Dependencies
+## Dependencies
  - [Discord.js](https://discord.js.org/ "Discord.js site")
  - [mysql](https://github.com/mysqljs/mysql "mysql Git Repo")
  - [winston](https://github.com/winstonjs/winston "winston-daily-rotate-file Git Repo")
