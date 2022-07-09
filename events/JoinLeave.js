@@ -37,15 +37,22 @@ module.exports = {
             }
 
         } else if(oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel){
-
+          console.log(oldState.channel.name)
+          console.log(newState.channel.name)
             // User change a voice channel
-            if ( toString(await querychannelcount(newUserChannel)) === 1 && toString(await querychannelcount(oldUserChannel)) === 0) {
+            if (toString(await querychannelcount(newUserChannel)) === 1 && toString(await querychannelcount(oldUserChannel)) === 0){
+              console.log("1")
               channeldupe(newState)
-            }else if ( toString(await querychannelcount(oldUserChannel)) === 1 && toString(await querychannelcount(newUserChannel)) === 1){
-              channeldupe(newState)
-              channeldupe(oldState)
             }else if(toString(await querychannelcount(newUserChannel)) === 0 && toString(await querychannelcount(oldUserChannel)) === 1){
               channeldupe(oldState)
+              console.log("2")
+            }else if (toString((await querychannelcount(oldUserChannel)) === 1 && toString(await querychannelcount(newUserChannel)) === 1) && oldState.channel.name !== newState.channel.name){
+              channeldupe(newState)
+              channeldupe(oldState)
+              console.log("3")
+            }else if(toString((await querychannelcount(oldUserChannel)) === 1 && toString(await querychannelcount(newUserChannel)) === 1) && oldState.channel.name == newState.channel.name){
+             channeldupe(oldState)
+              console.log("4")
             }else{
              //irrelevant channel 
             }
