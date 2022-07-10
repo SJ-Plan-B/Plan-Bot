@@ -29,7 +29,7 @@ module.exports =
                 }
             
 		}catch(error){
-			logger.error('Error while performing roll Command')
+			
 		}	
 	},
 };

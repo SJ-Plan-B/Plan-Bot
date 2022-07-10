@@ -1,36 +1,36 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { PermissionFlagsBits } = require('discord-api-types/v10');
 const logger = require('../util/logger').log;
-const { cascadingChannels_DB_host, cascadingChannels_DB_port, cascadingChannels_DB_user, cascadingChannels_DB_password, cascadingChannels_DB_database } =require('../data/db.json')
+const { role_reaction_DB_host, role_reaction_DB_port, role_reaction_DB_user, role_reaction_DB_password, role_reaction_DB_database } =require('../data/db.json')
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-    host: cascadingChannels_DB_host, 
-    port: cascadingChannels_DB_port,
-    user: cascadingChannels_DB_user, 
-    password: cascadingChannels_DB_password,
-    database: cascadingChannels_DB_database,
+    host: role_reaction_DB_host, 
+    port: role_reaction_DB_port,
+    user: role_reaction_DB_user, 
+    password: role_reaction_DB_password,
+    database: role_reaction_DB_database,
 });
 
 module.exports = 
 {
 	data: new SlashCommandBuilder() // Comand REG
-		.setName('listchanneldupe')
-		.setDescription('list channel dupe')
+		.setName('listrolereaction')
+		.setDescription('list role reaction')
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
 	async execute(interaction) // Funktion des Comands
 	{
 		try{
-           return interaction.reply('Diese Channel werden dupliziert \n'+'\`' + splitObjIntoArrayOfString(await(getchannellist())).join(`\n`) + '\`');
+           return interaction.reply('Diese Roles sind in der role reaction \n'+'\`' + splitObjIntoArrayOfString(await(getrolelist())).join(`\n`) + '\`');
 		}catch(error){
-			logger.error('Error while performing listchanneldupe'); 
+			logger.error('Error while performing listrole reaction'); 
 		}
 	},
 };
-function getchannellist(){
+function getrolelist(){
     try {
-        var sql = "SELECT DISTINCT name FROM channels";
+        var sql = "SELECT DISTINCT name FROM roles";
         sql = mysql.format(sql);
         return new Promise((resolve, reject) => {
           con.query(sql, (err, result) => {
@@ -40,7 +40,7 @@ function getchannellist(){
         }
       );
     } catch (error) {
-    logger.error(`Error while performing 'SELECT' in the database: ${cascadingChannels_DB_database}, in command listchanneldupe`); 
+    logger.error(`Error while performing 'SELECT' in the database: ${role_reaction_DB_database}, in command listrolereaction`); 
     }	
 };
 

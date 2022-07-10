@@ -17,7 +17,7 @@ module.exports = {
         con.connect(function(err) {
             if (err) throw err;
               logger.http(`connected to database: ${role_reaction_DB_database}`);
-              var sql = "CREATE TABLE IF NOT EXISTS channels ()";
+              var sql = "CREATE TABLE IF NOT EXISTS roles (name VARCHAR(255), id VARCHAR(255) PRIMARY KEY)";
               con.query(sql, function (err, result) {
                 if (err) throw err;
                 logger.http(`Table channels created in database: ${role_reaction_DB_database}`);
