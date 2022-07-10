@@ -2,9 +2,11 @@ const { SlashCommandBuilder,  } = require('@discordjs/builders');
 const { PermissionFlagsBits } = require('discord-api-types/v10');
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const { sendMessage } = require('../index.js')
+var mysql = require('mysql');
 const logger = require('../util/logger').log
 const { role_reaction_DB_host, role_reaction_DB_port, role_reaction_DB_user, role_reaction_DB_password, role_reaction_DB_database } =require('../data/db.json')
-var mysql = require('mysql');
+const { rollereact_title, rollereact_collor, rollereact_text } =require('../data/comand.json')
+
 
 var con = mysql.createConnection({
     host: role_reaction_DB_host, 
@@ -41,10 +43,9 @@ module.exports =
 				)
 				if ((index !==0) && ((index+1)%5 ==0) && first === true) {
 				const embed = new MessageEmbed()
-					.setColor('#0099ff')
-					.setTitle('Some title')
-					.setURL('https://discord.js.org')
-					.setDescription('Some description here');
+					.setColor(rollereact_collor)
+					.setTitle(rollereact_title)
+					.setDescription(rollereact_text);
 		
 				
 				let message = { content: 'Pong!', embeds: [embed], components: [row] }
