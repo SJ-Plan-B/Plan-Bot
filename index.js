@@ -72,7 +72,7 @@ client.on('interactionCreate', async interaction => {
 			 logger.info('prune!'+ returnvalue);
 			 if (returnvalue===true) {logger.info('channelID '+ channelID); sendMessage(channelID);}
 
-		}else {
+		}else{
 			const worker = new Worker('./commands/'+interaction.commandName+'.js', {workerData: await(command.execute(interaction))});
 
 			//worker.postMessage(interaction);
@@ -92,25 +92,6 @@ client.on('interactionCreate', async interaction => {
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
-
-
-//
-// Channel Creator
-//
-
-async function createchannel(channelname, parentId, settings){	
-	let channel = interaction.guild.channels.create(channelname, {
-		type: "GUILD_VOICE",
-		parent: parentId,
-		permissionOverwrites: [
-			{
-			id: interaction.guild.id,
-			deny: ["VIEW_CHANNEL"],
-			},
-		],
-		})
-}
-
 
 /*
 //
