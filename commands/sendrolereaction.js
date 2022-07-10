@@ -48,12 +48,12 @@ module.exports =
 		
 				
 				let message = { content: 'Pong!', embeds: [embed], components: [row] }
-				await interaction.reply(message)
+				await interaction.send(message)
 				first = false
 				row.spliceComponents(0,5)
 				}else if((index !==0) && ((index+1)%5 ==0) && first === false){
 				let message = { content: ' ', embeds: [], components: [row] }
-				await interaction.send(message)
+				await sendMessage(channelId,message)
 				}else{
 					if (counter === Object.keys(roles).length) {
 						console.log("hi")
