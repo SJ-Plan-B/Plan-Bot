@@ -20,9 +20,11 @@ module.exports = {
 				//console.log(roleId[0])
 
 				if (await interaction.member.roles.cache.has(roleId[0])) {
+
 					interaction.member.roles.add(roleId[0])	
+
 				} else {
-					console.log("reomve")
+				
 					interaction.member.roles.remove(roleId[0])	
 				}
 
@@ -31,7 +33,6 @@ module.exports = {
 			logger.verbose(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`);
 		} catch (error) {
 			logger.error('Error while performing interactionCreate')
-			console.log(error)
 		}
 	
 	},
@@ -51,7 +52,6 @@ function getroleID(rollid){
 	  );
 	} catch (error) {
 	logger.error(`Error while performing 'SELECT' in the database: ${role_reaction_DB_database}, in Event JoinLeave`); 
-	console.log(error)
 	}
 }
 function splitObjIntoArrayOfString(obj){
