@@ -33,8 +33,7 @@ module.exports =
 			var row = new MessageActionRow()
 			for (let index = 0; index < Object.keys(roles).length; index++) {
 				counter++
-				console.log("counter")
-				console.log(counter)
+
 				row.addComponents(
 				new MessageButton()
 						.setCustomId(roles[index])
@@ -48,8 +47,8 @@ module.exports =
 					.setDescription(rollereact_text);
 		
 				
-				let message = { content: 'Pong!', embeds: [embed], components: [row] }
-				await interaction.send(message)
+				let message = { content: ' ', embeds: [embed], components: [row] }
+				await sendMessage(channelId,message)
 				first = false
 				row.spliceComponents(0,5)
 				}else if((index !==0) && ((index+1)%5 ==0) && first === false){
@@ -57,7 +56,7 @@ module.exports =
 				await sendMessage(channelId,message)
 				}else{
 					if (counter === Object.keys(roles).length) {
-						console.log("hi")
+
 						let message = { content: ' ', embeds: [], components: [row] }
 						sendMessage(channelId, message)
 					} else {
@@ -66,7 +65,6 @@ module.exports =
 			}
 		}catch(error){
 				logger.error('Error while performing sendrolereaction');
-                console.log(error)
 		}
 		
 	},
