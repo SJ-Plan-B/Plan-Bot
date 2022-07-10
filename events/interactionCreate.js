@@ -22,9 +22,11 @@ module.exports = {
 				if (interaction.member.roles.cache.has(roleId[0])=== false) {
 					interaction.member.roles.add(roleId[0])	
 					interaction.reply({content: `Role ${interaction.customId} was addded`, ephemeral: true});
+					logger.verbose(`der user :${interaction.user.name}, mit der id ${interaction.user.id}, hat sich die rolle ${interaction.customId} gegeben`)
 				} else {
 					interaction.member.roles.remove(roleId[0])	
 					interaction.reply({content: `Role ${interaction.customId} was removed`, ephemeral: true});
+					logger.verbose(`der user :${interaction.user.name}, mit der id ${interaction.user.id}, hat sich die rolle ${interaction.customId} entfernt`)
 				}
 
 			}else{
