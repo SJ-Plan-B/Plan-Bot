@@ -15,16 +15,14 @@ module.exports = {
 	async execute(interaction) {
 		try {
 			if (interaction.isButton()){
-				console.log("interaction");
+				
 				let roleId = splitObjIntoArrayOfString(await(getroleID(interaction.customId)));
-				console.log(roleId[0])
+				
 
 				if (interaction.member.roles.cache.has(roleId[0])=== false) {
-					console.log("add")
 					interaction.member.roles.add(roleId[0])	
 					interaction.reply({content: `Role ${interaction.customId} was addded`, ephemeral: true});
 				} else {
-					console.log("remove")
 					interaction.member.roles.remove(roleId[0])	
 					interaction.reply({content: `Role ${interaction.customId} was removed`, ephemeral: true});
 				}
