@@ -85,7 +85,7 @@ module.exports = {
 					{logger.verbose(exitCode)}
 					;})
 				}
-				
+
 			} catch (error) {
 				logger.error(error);
 				await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
@@ -118,16 +118,16 @@ module.exports = {
 		*/
 
 
-		//
-		//send message to channel by id
-		//
-
 
 		//
 		//Login
 		//
 		client.login(token);
 	},
+
+	//
+	// Globale Send Message Funktion
+	//
 
 	async sendMessage(cID,message){
 			try {
