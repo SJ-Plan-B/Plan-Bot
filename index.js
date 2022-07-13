@@ -17,8 +17,8 @@ const client = new Client(
 			  ]
 	});
 
-
 module.exports = {
+	
 	async startbot(){
 
 

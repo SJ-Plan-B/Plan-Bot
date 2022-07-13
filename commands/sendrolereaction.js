@@ -36,7 +36,7 @@ module.exports =
 
 				row.addComponents(
 				new MessageButton()
-						.setCustomId(roles[index])
+						.setCustomId("roles_"+roles[index])
 						.setLabel(roles[index])
 						.setStyle('PRIMARY'),
 				)
@@ -63,6 +63,7 @@ module.exports =
 					}
 				}
 			}
+			interaction.reply({content: `roll reaction send`, ephemeral: true});
 		}catch(error){
 				logger.error('Error while performing sendrolereaction');
 		}
