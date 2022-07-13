@@ -63,6 +63,7 @@ module.exports =
 					}
 				}
 			}
+			interaction.reply({content: `roll reaction send`, ephemeral: true});
 		}catch(error){
 				logger.error('Error while performing sendrolereaction');
 		}
