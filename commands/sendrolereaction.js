@@ -36,7 +36,7 @@ module.exports =
 
 				row.addComponents(
 				new MessageButton()
-						.setCustomId(roles[index])
+						.setCustomId("roles_"+roles[index])
 						.setLabel(roles[index])
 						.setStyle('PRIMARY'),
 				)
