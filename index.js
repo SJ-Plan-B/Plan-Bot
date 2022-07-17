@@ -92,7 +92,7 @@ module.exports = {
 			}
 		});
 
-		/*
+		
 		//
 		// chanel-logger-handling
 		//
@@ -115,7 +115,7 @@ module.exports = {
 			logger.error(error)
 			logger.warn('Error Wile Using Logger Funktions')
 		}
-		*/
+		
 
 
 
