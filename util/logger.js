@@ -56,7 +56,7 @@ module.exports = {
 /*
 error: 0, error codes
 warn: 1, error text
-info: 2, 
+info: 2, Logger Events
 http: 3, Datenbank Requsts/ API Hocks
 verbose: 4, Nachrichten im chat
 debug: 5, Debug

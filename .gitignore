@@ -9,3 +9,4 @@ config.json
 db.json
 event.json
 comand.json
+logger.json
