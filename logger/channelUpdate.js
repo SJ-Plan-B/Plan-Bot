@@ -6,7 +6,7 @@ module.exports = {
             console.log(`channelUpdate -> a channel is updated - e.g. name change, topic change`)
             console.log(`oldChannel: ${oldChannel}, newChannel: ${newChannel}`)
 		} catch (error) {
-			logger.warn('Error while performing channelUpdate')
+			logger.warn('Error while performing channelUpdate in logger')
 			logger.error(error)
 		}
 	},

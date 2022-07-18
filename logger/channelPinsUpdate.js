@@ -5,7 +5,7 @@ module.exports = {
 		try {
             console.log(`channelPinsUpdate: ${channel}:${time}`);
 		} catch (error) {
-			logger.warn('Error while performing channelPinsUpdate')
+			logger.warn('Error while performing channelPinsUpdate in logger')
 			logger.error(error)
 		}
 	},

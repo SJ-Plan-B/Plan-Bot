@@ -40,11 +40,9 @@ module.exports = {
 				logger.info(`${username}#${userdiscriminator} with the id ${userid} has Created the channel ${channelname} with the id ${channelid}` )
 			}
 				
-			
-		
 
 		} catch (error) {
-			logger.warn('Error while performing channelCreate')
+			logger.warn('Error while performing channelCreate in logger')
 		}
 		
 		

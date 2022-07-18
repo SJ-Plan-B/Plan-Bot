@@ -40,7 +40,7 @@ module.exports = {
 					logger.info(`${username}#${userdiscriminator} with the id ${userid} has Deleted the channel ${channelname} with the id ${channelid}` )
 					}
 		} catch (error) {
-			logger.warn('Error while performing channelDelete')
+			logger.warn('Error while performing channelDelete in logger')
 		}
 	},
 };
