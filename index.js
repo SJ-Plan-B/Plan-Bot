@@ -123,8 +123,6 @@ module.exports = {
 		}
 		
 
-
-
 		//
 		//Login
 		//
