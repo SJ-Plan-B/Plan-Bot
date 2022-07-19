@@ -31,9 +31,9 @@ module.exports = {
                 .setAuthor({ name: bot_nickname,
                             iconURL: bot_icon,
                             })
-                .setDescription(`\`${authorname}#${authordiscriminator}\` with the id \`${authorid}\`
+                .setDescription(`\`${username}#${userdiscriminator}\` with the id \`${userid}\`
                                 has Deleted a messagefrom the user 
-                                \`${username}#${userdiscriminator}\` with the id \`${userid}\`
+                                \`${authorname}#${authordiscriminator}\` with the id \`${authorid}\`
                                 in the channel \`${channelname}\` with the id \`${channelid}\` `)
                 .setThumbnail(bot_icon)
                 .setTimestamp()
@@ -42,6 +42,7 @@ module.exports = {
                 if (messageDeleteLogging === true){
                     let message = { content: ' ', embeds: [Embed]};
                     sendMessage(logchannel, message)
+                    logger.info(`${authorname}#${authordiscriminator} with the id ${authorid} has Deleted a message from the user ${username}#${userdiscriminator} with the id ${userid} in the channel ${channelname} with the id ${channelid} `)
                 }
 
             }else{
