@@ -7,7 +7,7 @@ const { command_burger_song_link, command_burger_picture_link } =require('../dat
 module.exports = 
 {
 	data: new SlashCommandBuilder()
-		.setName('Burger')
+		.setName('burger')
 		.setDescription('Hamburger Cheeseburger Bigmac Wopper'),
 
 	async execute(interaction)
