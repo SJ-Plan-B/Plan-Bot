@@ -9,7 +9,7 @@ module.exports = {
 			try {
 				let auditfetch = await channel.guild.fetchAuditLogs({
 					limit: 1,
-					type: 'CHANNEL_CREATE',
+					type: 'CHANNEL_DELETE',
 				});
 				let aditinfo = auditfetch.entries.first();
 	
