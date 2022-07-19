@@ -14,8 +14,12 @@ const client = new Client(
 				Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
 				Intents.FLAGS.DIRECT_MESSAGES,
 				Intents.FLAGS.GUILD_MEMBERS,
-			  ]
-	});
+			  ],
+	partials: [
+				'MESSAGE',
+				'CHANNEL',
+				'REACTION',
+			]});
 
 module.exports = {
 	
@@ -65,7 +69,9 @@ module.exports = {
 			if (!command) return;
 
 			try {
-				if (interaction.commandName === 'prune') {
+				if (interaction.partial){
+					interaction.reply("please try again")
+				}else if (interaction.commandName === 'prune') {
 					
 					let returnvalue = await command.execute(interaction);
 					logger.info('prune!'+ returnvalue);

@@ -1,8 +1,12 @@
 {
     "logchannel" : "",
+    "bot_nickname" : "",
+    "bot_icon" : "",
     "channelCreateLogging" : false,
     "channelCreateLoggingCollore" : "#e30926",
     "channelDeleteLogging" : false,
-    "channelDeleteLoggingCollore" : "#e30926"
+    "channelDeleteLoggingCollore" : "#e30926",
+    "messageDeleteLogging" : false,
+    "messageDeleteLoggingCollore" : "#e30926"
 
 }
