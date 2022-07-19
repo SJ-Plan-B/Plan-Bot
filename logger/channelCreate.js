@@ -8,7 +8,7 @@ module.exports = {
 	async execute(channel) { 
 		try {
 			let auditfetch = await channel.guild.fetchAuditLogs({
-				limit: 1,
+				limit: 1,											//used to lock ad the audit log
 				type: 'CHANNEL_CREATE',
 			});
 			let aditinfo = auditfetch.entries.first();
