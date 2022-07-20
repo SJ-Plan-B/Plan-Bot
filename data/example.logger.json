@@ -7,11 +7,13 @@
     "guildBanRemoveLoggingCollore" : "#e30926",
     "guildBanAddLogging" : false,
     "guildBanAddLoggingCollore" : "#e30926",
+    "guildMemberRemoveLogging" : false,
+    "guildMemberRemoveLoggingCollore" : "#e30926",
     "channelCreateLogging" : false,
     "channelCreateLoggingCollore" : "#e30926",
     "channelDeleteLogging" : false,
     "channelDeleteLoggingCollore" : "#e30926",
     "messageDeleteLogging" : false,
     "messageDeleteLoggingCollore" : "#e30926"
-
+    
 }
