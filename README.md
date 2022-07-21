@@ -8,8 +8,8 @@ Dieser Bot soll alle Funktionen bekommen, die alle Server brauchen: <br>
 - und vieles mehr
 
 ## Installation DE
-1. Zur Installation der Dependencies einfach **`npm install`** im Verzeichnis des Bots ausführen. <br>
-2. Trage Deine Konfigurationen in die **`.json`** Dateien im **`data`** Ordner ein. <br>
+1. Zur Installation der Abhängigkeiten einfach **`npm install`** im Verzeichnis des Bots ausführen. <br>
+2. Trage deine Konfigurationen in die **`.json`** Dateien im **`data`** Ordner ein. <br>
 3. Entferne das **`example.`** am Anfang der **`.json`** Dateien im **`data`** Ordner. <br>
 4. Zum Starten des Bots **`node .\start.js`**  im Verzeichnis des Bots ausführen.  <br>
 

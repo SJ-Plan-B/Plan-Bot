@@ -16,19 +16,25 @@ module.exports = {
 		try {
 			if (interaction.isButton()){
 				
-				let roleId = splitObjIntoArrayOfString(await(getroleID(interaction.customId)));
-				
+				if((interaction.customId).startsWith("roles_") == true && interaction.message.author.id === interaction.applicationId) {
+					
+					let roleId = splitObjIntoArrayOfString(await(getroleID((interaction.customId).split("_")[1])));
 
-				if (interaction.member.roles.cache.has(roleId[0])=== false) {
-					interaction.member.roles.add(roleId[0])	
-					interaction.reply({content: `Role ${interaction.customId} was addded`, ephemeral: true});
-					logger.verbose(`der user :${interaction.user.name}, mit der id ${interaction.user.id}, hat sich die rolle ${interaction.customId} gegeben`)
+					if (interaction.member.roles.cache.has(roleId[0])=== false) {
+						interaction.member.roles.add(roleId[0])	
+						interaction.reply({content: `Role ${interaction.customId} was addded`, ephemeral: true});
+						logger.verbose(`der user : ${interaction.user.username}, mit der id ${interaction.user.id}, hat sich die rolle ${interaction.customId} gegeben`)
+					} else {
+						interaction.member.roles.remove(roleId[0])	
+						interaction.reply({content: `Role ${interaction.customId} was removed`, ephemeral: true});
+						logger.verbose(`der user : ${interaction.user.username}, mit der id ${interaction.user.id}, hat sich die rolle ${interaction.customId} entfernt`)
+					}
+
 				} else {
-					interaction.member.roles.remove(roleId[0])	
-					interaction.reply({content: `Role ${interaction.customId} was removed`, ephemeral: true});
-					logger.verbose(`der user :${interaction.user.name}, mit der id ${interaction.user.id}, hat sich die rolle ${interaction.customId} entfernt`)
+					
 				}
 
+				
 			}else{
 				logger.verbose(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`);
 			}
@@ -36,6 +42,7 @@ module.exports = {
 			
 		} catch (error) {
 			logger.error('Error while performing interactionCreate')
+			console.log(error)
 		}
 	
 	},
@@ -74,3 +81,4 @@ function splitObjIntoArrayOfString(obj){
 		logger.error('Error while performing splitObjIntoArrayOfString in interactionCreate')
 	}
   }	
+
