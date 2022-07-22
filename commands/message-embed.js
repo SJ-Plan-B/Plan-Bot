@@ -43,7 +43,7 @@ module.exports =
 			)
 			.addField('Inline field title', 'Some value here', true)
 			.setImage('https://i.imgur.com/AfFp7pu.png')
-			.setTimestamp()
+			.setTimestamp(Date.now())
 			.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 		
 		return interaction.reply({ embeds: [exampleEmbed] });
