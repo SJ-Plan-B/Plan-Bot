@@ -45,3 +45,7 @@ This bot should have all the functions that all servers need: <br>
  - [libsodium-wrappers](https://www.npmjs.com/package/libsodium-wrappers "libsodium-wrappers npm site")
  - [opusscript](https://www.npmjs.com/package/opusscript "opusscript npm site")
  - [ytdl-core](https://www.npmjs.com/package/ytdl-core "ytdl-core npm site")
+ - [utf-8-validate](https://www.npmjs.com/package/utf-8-validate "utf-8-validate")
+ - [bufferutil](https://www.npmjs.com/package/bufferutil "bufferutil npm site")
+ - [zlib-sync](https://www.npmjs.com/package/zlib-sync "zlib-sync npm site")
+ - [erlpack](https://github.com/discord/erlpack "erlpack github site")
