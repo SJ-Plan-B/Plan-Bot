@@ -7,13 +7,15 @@ module.exports = {
 	name: 'channelCreate',
 	async execute(channel) { 
 		try {
-			if (!channel.partial) {
 
-					let auditfetch = await channel.guild.fetchAuditLogs({
-						limit: 1,											//used to lock ad the audit log
-						type: 'CHANNEL_CREATE',
-					});
-					let aditinfo = auditfetch.entries.first();
+			let auditfetch = await channel.guild.fetchAuditLogs({
+				limit: 1,											//used to lock ad the audit log
+				type: 'CHANNEL_CREATE',
+			});
+			let aditinfo = auditfetch.entries.first();
+
+			if (aditinfo.executor.id !== channel.client.user.id ) {
+				if (!channel.partial) {
 		
 					let channelname = channel.name;
 					let channelid = channel.id;
@@ -25,7 +27,7 @@ module.exports = {
 					let botname = channel.client.user.username;
 					let boticon = channel.client.user.displayAvatarURL();
 				
-					const exampleEmbed = new MessageEmbed()
+					const Embed = new MessageEmbed()
 					.setColor(channelCreateLoggingCollore)
 					.setTitle('A Channel was Created')
 					.setAuthor({ name: botname,
@@ -37,7 +39,7 @@ module.exports = {
 					.setFooter({ text: 'Message By Logger of Plan Bot'});
 					
 					if (channelCreateLogging === true) {
-						let message = { content: ' ', embeds: [exampleEmbed]};
+						let message = { content: ' ', embeds: [Embed]};
 						sendMessage(logchannel, message)
 						logger.info(`${username}#${userdiscriminator} with the id ${userid} has Created the channel ${channelname} with the id ${channelid}` )
 					}
@@ -45,6 +47,11 @@ module.exports = {
 			} else {
 				logger.warn('got partial response while performing channelCreate in logger')
 			}
+
+			} else {
+				logger.debug('the bot did somthing with channel create')				
+			}
+			
 					
 		} catch (error) {
 			logger.warn('Error while performing channelCreate in logger')

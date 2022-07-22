@@ -22,7 +22,7 @@ module.exports = {
 					let botname = guild.client.user.username;
 					let boticon = guild.client.user.displayAvatarURL();
 				
-					const exampleEmbed = new MessageEmbed()
+					const Embed = new MessageEmbed()
 					.setColor(guildBanAddLoggingCollore)
 					.setTitle('A user was banned')
 					.setAuthor({ name: botname,
@@ -37,7 +37,7 @@ module.exports = {
 					.setFooter({ text: 'Message By Logger of Plan Bot'});
 					
 					if (guildBanAddLogging === true) {
-						let message = { content: ' ', embeds: [exampleEmbed]};
+						let message = { content: ' ', embeds: [Embed]};
 						sendMessage(logchannel, message)
 						logger.info(`\'${target.tag}\' with the id \'${target.id}\' was banned from \'${executor.tag}\' with the id \'${executor.id}\' was banned with the reason  \'${banreason}\'`)
 						}		

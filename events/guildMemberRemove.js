@@ -25,7 +25,7 @@ module.exports = {
 							let botname = member.client.user.username;
 							let boticon = member.client.user.displayAvatarURL();
 						
-							const exampleEmbed = new MessageEmbed()
+							const Embed = new MessageEmbed()
 							.setColor(guildMemberRemoveLoggingCollore)
 							.setTitle('A user was kicked from the server')
 							.setAuthor({ name: botname,
@@ -40,7 +40,7 @@ module.exports = {
 							.setFooter({ text: 'Message By Logger of Plan Bot'});
 							
 							if (guildMemberRemoveLogging === true) {
-								let message = { content: ' ', embeds: [exampleEmbed]};
+								let message = { content: ' ', embeds: [Embed]};
 								sendMessage(logchannel, message)
 								logger.info(`${target.tag} with the id ${target.id} was kicked from ${executor.tag} with the id ${executor.id}.	the kick reason given is: ${kickreason}`)
 								}
