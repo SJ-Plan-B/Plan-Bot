@@ -21,6 +21,7 @@ const client = new Client(
 				'CHANNEL',
 				'REACTION',
 				'GUILD_MEMBER',
+				'User',
 			]});
 
 module.exports = {
