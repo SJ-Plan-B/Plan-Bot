@@ -13,5 +13,6 @@ logger.info('initializing Databases');
 cascadingChannels_DB()
 role_reaction_DB()
 
+// Start the bot
 logger.info('Starting Bot');
 startbot()
