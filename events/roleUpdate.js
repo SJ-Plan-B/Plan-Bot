@@ -25,10 +25,8 @@ module.exports = {
 
                     if (oldperm === [] && newperm === []) {
                         permdiv = "there are no changes to the permissons";
-                        console.log("if 1")
                     } else {
                         permdiv = slicerdicerpluxl(permvergleich(newperm, oldperm));
-                        console.log("if 2")
                     }
                    
                     let compnewperm = slicerdicerpluxl(newperm);
