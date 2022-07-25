@@ -23,7 +23,7 @@ module.exports = {
 				
 					const Embed = new MessageEmbed()
 					.setColor(roleDeleteLoggingCollore)
-					.setTitle('A user was banned')
+					.setTitle('A role hase bin Deleted')
 					.setAuthor({ name: botname,
 								iconURL: boticon,
 								})
@@ -35,7 +35,7 @@ module.exports = {
 					if (roleDeleteLogging === true) {
 						let message = { content: ' ', embeds: [Embed]};
 						sendMessage(logchannel, message)
-						//logger.info(`\'${target.tag}\' with the id \'${target.id}\' was banned from \'${executor.tag}\' with the id \'${executor.id}\' was banned with the reason  \'${banreason}\'`)
+						logger.info(`\"${executor.tag}\" with the id \"${executor.id}\" has deleated the role \"${rolename}\" with the id \"${target.id}\"`)
 						}	
 
 		} catch (error) {

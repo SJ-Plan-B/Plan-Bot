@@ -8,7 +8,7 @@ var transportallevents = new (winston.transports.DailyRotateFile)({
   level: 'debug',
   filename: './logs/debug-log-%DATE%.log',
   json: false,
-  datePattern: 'yyyy-MM-dd',
+  datePattern: 'dd-MM-yyyy',
   prepend: true,
   zippedArchive: true,
   maxSize: '200m',

@@ -13,6 +13,8 @@
     "roleCreateLoggingCollore" : "#e30926",
     "roleDeleteLogging" : false,
     "roleDeleteLoggingCollore" : "#e30926",
+    "roleUpdateLogging" : false,
+    "roleUpdateLoggingCollore" : "#e30926",
     "channelCreateLogging" : false,
     "channelCreateLoggingCollore" : "#e30926",
     "channelDeleteLogging" : false,

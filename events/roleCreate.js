@@ -16,14 +16,14 @@ module.exports = {
 					let aditinfo = auditfetch.entries.first();
 					let { executor, target } = aditinfo;
 				
-					let permissions = slicerdicerpluxl(target.permissions.toArray())
+					let permissions = slicerdicerpluxl(role.permissions.toArray())
 							
 					let botname = role.client.user.username;
 					let boticon = role.client.user.displayAvatarURL();
 				
 					const Embed = new MessageEmbed()
 					.setColor(roleCreateLoggingCollore)
-					.setTitle('A user was banned')
+					.setTitle('A role hase bin Created')
 					.setAuthor({ name: botname,
 								iconURL: boticon,
 								})
@@ -37,14 +37,14 @@ module.exports = {
 					if (roleCreateLogging === true) {
 						let message = { content: ' ', embeds: [Embed]};
 						sendMessage(logchannel, message)
-						//logger.info(`\'${target.tag}\' with the id \'${target.id}\' was banned from \'${executor.tag}\' with the id \'${executor.id}\' was banned with the reason  \'${banreason}\'`)
+						logger.info(`\"${executor.tag}\" with the id \"${executor.id}\" has created the role \"${target.name}\" with the id \"${target.id}\"`)
 						}	
 
 		} catch (error) {
 			logger.warn('Error while performing guildBanAdd in logger')
 			console.log(error)
 		}
-	},
+	}
 };
 
 function slicerdicerpluxl(permissions){
