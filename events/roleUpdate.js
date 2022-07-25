@@ -9,6 +9,7 @@ module.exports = {
 			try {
 				
                 if (!oldRole.partial && !newRole.partial) {
+					
                     let auditfetch = await oldRole.guild.fetchAuditLogs({
 						limit: 1,											//used to lock ad the audit log
 						type: 'ROLE_UPDATE',
@@ -17,7 +18,7 @@ module.exports = {
 					let aditinfo = auditfetch.entries.first();
 					let { executor, target } = aditinfo;
 
-                    if (oldRole.rawPosition === newRole.rawPosition && (oldRole.permissions !== newRole.permissions || oldRole.name !== newRole.name) ) {
+                    if (oldRole.rawPosition === newRole.rawPosition && (oldRole.permissions !== newRole.permissions || oldRole.name !== newRole.name) ){
 
                     let oldperm = oldRole.permissions.toArray();
                     let newperm = newRole.permissions.toArray();
