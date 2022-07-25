@@ -23,7 +23,7 @@ module.exports = {
 				
 					const Embed = new MessageEmbed()
 					.setColor(roleDeleteLoggingCollore)
-					.setTitle('A role hase bin Deleted')
+					.setTitle('A role has bin Deleted')
 					.setAuthor({ name: botname,
 								iconURL: boticon,
 								})

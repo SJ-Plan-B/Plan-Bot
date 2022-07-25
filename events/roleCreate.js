@@ -23,7 +23,7 @@ module.exports = {
 				
 					const Embed = new MessageEmbed()
 					.setColor(roleCreateLoggingCollore)
-					.setTitle('A role hase bin Created')
+					.setTitle('A role has bin Created')
 					.setAuthor({ name: botname,
 								iconURL: boticon,
 								})
