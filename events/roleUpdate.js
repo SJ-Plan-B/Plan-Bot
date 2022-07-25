@@ -37,7 +37,7 @@ module.exports = {
                     if (newrolename === oldrolename) {
                         nameconstruct = oldrolename
                     } else {
-                        nameconstruct = oldrolename.concat("=>", newrolename)
+                        nameconstruct = oldrolename.concat(" => ", newrolename)
                     }
                 
 		
