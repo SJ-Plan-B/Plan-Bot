@@ -17,7 +17,7 @@ module.exports =
 	{
 		try {
 			var datei = path.join(__dirname, '..', 'data', 'counter.json')
-			var { ganzcounter } = JSON.parse(fs.readFileSync(datei, 'utf8'))
+			var { ganscounter } = JSON.parse(fs.readFileSync(datei, 'utf8'))
 			const channel = interaction.member.voice.channel;
 			const song = command_gans_song_link
 			let jsonfile = 'counter.json'
@@ -47,7 +47,7 @@ module.exports =
             			let counted = cfs.writetojsonvariabl(jsonvariable, output, jsonfile, jsonsubfolder)
 
 						music.play({ interaction: interaction, channel: channel, song: song});
-						return interaction.reply({ embeds: [GansEmbed] })
+						if(counted === true)interaction.reply({ embeds: [GansEmbed] });
 					}catch(error){
 						logger.info('Error while performing play')
 						interaction.reply('Invalide Song Link');

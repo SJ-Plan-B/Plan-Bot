@@ -43,11 +43,11 @@ module.exports =
 	
 				default:
 					try{
-						let output = Number((fuchscounter));
+						let output = Number((newcountervalue));
 						let counted = cfs.writetojsonvariabl(jsonvariable, output, jsonfile, jsonsubfolder);
 
 						music.play({ interaction: interaction, channel: channel, song: song});
-						if(counted === true)interaction.reply({ embeds: [FuchsEmbed] })
+						if(counted === true)interaction.reply({ embeds: [FuchsEmbed] });
 					}catch(error){
 						logger.info('Error while performing play')
 						interaction.reply('Invalide Song Link');
