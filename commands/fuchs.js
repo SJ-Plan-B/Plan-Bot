@@ -1,6 +1,9 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const music = require('@koenie06/discord.js-music');
 const { MessageEmbed } = require('discord.js');
+const fs = require('fs');
+const path = require('path');
+const cfs = require('../util/customfunctions.js')
 const logger = require('../util/logger').log;
 const { command_fuchs_song_link, command_fuchs_picture_link } =require('../data/comand.json')
 
@@ -13,13 +16,20 @@ module.exports =
 	async execute(interaction)
 	{
 		try {
-			const channel = interaction.member.voice.channel;
-			const song = command_fuchs_song_link
+			var datei = path.join(__dirname, '..', 'data', 'counter.json')
+			var { fuchscounter } = JSON.parse(fs.readFileSync(datei, 'utf8'))
+			let channel = interaction.member.voice.channel;
+			let song = command_fuchs_song_link
+			let jsonfile = 'counter.json'
+			let jsonsubfolder = 'data'
+			let jsonvariable = 'fuchscounter'
+			let newcountervalue = fuchscounter+1
 
 			const FuchsEmbed = new MessageEmbed()
 			.setColor('#e30926')
 			.setTitle('Fuchs')
-			.setDescription(`${await(interaction.user.username)} hat die Gans gestohlen`)
+			.setDescription(`${await(interaction.user.username)} hat die Gans gestohlen.
+							Der Fuchs hat schon zum \`${newcountervalue}\` mal die Gans gestohlen `)
 			.setThumbnail(command_fuchs_picture_link)
 
 			switch(true){
@@ -33,8 +43,11 @@ module.exports =
 	
 				default:
 					try{
+						let output = Number((fuchscounter));
+						let counted = cfs.writetojsonvariabl(jsonvariable, output, jsonfile, jsonsubfolder);
+
 						music.play({ interaction: interaction, channel: channel, song: song});
-						return interaction.reply({ embeds: [FuchsEmbed] })
+						if(counted === true)interaction.reply({ embeds: [FuchsEmbed] })
 					}catch(error){
 						logger.info('Error while performing play')
 						interaction.reply('Invalide Song Link');

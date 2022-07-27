@@ -3,6 +3,9 @@ const music = require('@koenie06/discord.js-music');
 const { MessageEmbed } = require('discord.js');
 const logger = require('../util/logger').log;
 const { command_burger_song_link, command_burger_picture_link } =require('../data/comand.json')
+const fs = require('fs');
+const path = require('path');
+const cfs = require('../util/customfunctions.js')
 
 module.exports = 
 {
@@ -13,13 +16,21 @@ module.exports =
 	async execute(interaction)
 	{
 		try {
-			const channel = interaction.member.voice.channel;
-			const song = command_burger_song_link
+			var datei = path.join(__dirname, '..', 'data', 'counter.json')
+			var { burgercounter } = JSON.parse(fs.readFileSync(datei, 'utf8'))
+			let channel = interaction.member.voice.channel;
+			let song = command_burger_song_link
+			let jsonfile = 'counter.json'
+			let jsonsubfolder = 'data'
+			let jsonvariable = 'burgercounter'
+			let newcountervalue = burgercounter+1
+		
 
 			const BurgerEmbed = new MessageEmbed()
 			.setColor('#e30926')
 			.setTitle('Burger')
-			.setDescription(`${await(interaction.user.username)} Träumt von Burgern`)
+			.setDescription(`${await(interaction.user.username)} Träumt von Burgern.
+							So oft wurde schon von Burgern getäumt: \`${newcountervalue}\``)
 			.setThumbnail(command_burger_picture_link)
 
 			switch(true){
@@ -33,13 +44,18 @@ module.exports =
 	
 				default:
 					try{
+						let output = Number((newcountervalue))
+            			let counted = cfs.writetojsonvariabl(jsonvariable, output, jsonfile, jsonsubfolder)
+						
 						music.play({ interaction: interaction, channel: channel, song: song});
-						return interaction.reply({ embeds: [BurgerEmbed] })
+						if(counted === true)interaction.reply({ embeds: [BurgerEmbed] })
 					}catch(error){
 						logger.info('Error while performing play')
 						interaction.reply('Invalide Song Link');
 					}}
-		} catch (error) {
+
+				
+			} catch (error) {
 			logger.error('Error while performing play')
 		}
 	},
