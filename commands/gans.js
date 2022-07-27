@@ -22,14 +22,14 @@ module.exports =
 			const song = command_gans_song_link
 			let jsonfile = 'counter.json'
 			let jsonsubfolder = 'data'
-			let jsonvariable = 'ganzcounter'
-			let newcountervalue = ganzcounter+1
+			let jsonvariable = 'ganscounter'
+			let newcountervalue = ganscounter+1
 
 			const GansEmbed = new MessageEmbed()
 			.setColor('#e30926')
 			.setTitle('Gans')
 			.setDescription(`${await(interaction.user.username)} wird vom fuchs gestolen.
-			So oft wurde die Ganz schon vom Fuchs gestohlen: \`${newcountervalue}\``)
+			So oft wurde die Gans schon vom Fuchs gestohlen: \`${newcountervalue}\``)
 			.setThumbnail(command_gans_picture_link)
 			
 			switch(true){
