@@ -3,6 +3,9 @@ const music = require('@koenie06/discord.js-music');
 const { MessageEmbed } = require('discord.js');
 const logger = require('../util/logger').log;
 const { command_gans_song_link, command_gans_picture_link } =require('../data/comand.json')
+const fs = require('fs');
+const path = require('path');
+const cfs = require('../util/customfunctions.js')
 
 module.exports = 
 {
@@ -13,13 +16,20 @@ module.exports =
 	async execute(interaction)
 	{
 		try {
+			var datei = path.join(__dirname, '..', 'data', 'counter.json')
+			var { ganzcounter } = JSON.parse(fs.readFileSync(datei, 'utf8'))
 			const channel = interaction.member.voice.channel;
 			const song = command_gans_song_link
+			let jsonfile = 'counter.json'
+			let jsonsubfolder = 'data'
+			let jsonvariable = 'ganzcounter'
+			let newcountervalue = ganzcounter+1
 
 			const GansEmbed = new MessageEmbed()
 			.setColor('#e30926')
 			.setTitle('Gans')
-			.setDescription(`${await(interaction.user.username)} wird vom fuchs gestolen`)
+			.setDescription(`${await(interaction.user.username)} wird vom fuchs gestolen
+			So oft wurde die ganz schon vom fuchs gestohlen: \`${newcountervalue}\``)
 			.setThumbnail(command_gans_picture_link)
 			
 			switch(true){
@@ -33,6 +43,9 @@ module.exports =
 	
 				default:
 					try{
+						let output = Number((newcountervalue))
+            			let counted = cfs.writetojsonvariabl(jsonvariable, output, jsonfile, jsonsubfolder)
+
 						music.play({ interaction: interaction, channel: channel, song: song});
 						return interaction.reply({ embeds: [GansEmbed] })
 					}catch(error){

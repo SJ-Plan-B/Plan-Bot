@@ -38,7 +38,7 @@ module.exports =
             .setThumbnail(Thumbnaillink)
             .setTimestamp();
 
-            output = Number((newcountervalue))
+            let output = Number((newcountervalue))
             let counted = cfs.writetojsonvariabl(jsonvariable, output, jsonfile, jsonsubfolder)
 
             if(counted === true)interaction.reply({embeds: [Embed]});
