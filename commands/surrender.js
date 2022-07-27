@@ -44,11 +44,10 @@ module.exports =
 				default:
 					try{
 						let output = Number((newcountervalue))
-        			    let counted = cfs.writetojsonvariabl(jsonvariable, output, jsonfile, jsonsubfolder)^
+        			    let counted = cfs.writetojsonvariabl(jsonvariable, output, jsonfile, jsonsubfolder)
 
 						music.play({ interaction: interaction, channel: channel, song: song});
-						if(counted === true) interaction.reply({ embeds: [surrenderEmbed] });
-
+						if(counted === true)interaction.reply({ embeds: [surrenderEmbed] });
 					}catch(error){
 						logger.info('Error while performing play')
 						interaction.reply('Invalide Song Link');
