@@ -1,5 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const music = require('@koenie06/discord.js-music');
+const fs = require('fs');
+const path = require('path');
+const cfs = require('../util/customfunctions.js');
 const logger = require('../util/logger').log
 const { MessageEmbed } = require('discord.js');
 const { command_surrender_song_link, command_surrender_picture_link } =require('../data/comand.json')
@@ -49,6 +52,7 @@ module.exports =
 					}catch(error){
 						logger.info('Error while performing play')
 						interaction.reply('Invalide Song Link');
+						
 					}}
 					
 		} catch (error) {
