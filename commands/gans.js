@@ -28,8 +28,8 @@ module.exports =
 			const GansEmbed = new MessageEmbed()
 			.setColor('#e30926')
 			.setTitle('Gans')
-			.setDescription(`${await(interaction.user.username)} wird vom fuchs gestolen
-			So oft wurde die ganz schon vom fuchs gestohlen: \`${newcountervalue}\``)
+			.setDescription(`${await(interaction.user.username)} wird vom fuchs gestolen.
+			So oft wurde die Ganz schon vom Fuchs gestohlen: \`${newcountervalue}\``)
 			.setThumbnail(command_gans_picture_link)
 			
 			switch(true){
