@@ -2,8 +2,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const {Worker} = require("worker_threads");
 const logger = require('./util/logger').log;
-const {Client, GatewayIntentBits, Partials, Collection, InteractionType, Channel,  GuildMember, } = require('discord.js');
-const {token, guildId} = require('./data/config.json');
+const {Client, GatewayIntentBits, Partials, Collection, InteractionType} = require('discord.js');
+const {token} = require('./data/config.json');
 
 
 const client = new Client(
