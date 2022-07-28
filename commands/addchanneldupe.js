@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder, ChannelType } = require('discord.js');
 const { PermissionFlagsBits } = require('discord-api-types/v10');
 const logger = require('../util/logger').log;
 const { cascadingChannels_DB_host, cascadingChannels_DB_port, cascadingChannels_DB_user, cascadingChannels_DB_password, cascadingChannels_DB_database } =require('../data/db.json')
@@ -27,7 +27,7 @@ module.exports =
 			const channelObject = interaction.guild.channels.cache.get(channelid); // Gets the channel object
 			var name = channelObject.name
 
-			if (channelObject.type === 'GUILD_VOICE'){
+			if (channelObject.type === ChannelType.GuildVoice){
 
 				try {
 					// Insert Voice into Database

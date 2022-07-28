@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const music = require('@koenie06/discord.js-music');
 const logger = require('../util/logger').log;
 const { command_cat_song_link, command_cat_picture_link } =require('../data/comand.json')
@@ -12,7 +12,7 @@ module.exports =
 	async execute(interaction)
 	{
 
-		const CatEmbed = new MessageEmbed()
+		const CatEmbed = new EmbedBuilder()
 		.setColor('#60a8a1')
 		.setTitle('Cat')
 		.setDescription(`${await(interaction.user.username)} is a Purring cat`)
@@ -28,7 +28,7 @@ module.exports =
 					song: song
 					});
 				
-				return interaction.reply({ embeds: [CatEmbed] })
+				interaction.reply({ embeds: [CatEmbed] })
 			}catch(error){
 				interaction.reply('Invalide Song Link');
 			}

@@ -1,5 +1,5 @@
 const logger = require('../util/logger').log
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder, AuditLogEvent  } = require('discord.js');
 const { sendMessage } = require('../index.js')
 const {logchannel, bot_nickname, bot_icon, messageDeleteLogging, messageDeleteLoggingCollore} = require('../data/logger.json')
 
@@ -10,7 +10,7 @@ module.exports = {
             if(message.partial){
                 let auditfetch = await message.guild.fetchAuditLogs({
                     limit: 1,											//used to lock ad the audit log
-                    type: 'MESSAGE_DELETE',
+                    type: AuditLogEvent.MessageDelete,
                 });
                 let aditinfo = auditfetch.entries.first();
 
@@ -25,7 +25,7 @@ module.exports = {
                 let channelname = aditinfo.extra.channel.name
                 let channelid = aditinfo.extra.channel.id
 
-                const Embed = new MessageEmbed()
+                const Embed = new EmbedBuilder()
                 .setColor(messageDeleteLoggingCollore)
                 .setTitle('A Message was Deleted')
                 .setAuthor({ name: bot_nickname,
@@ -49,7 +49,7 @@ module.exports = {
             
                 let auditfetch = await message.guild.fetchAuditLogs({
                     limit: 1,											//used to lock ad the audit log
-                    type: 'MESSAGE_DELETE',
+                    type: AuditLogEvent.MessageDelete,
                 });
                 
                 let aditinfo = auditfetch.entries.first();
@@ -69,7 +69,7 @@ module.exports = {
                 
                 let messagecontent = message.content;
                 
-                const Embed = new MessageEmbed()
+                const Embed = new EmbedBuilder()
                 .setColor(messageDeleteLoggingCollore)
                 .setTitle('A Message was Deleted')
                 .setAuthor({ name: bot_nickname,

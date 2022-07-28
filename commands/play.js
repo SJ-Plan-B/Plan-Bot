@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const logger = require('../util/logger').log
 const music = require('@koenie06/discord.js-music');
 
@@ -16,19 +15,19 @@ module.exports =
 			const channel = interaction.member.voice.channel;
 			const song = interaction.options.getString('song');
 
-			const playEmbed = new MessageEmbed()
+			const playEmbed = new EmbedBuilder()
 				.setColor('#e30926')
 				.setTitle('Playing')
 				.setDescription(`${await(interaction.user.username)} plays \n ${song} `)
 				.setThumbnail('https://cdn-icons-png.flaticon.com/512/1384/1384060.png')
 
-				const nosongEmbed = new MessageEmbed()
+				const nosongEmbed = new EmbedBuilder()
 				.setColor('#e30926')
 				.setTitle('Error')
 				.setDescription(`${await(interaction.user.username)} no song in Queue`)
 				.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
 
-				const voiceEmbed = new MessageEmbed()
+				const voiceEmbed = new EmbedBuilder()
 				.setColor('#e30926')
 				.setTitle('Error')
 				.setDescription(`${await(interaction.user.username)} You must be in a Voicechannel`)

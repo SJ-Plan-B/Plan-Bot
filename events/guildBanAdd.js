@@ -1,5 +1,5 @@
 const logger = require('../util/logger').log
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder, AuditLogEvent  } = require('discord.js');
 const { sendMessage } = require('../index.js')
 const {logchannel, guildBanAddLogging, guildBanAddLoggingCollore, ban_icon} = require('../data/logger.json')
 
@@ -10,7 +10,7 @@ module.exports = {
 				
 					let auditfetch = await guild.guild.fetchAuditLogs({
 						limit: 1,											//used to lock ad the audit log
-						type: 'MEMBER_BAN_ADD',
+						type: AuditLogEvent.MemberBanAdd,
 					});
 
 					let aditinfo = auditfetch.entries.first();
@@ -22,7 +22,7 @@ module.exports = {
 					let botname = guild.client.user.username;
 					let boticon = guild.client.user.displayAvatarURL();
 				
-					const Embed = new MessageEmbed()
+					const Embed = new EmbedBuilder()
 					.setColor(guildBanAddLoggingCollore)
 					.setTitle('A user was banned')
 					.setAuthor({ name: botname,

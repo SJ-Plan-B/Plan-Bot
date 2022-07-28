@@ -1,6 +1,5 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const music = require('@koenie06/discord.js-music');
-const { MessageEmbed } = require('discord.js');
 const logger = require('../util/logger').log;
 const { command_burger_song_link, command_burger_picture_link } =require('../data/comand.json')
 const fs = require('fs');
@@ -19,6 +18,7 @@ module.exports =
 			var datei = path.join(__dirname, '..', 'data', 'counter.json')
 			var { burgercounter } = JSON.parse(fs.readFileSync(datei, 'utf8'))
 			let channel = interaction.member.voice.channel;
+			console.log(channel)
 			let song = command_burger_song_link
 			let jsonfile = 'counter.json'
 			let jsonsubfolder = 'data'
@@ -26,7 +26,7 @@ module.exports =
 			let newcountervalue = burgercounter+1
 		
 
-			const BurgerEmbed = new MessageEmbed()
+			const BurgerEmbed = new EmbedBuilder()
 			.setColor('#e30926')
 			.setTitle('Burger')
 			.setDescription(`${await(interaction.user.username)} Träumt von Burgern.

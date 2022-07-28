@@ -1,6 +1,5 @@
-const { SlashCommandBuilder,  } = require('@discordjs/builders');
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder } = require('discord.js');
 const { PermissionFlagsBits } = require('discord-api-types/v10');
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const { sendMessage } = require('../index.js')
 var mysql = require('mysql');
 const logger = require('../util/logger').log
@@ -30,18 +29,18 @@ module.exports =
 			let roles = splitObjIntoArrayOfString(await(getrolelist()))
 			var first = true
 			var counter = 0
-			var row = new MessageActionRow()
+			var row = new ActionRowBuilder()
 			for (let index = 0; index < Object.keys(roles).length; index++) {
 				counter++
 
 				row.addComponents(
-				new MessageButton()
+				new ButtonBuilder()
 						.setCustomId("roles_"+roles[index])
 						.setLabel(roles[index])
-						.setStyle('PRIMARY'),
+						.setStyle('Primary'),
 				)
 				if ((index !==0) && ((index+1)%5 ==0) && first === true) {
-				const embed = new MessageEmbed()
+				const embed = new EmbedBuilder()
 					.setColor(rollereact_collor)
 					.setTitle(rollereact_title)
 					.setDescription(rollereact_text);
@@ -50,7 +49,7 @@ module.exports =
 				let message = { content: ' ', embeds: [embed], components: [row] }
 				await sendMessage(channelId,message)
 				first = false
-				row.spliceComponents(0,5)
+				row.components.splice(0,5)
 				}else if((index !==0) && ((index+1)%5 ==0) && first === false){
 				let message = { content: ' ', embeds: [], components: [row] }
 				await sendMessage(channelId,message)
@@ -66,6 +65,7 @@ module.exports =
 			interaction.reply({content: `roll reaction send`, ephemeral: true});
 		}catch(error){
 				logger.error('Error while performing sendrolereaction');
+				console.log(error)
 		}
 		
 	},

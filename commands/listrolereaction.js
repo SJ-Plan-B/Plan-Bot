@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const { PermissionFlagsBits } = require('discord-api-types/v10');
 const logger = require('../util/logger').log;
 const { role_reaction_DB_host, role_reaction_DB_port, role_reaction_DB_user, role_reaction_DB_password, role_reaction_DB_database } =require('../data/db.json')
@@ -22,7 +22,7 @@ module.exports =
 	async execute(interaction) // Funktion des Comands
 	{
 		try{
-           return interaction.reply('Diese Roles sind in der role reaction \n'+'\`' + splitObjIntoArrayOfString(await(getrolelist())).join(`\n`) + '\`');
+          interaction.reply('Diese Roles sind in der role reaction \n'+'\`' + splitObjIntoArrayOfString(await(getrolelist())).join(`\n`) + '\`');
 		}catch(error){
 			logger.error('Error while performing listrole reaction'); 
 		}

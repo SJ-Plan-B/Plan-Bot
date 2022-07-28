@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const logger = require('../util/logger').log;
 
 module.exports = 
@@ -21,7 +21,7 @@ module.exports =
 				default: console.info("Fehler beim generiren der Zufals zahl")
 			}
 				
-			  return interaction.reply({ content: `Deine Münze ist auf ${ausgabe} gelandet!`,});
+			  interaction.reply({ content: `Deine Münze ist auf ${ausgabe} gelandet!`,});
 		} catch (error) {
 			logger.warn('Error while performing coinflip'); 
 			logger.error(error)

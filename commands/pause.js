@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const logger = require('../util/logger').log
 const music = require('@koenie06/discord.js-music');
 
@@ -23,7 +23,7 @@ module.exports =
 	
 			if(songs >= 1){
 				music.pause({interaction: interaction});
-				return interaction.reply('song paused');
+				interaction.reply('song paused');
 			}else{
 				if(songs < 1){ 
 					interaction.reply('not enough songs in queue');

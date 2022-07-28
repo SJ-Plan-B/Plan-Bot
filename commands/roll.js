@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const logger = require('../util/logger').log
 
 module.exports = 
@@ -22,7 +22,7 @@ module.exports =
                 }
             try{
                     let ausgabe = ergebnis.join(', ');  
-                    return interaction.reply({ content: `you have rolled : \`${ausgabe}\`.`,});
+                    interaction.reply({ content: `you have rolled : \`${ausgabe}\`.`,});
             }catch(error) 
                 {
                     logger.error('Error while joining array in roll Command')

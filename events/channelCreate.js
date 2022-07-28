@@ -1,5 +1,5 @@
 const logger = require('../util/logger').log
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder, AuditLogEvent  } = require('discord.js');
 const { sendMessage } = require('../index.js')
 const {logchannel, channelCreateLogging, channelCreateLoggingCollore} = require('../data/logger.json')
 
@@ -10,7 +10,7 @@ module.exports = {
 
 			let auditfetch = await channel.guild.fetchAuditLogs({
 				limit: 1,											//used to lock ad the audit log
-				type: 'CHANNEL_CREATE',
+				type: AuditLogEvent.ChannelCreate ,
 			});
 			let aditinfo = auditfetch.entries.first();
 
@@ -27,7 +27,7 @@ module.exports = {
 					let botname = channel.client.user.username;
 					let boticon = channel.client.user.displayAvatarURL();
 				
-					const Embed = new MessageEmbed()
+					const Embed = new EmbedBuilder()
 					.setColor(channelCreateLoggingCollore)
 					.setTitle('A Channel was Created')
 					.setAuthor({ name: botname,
@@ -54,6 +54,7 @@ module.exports = {
 			
 					
 		} catch (error) {
+			console.error(error)
 			logger.warn('Error while performing channelCreate in logger')
 		}
 		

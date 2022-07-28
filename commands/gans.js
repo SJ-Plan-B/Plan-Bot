@@ -1,6 +1,5 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const music = require('@koenie06/discord.js-music');
-const { MessageEmbed } = require('discord.js');
 const logger = require('../util/logger').log;
 const { command_gans_song_link, command_gans_picture_link } =require('../data/comand.json')
 const fs = require('fs');
@@ -25,7 +24,7 @@ module.exports =
 			let jsonvariable = 'ganscounter'
 			let newcountervalue = ganscounter+1
 
-			const GansEmbed = new MessageEmbed()
+			const GansEmbed = new EmbedBuilder()
 			.setColor('#e30926')
 			.setTitle('Gans')
 			.setDescription(`${await(interaction.user.username)} wird vom fuchs gestolen.

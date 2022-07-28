@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const logger = require('../util/logger').log;
 
 module.exports = 
@@ -12,7 +12,7 @@ module.exports =
         try{
 			const rolle = getRandomArbitrary(1, 4)
 
-			return interaction.reply({ content: `you have rolled a: ${rolle}.`,});
+			interaction.reply({ content: `you have rolled a: ${rolle}.`,});
 		}catch(error){
 			logger.error('Error while performing D4'); 
 		}

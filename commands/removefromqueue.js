@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const logger = require('../util/logger').log
 const music = require('@koenie06/discord.js-music');
 
@@ -27,7 +27,7 @@ module.exports =
 					music.removeQueue({
 						interaction: interaction,
 						number: number     });
-					return	interaction.reply('skipt the song with id:'+number);
+					interaction.reply('skipt the song with id:'+number);
 				}else{
 					if(number >= songs){ 
 						interaction.reply('not enough songs in queue' );

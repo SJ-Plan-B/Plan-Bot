@@ -1,5 +1,4 @@
-const { MessageEmbed } = require('discord.js');
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { PermissionFlagsBits } = require('discord-api-types/v10');
 const logger = require('../util/logger').log
 
@@ -13,7 +12,7 @@ module.exports =
 	async execute(interaction) // Funktion des Comands
 	{
 		try{
-			const exampleEmbed = new MessageEmbed() // Embedded MSG Creator
+			const exampleEmbed = new EmbedBuilder() // Embedded MSG Creator
 			.setColor('#0099ff') // Titel Farbe
 			.setTitle('Some title') // Titel der Nachricht
 			.setURL('https://discord.js.org/') // Link in der nachricht
@@ -46,7 +45,7 @@ module.exports =
 			.setTimestamp(Date.now())
 			.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 		
-		return interaction.reply({ embeds: [exampleEmbed] });
+		interaction.reply({ embeds: [exampleEmbed] });
 		}catch(error){
 			logger.error('Error while performing message-embed')
 		}

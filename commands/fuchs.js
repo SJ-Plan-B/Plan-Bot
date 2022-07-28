@@ -1,6 +1,5 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const music = require('@koenie06/discord.js-music');
-const { MessageEmbed } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 const cfs = require('../util/customfunctions.js')
@@ -25,7 +24,7 @@ module.exports =
 			let jsonvariable = 'fuchscounter'
 			let newcountervalue = fuchscounter+1
 
-			const FuchsEmbed = new MessageEmbed()
+			const FuchsEmbed = new EmbedBuilder()
 			.setColor('#e30926')
 			.setTitle('Fuchs')
 			.setDescription(`${await(interaction.user.username)} hat die Gans gestohlen.

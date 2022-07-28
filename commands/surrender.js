@@ -1,10 +1,9 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const music = require('@koenie06/discord.js-music');
 const fs = require('fs');
 const path = require('path');
 const cfs = require('../util/customfunctions.js');
 const logger = require('../util/logger').log
-const { MessageEmbed } = require('discord.js');
 const { command_surrender_song_link, command_surrender_picture_link } =require('../data/comand.json')
 
 module.exports = 
@@ -25,7 +24,7 @@ module.exports =
 			let jsonvariable = 'surrendercounter'
 			let newcountervalue = surrendercounter+1
 
-			const surrenderEmbed = new MessageEmbed()
+			const surrenderEmbed = new EmbedBuilder()
 						.setColor('#e30926')
 						.setTitle('Surrender')
 						.setDescription(`${await(interaction.user.username)} hat surrenderd.

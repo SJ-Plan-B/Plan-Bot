@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const { PermissionFlagsBits } = require('discord-api-types/v10');
 const logger = require('../util/logger').log
 
@@ -16,8 +16,8 @@ module.exports =
 			const value = interaction.options.getString('input');
 
 			if(value)
-			return interaction.reply(`The options value is: \`${value}\``);
-			return interaction.reply('No option was provided!');
+			interaction.reply(`The options value is: \`${value}\``);
+			interaction.reply('No option was provided!');
 		}catch(error){
 			logger.error('Error while performing options-info')
 		}

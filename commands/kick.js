@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const { PermissionFlagsBits } = require('discord-api-types/v10');
 const logger = require('../util/logger').log;
 
@@ -15,7 +15,7 @@ module.exports =
 		try{
 			const user = interaction.options.getUser('target');
 
-			return interaction.reply({ content: `You wanted to kick: ${await(user.username)}`, ephemeral: true });
+			interaction.reply({ content: `You wanted to kick: ${await(user.username)}`, ephemeral: true });
 		} catch (error) {
 			logger.error('Error while performing Kick');
 		}

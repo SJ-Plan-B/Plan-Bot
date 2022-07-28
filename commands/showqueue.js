@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const logger = require('../util/logger').log
 const music = require('@koenie06/discord.js-music');
 
@@ -22,7 +22,7 @@ module.exports =
 						result[index] = slicerdicer.slice(17);
 						logger.debug(result)
 					}
-					return interaction.reply('\`' + result.join(`\n`) + '\`');
+					interaction.reply('\`' + result.join(`\n`) + '\`');
 			}catch(error){
 				interaction.reply('no song in queue')
 			}

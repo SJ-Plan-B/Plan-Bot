@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const { PermissionFlagsBits } = require('discord-api-types/v10');
 const logger = require('../util/logger').log;
 const { cascadingChannels_DB_host, cascadingChannels_DB_port, cascadingChannels_DB_user, cascadingChannels_DB_password, cascadingChannels_DB_database } =require('../data/db.json')
@@ -22,7 +22,7 @@ module.exports =
 	async execute(interaction) // Funktion des Comands
 	{
 		try{
-           return interaction.reply('Diese Channel werden dupliziert \n'+'\`' + splitObjIntoArrayOfString(await(getchannellist())).join(`\n`) + '\`');
+          interaction.reply('Diese Channel werden dupliziert \n'+'\`' + splitObjIntoArrayOfString(await(getchannellist())).join(`\n`) + '\`');
 		}catch(error){
 			logger.error('Error while performing listchanneldupe'); 
 		}

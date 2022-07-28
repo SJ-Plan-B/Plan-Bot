@@ -1,5 +1,5 @@
 const logger = require('../util/logger').log
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder, AuditLogEvent  } = require('discord.js');
 const { sendMessage } = require('../index.js')
 const {logchannel, channelDeleteLogging, channelDeleteLoggingCollore} = require('../data/logger.json')
 
@@ -10,7 +10,7 @@ module.exports = {
 
 				let auditfetch = await channel.guild.fetchAuditLogs({
 					limit: 1,											//used to lock ad the audit log
-					type: 'CHANNEL_DELETE',
+					type: AuditLogEvent.ChannelDelete,
 				});
 				let aditinfo = auditfetch.entries.first();
 					if ( aditinfo.executor.id !== channel.client.user.id ) {
@@ -26,7 +26,7 @@ module.exports = {
 							let botname = channel.client.user.username;
 							let boticon = channel.client.user.displayAvatarURL();
 						
-							const Embed = new MessageEmbed()
+							const Embed = new EmbedBuilder()
 							.setColor(channelDeleteLoggingCollore)
 							.setTitle('A Channel was Deleted')
 							.setAuthor({ name: botname,

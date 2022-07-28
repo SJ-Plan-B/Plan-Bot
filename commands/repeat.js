@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const logger = require('../util/logger').log
 const music = require('@koenie06/discord.js-music');
 
@@ -28,7 +28,7 @@ module.exports =
 					interaction: interaction,
 					value: OnOrOff
 				});
-				return interaction.reply('repeat music '+OnOrOff);
+				interaction.reply('repeat music '+OnOrOff);
 			}else{
 				if(songs < 1){ 
 					interaction.reply('no song in queue');
