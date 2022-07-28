@@ -33,7 +33,6 @@ This bot should have all the functions that all servers need: <br>
  - [mysql](https://github.com/mysqljs/mysql "mysql Git Repo")
  - [winston](https://github.com/winstonjs/winston "winston-daily-rotate-file Git Repo")
  - [winston-daily-rotate-file](https://github.com/winstonjs/winston-daily-rotate-file "mysql Git Repo")
- - [@discordjs/builders](https://www.npmjs.com/package/@discordjs/builders "@discordjs/builders site")
  - [@discordjs/opus](https://www.npmjs.com/package/@discordjs/opus "@discordjs/opus npm site")
  - [@discordjs/rest](https://www.npmjs.com/package/@discordjs/rest "@discordjs/rest npm site")
  - [@discordjs/voice](https://www.npmjs.com/package/@discordjs/voice "@discordjs/voice npm site")
