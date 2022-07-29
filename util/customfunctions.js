@@ -27,7 +27,6 @@ module.exports = {
                 return true
             } catch (error) {
                 logger.error('Error while performing writetojson in customfunctions');
-                console.log(error)
             }
 
         },
