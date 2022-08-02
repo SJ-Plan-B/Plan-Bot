@@ -8,6 +8,7 @@ const path = require('path');
 module.exports = {
         writetojsonvariabl(variablenname, wertdervariable, jsondateiname, jsonsubfoldername){ 
             //  if inputing a number use let output = Number((zahlvariable)) in host funktion
+            // input must be a valid jason variabel input
          
             var datei
             if (jsonsubfoldername !== null) {
