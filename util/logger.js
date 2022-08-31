@@ -12,7 +12,7 @@ var transportallevents = new (winston.transports.DailyRotateFile)({
   prepend: true,
   zippedArchive: true,
   maxSize: '200m',
-  maxFiles: '14d'
+  maxFiles: '2d'
 });
 
 var transportinfolog = new (winston.transports.DailyRotateFile)({
@@ -24,7 +24,7 @@ var transportinfolog = new (winston.transports.DailyRotateFile)({
   prepend: true,
   zippedArchive: true,
   maxSize: '200m',
-  maxFiles: '14d'
+  maxFiles: '2d'
 });
 
 var transporterrorlog = new (winston.transports.DailyRotateFile)({
@@ -36,7 +36,7 @@ var transporterrorlog = new (winston.transports.DailyRotateFile)({
   prepend: true,
   zippedArchive: true,
   maxSize: '200m',
-  maxFiles: '14d'
+  maxFiles: '2d'
 });
 
 var logger = new (winston.createLogger)({

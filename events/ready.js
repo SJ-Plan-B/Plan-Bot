@@ -4,6 +4,7 @@ module.exports = {
 	once: true,
 	execute(client) {
 		try {
+			console.log("Started")
 			logger.info(`Ready! Logged in as ${client.user.tag}`);
 		} catch (error) {
 			logger.error('Error while performing ready')
