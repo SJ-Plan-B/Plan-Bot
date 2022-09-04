@@ -26,7 +26,11 @@ module.exports =
 		}catch(error){
 			logger.error('Error while performing listchanneldupe'); 
 		}
-	},
+
+    con.end(function(err) {
+		logger.http(`a Connection to database: ${cascadingChannels_DB_database} has been terminated`)})
+  
+  },
 };
 function getchannellist(){
     try {

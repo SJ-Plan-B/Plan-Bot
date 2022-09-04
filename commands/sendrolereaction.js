@@ -63,6 +63,10 @@ module.exports =
 				}
 			}
 			interaction.reply({content: `roll reaction send`, ephemeral: true});
+
+			con.end(function(err) {
+			logger.http(`a Connection to database: ${role_reaction_DB_database} has been terminated`)})
+
 		}catch(error){
 				logger.error('Error while performing sendrolereaction');
 				console.log(error)

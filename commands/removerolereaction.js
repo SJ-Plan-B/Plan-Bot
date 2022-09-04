@@ -45,7 +45,10 @@ module.exports =
 
 				} catch (error) {
 				logger.error(`Error while performing the database: ${role_reaction_DB_database}, Conection in removerolereaction`); 
-				}	
+				}
+				
+				con.end(function(err) {
+				logger.http(`a Connection to database: ${role_reaction_DB_database} has been terminated`)})
 
 		}catch(error){
 			logger.error('Error while performing removerolereaction'); 

@@ -22,6 +22,9 @@ module.exports = {
                 if (err) throw err;
                 logger.http(`Table channels created in database: ${role_reaction_DB_database}`);
               });
+
+            con.end(function(err) {
+			logger.http(`a Connection to database: ${role_reaction_DB_database} has been terminated`)})
         });
     }
 }

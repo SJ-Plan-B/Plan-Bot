@@ -48,6 +48,9 @@ module.exports =
 				interaction.reply('The selectetd channel is no voice channel')
 			}
 
+			con.end(function(err) {
+			logger.http(`a Connection to database: ${cascadingChannels_DB_database} has been terminated`)})
+
 		}catch(error){
 			logger.error('Error while performing addchanneldupe'); 
 		}

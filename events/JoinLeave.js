@@ -59,7 +59,10 @@ module.exports = {
               logger.warn('Cannot identify join/leave Event')
         }
 
-		} catch (error) {
+        con.end(function(err) {
+        logger.http(`a Connection to database: ${cascadingChannels_DB_database} has been terminated`)})
+
+		}catch (error) {
 			logger.error('Error while performing JoinLeave')
 		}
 	},

@@ -26,6 +26,9 @@ module.exports =
 		}catch(error){
 			logger.error('Error while performing listrole reaction'); 
 		}
+
+    con.end(function(err) {
+    logger.http(`a Connection to database: ${role_reaction_DB_database} has been terminated`)})
 	},
 };
 function getrolelist(){
