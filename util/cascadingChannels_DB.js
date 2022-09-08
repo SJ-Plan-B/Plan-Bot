@@ -23,9 +23,6 @@ module.exports = {
                 if (err) throw err;
                 logger.http(`Table channels created in database: ${cascadingChannels_DB_database}`);
               });
-              con.end(function(err) {
-                logger.http(`a Connection to database: ${cascadingChannels_DB_database} has been terminated`);
-              });
         });
     }
 }

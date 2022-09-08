@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const logger = require('../util/logger').log
-const music = require('@koenie06/discord.js-music');
+const { QueryType } = require('discord-player');
 
 module.exports = 
 {
@@ -11,7 +11,9 @@ module.exports =
 
 	async execute(interaction)
 	{
+
 		try{
+			const { client } = require('../index');
 			const channel = interaction.member.voice.channel;
 			const song = interaction.options.getString('song');
 
@@ -33,25 +35,42 @@ module.exports =
 				.setDescription(`${await(interaction.user.username)} You must be in a Voicechannel`)
 				.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
 
+				const guild = interaction.guild
+				const searchResult = await client.player
+					.search(song, {
+						requestedBy: interaction.user.username,
+						searchEngine: QueryType.AUTO
+					})
+					.catch(() => {
+						console.log('he');
+					});
+					
+				if (!searchResult || !searchResult.tracks.length) return void interaction.reply({ embeds: [nosongEmbed] });
+		
+				const queue = await client.player.createQueue(guild, {
+					ytdlOptions: {
+						filter: 'audioonly',
+						highWaterMark: 1 << 30,
+						dlChunkSize: 0,
+					},
+					metadata: channel
+				});
 
-			switch(true){
-				case(channel === null):
-					interaction.reply({ embeds: [voiceEmbed] });
-					break;
+				try {
+					if (!queue.connection) await queue.connect(channel);
+				} catch {
+					void client.player.deleteQueue(guild.id);
+					return void interaction.reply({ embeds: [voiceEmbed] });
+				}
+		
+				await interaction.reply({ embeds: [playEmbed] });
+				searchResult.playlist ? queue.addTracks(searchResult.tracks) : queue.addTrack(searchResult.tracks[0]);
+				if (!queue.playing) await queue.play();
 	
-				case(song === null):
-					interaction.reply({ embeds: [nosongEmbed] });
-					break;
-	
-				default:
-					try{
-						music.play({ interaction: interaction, channel: channel, song: song});
-						return interaction.reply({ embeds: [playEmbed] });
-					}catch(error){
-						interaction.reply('Invalide Song Link');
-					}}
+
 		}catch(error){
-			logger.error('Error while performing ping');
+			logger.error('Error while performing play');
+			console.log(error)
 		}
 	}
 };

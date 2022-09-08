@@ -4,6 +4,8 @@ const {Worker} = require("worker_threads");
 const logger = require('./util/logger').log;
 const {Client, GatewayIntentBits, Partials, Collection, InteractionType} = require('discord.js');
 const {token} = require('./data/config.json');
+const { Player } = require('discord-player');
+const { registerPlayerEvents } = require('./events');
 
 
 const client = new Client(
@@ -24,7 +26,12 @@ const client = new Client(
 				Partials.User,
 			]});
 
+	client.player = new Player(client);
+	registerPlayerEvents(client.player);
+
 module.exports = {
+
+	client,
 	
 	async startbot(){
 

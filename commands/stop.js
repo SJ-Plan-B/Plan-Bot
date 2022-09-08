@@ -1,6 +1,6 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const logger = require('../util/logger').log
-const music = require('@koenie06/discord.js-music');
+const { QueryType } = require('discord-player');
 
 module.exports = 
 {
@@ -11,28 +11,17 @@ module.exports =
 	async execute(interaction)
 	{
 		try{
-			var queue = [] ;
-			
-			try{
-				queue = await(music.getQueue({ interaction: interaction })) ;	
-			}catch (error){
-				logger.warn('while get music.getQueue in RemoveFromQueue in stop')
-			}
 
-			var songs = Object.keys(queue).length ;
-	
-			if(songs >= 1){
-				music.stop({ interaction: interaction });
-				return interaction.reply('music stopped');
-			}else{
-				if(songs < 1){ 
-					interaction.reply('not enough songs in queue');
-				}else{
-					logger.info( `${await(interaction.user.username)} destroyed the matrix while performing stop` )	
-				}
-			}
+			const { client } = require('../index');
+			const queue = client.player.getQueue(interaction.guild.id);
+
+			if (!queue || !queue.playing) return void interaction.reply({ content: '❌ | No music is being played!' });
+			queue.destroy();
+			return void interaction.reply({ content: '🛑 | Stopped the player!' });
+
 		}catch(error){
-				logger.error('Error while performing volume'); 
+				logger.error('Error while performing Stop');
+				console.log(error)
 		}
 	},
 };

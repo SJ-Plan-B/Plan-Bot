@@ -36,7 +36,7 @@ This bot should have all the functions that all servers need: <br>
  - [@discordjs/opus](https://www.npmjs.com/package/@discordjs/opus "@discordjs/opus npm site")
  - [@discordjs/rest](https://www.npmjs.com/package/@discordjs/rest "@discordjs/rest npm site")
  - [@discordjs/voice](https://www.npmjs.com/package/@discordjs/voice "@discordjs/voice npm site")
- - [@koenie06/discord.js-music](https://www.npmjs.com/package/@koenie06/discord.js-music "@koenie06/discord.js-music npm site")
+ - [discord-player](https://www.npmjs.com/package/discord-player "discord-player npm site")
  - [discord-api-types](https://www.npmjs.com/package/discord-api-types "discord-api-types npm site")
  - [ffmpeg](https://ffmpeg.org/ "ffmpeg npm site")
  - [ffmpeg-static](https://www.npmjs.com/package/ffmpeg-static "ffmpeg-static npm site")

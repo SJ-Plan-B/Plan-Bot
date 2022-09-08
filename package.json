@@ -18,7 +18,8 @@
     "@discordjs/voice": "^0.11.0",
     "@types/yt-search": "^2.3.2",
     "bufferutil": "^4.0.6",
-    "discord-api-types": "^0.37.5",
+    "discord-api-types": "^0.37.8",
+    "discord-player": "^5.3.1",
     "discord.js": "^14.3.0",
     "edit-json-file": "^1.7.0",
     "erlpack": "github:discord/erlpack",
@@ -29,7 +30,7 @@
     "opusscript": "^0.0.8",
     "sodium": "^3.0.2",
     "utf-8-validate": "^5.0.9",
-    "winston": "^3.8.1",
+    "winston": "^3.8.2",
     "winston-daily-rotate-file": "^4.7.1",
     "ytdl-core": "^4.11.2",
     "zlib-sync": "^0.1.7"
