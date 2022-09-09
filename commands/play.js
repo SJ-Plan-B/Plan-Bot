@@ -20,7 +20,7 @@ module.exports =
 				const nosongEmbed = new EmbedBuilder()
 				.setColor('#e30926')
 				.setTitle('Error')
-				.setDescription(`${await(interaction.user.username)} no song in Queue`)
+				.setDescription(`${await(interaction.user.username)} no song in link`)
 				.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
 
 				const voiceEmbed = new EmbedBuilder()
@@ -56,12 +56,12 @@ module.exports =
 					void client.player.deleteQueue(guild.id);
 					return void interaction.reply({ embeds: [voiceEmbed] });
 				}
-				
+
 				
 				const playEmbed = new EmbedBuilder()
 				.setColor('#e30926')
 				.setTitle('Playing')
-				.setDescription(`Loading your ${searchResult.playlist ? 'playlist' : 'track'}...`)
+				.setDescription(`the bot is now Playing ${searchResult.playlist ? 'the Playlist '+searchResult.tracks[0].playlist.title+' with '+searchResult.tracks[0].playlist.tracks.length+' songs' : 'the song '+searchResult.tracks[0].title}`)
 				.setThumbnail('https://cdn-icons-png.flaticon.com/512/1384/1384060.png')
 		
 				await interaction.reply({ embeds: [playEmbed] });
@@ -71,6 +71,7 @@ module.exports =
 
 		}catch(error){
 			logger.error('Error while performing play');
+			console.log(error)
 		}
 	}
 };
