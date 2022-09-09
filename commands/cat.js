@@ -1,27 +1,26 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const logger = require('../util/logger').log
 const { QueryType } = require('discord-player');
+const logger = require('../util/logger').log;
+const { command_cat_song_link, command_cat_picture_link } =require('../data/comand.json')
 
 module.exports = 
 {
 	data: new SlashCommandBuilder()
-		.setName('play')
-		.setDescription('play a song')
-		.addStringOption(option => option.setName('song').setDescription('add a song youtube link').setRequired(true)),
+		.setName('cat')
+		.setDescription('Happy Cat Purring'),
 
 	async execute(interaction)
 	{
+		try {
+				const song = command_cat_song_link
+				const channel = interaction.member.voice.channel;
 
-		try{
-			const { client } = require('../index');
-			const channel = interaction.member.voice.channel;
-			const song = interaction.options.getString('song');
+				const CatEmbed = new EmbedBuilder()
+				.setColor('#60a8a1')
+				.setTitle('Cat')
+				.setDescription(`${await(interaction.user.username)} is a Purring cat`)
+				.setThumbnail(command_cat_picture_link)
 
-				const nosongEmbed = new EmbedBuilder()
-				.setColor('#e30926')
-				.setTitle('Error')
-				.setDescription(`${await(interaction.user.username)} no song in Queue`)
-				.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
 
 				const voiceEmbed = new EmbedBuilder()
 				.setColor('#e30926')
@@ -29,6 +28,7 @@ module.exports =
 				.setDescription(`${await(interaction.user.username)} You must be in a Voicechannel`)
 				.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
 
+				const { client } = require('../index');
 				const guild = interaction.guild
 				const searchResult = await client.player
 					.search(song, {
@@ -39,8 +39,8 @@ module.exports =
 						console.log('he');
 					});
 					
-				if (!searchResult || !searchResult.tracks.length) return void interaction.reply({ embeds: [nosongEmbed] });
-		
+				if (!searchResult || !searchResult.tracks.length) return void logger.error('The Coconut link is invalid');
+
 				const queue = await client.player.createQueue(guild, {
 					ytdlOptions: {
 						filter: 'audioonly',
@@ -57,20 +57,14 @@ module.exports =
 					return void interaction.reply({ embeds: [voiceEmbed] });
 				}
 				
+				await interaction.reply({ embeds: [CatEmbed] });
 				
-				const playEmbed = new EmbedBuilder()
-				.setColor('#e30926')
-				.setTitle('Playing')
-				.setDescription(`Loading your ${searchResult.playlist ? 'playlist' : 'track'}...`)
-				.setThumbnail('https://cdn-icons-png.flaticon.com/512/1384/1384060.png')
-		
-				await interaction.reply({ embeds: [playEmbed] });
 				searchResult.playlist ? queue.addTracks(searchResult.tracks) : queue.addTrack(searchResult.tracks[0]);
 				if (!queue.playing) await queue.play();
-	
+		
 
-		}catch(error){
-			logger.error('Error while performing play');
+		} catch (error) {
+			logger.error('Error while performing play')
 		}
-	}
+	},
 };

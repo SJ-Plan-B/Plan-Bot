@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const logger = require('../util/logger').log
 
 module.exports = 
@@ -13,14 +13,26 @@ module.exports =
 
 			const { client } = require('../index');
 
+			const pauseEmbed = new EmbedBuilder()
+			.setColor('#e30926')
+			.setTitle('Queue Paused')
+			.setDescription(`${await(interaction.user.username)} has Paused the queue`)
+
 	
 			const queue = client.player.getQueue(interaction.guild.id);
-			if (!queue || !queue.playing) return void interaction.reply({ content: '❌ | No music is being played!' });
+			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
 			const paused = queue.setPaused(true);
-			return void interaction.reply({ content: paused ? '⏸ | Paused!' : '❌ | Something went wrong!' });
+			
+			if (paused === true) {
+				return void interaction.reply({ embeds: [pauseEmbed] });
+			} else {
+				return void interaction.reply({ content: 'Something went wrong!' });
+			}
+			
 
 		}catch(error){
 			logger.error('Error while performing pause')
+			console.log(error)
 		}
 	}
 }
