@@ -75,7 +75,7 @@ module.exports =
 			if(counted === true)interaction.reply({ embeds: [surrenderEmbed] });
 					
 		} catch (error) {
-			logger.error('Error while performing play')
+			logger.error('Error while performing surrender')
 		}
 	},
 };

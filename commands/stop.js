@@ -10,13 +10,17 @@ module.exports =
 	async execute(interaction)
 	{
 		try{
-
 			const { client } = require('../index');
 			const queue = client.player.getQueue(interaction.guild.id);
 
-			if (!queue || !queue.playing) return void interaction.reply({ content: '❌ | No music is being played!' });
+			const stopEmbed = new EmbedBuilder()
+			.setColor('#e30926')
+			.setTitle('Stop')
+			.setDescription(`${await(interaction.user.username)} has Stopt the queue`)  
+
+			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
 			queue.destroy();
-			return void interaction.reply({ content: '🛑 | Stopped the player!' });
+			return void interaction.reply({ embeds: [stopEmbed],});
 
 		}catch(error){
 				logger.error('Error while performing Stop');
