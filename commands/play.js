@@ -70,7 +70,6 @@ module.exports =
 
 		}catch(error){
 			logger.error('Error while performing play');
-			console.log(error)
 		}
 	}
 };

@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const logger = require('../util/logger').log
-const { QueryType } = require('discord-player');
 
 module.exports = 
 {
@@ -21,7 +20,7 @@ module.exports =
 
 		}catch(error){
 				logger.error('Error while performing Stop');
-				console.log(error)
+
 		}
 	},
 };
