@@ -9,6 +9,8 @@ currently being supported with security updates.
 | ------- | ------------------ |
 | 1.0.x.x | :x:                |
 | 1.1.x.x | :x:                |
+| 1.2.2.x | :x:                |
+| 1.2.3.x | :x:                |
 | 1.2.x.x | :white_check_mark: |
 
 
