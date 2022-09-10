@@ -16,19 +16,19 @@ module.exports =
 {
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('listchanneldupe')
-		.setDescription('list channel dupe')
+		.setDescription('List of channels to be duplicated.')
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
 	async execute(interaction) // Funktion des Comands
 	{
 		try{
-          interaction.reply('Diese Channel werden dupliziert \n'+'\`' + splitObjIntoArrayOfString(await(getchannellist())).join(`\n`) + '\`');
+          interaction.reply('Channels to be duplicated: \n'+'\`' + splitObjIntoArrayOfString(await(getchannellist())).join(`\n`) + '\`');
 		}catch(error){
-			logger.error('Error while performing listchanneldupe'); 
+			logger.error('Error while performing listchanneldupe.'); 
 		}
 
     con.end(function(err) {
-		logger.http(`a Connection to database: ${cascadingChannels_DB_database} has been terminated`)})
+		logger.http(`A connection to database: ${cascadingChannels_DB_database} has been terminated.`)})
   
   },
 };
@@ -44,7 +44,7 @@ function getchannellist(){
         }
       );
     } catch (error) {
-    logger.error(`Error while performing 'SELECT' in the database: ${cascadingChannels_DB_database}, in command listchanneldupe`); 
+    logger.error(`Error while performing 'SELECT' in the database: ${cascadingChannels_DB_database}, in listchanneldupe.`); 
     }	
 };
 

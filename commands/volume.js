@@ -5,8 +5,8 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('volume')
-		.setDescription('change volume')
-        .addIntegerOption(option => option.setName('volume').setDescription('enter volume in %').setRequired(true)),
+		.setDescription('Change music volume-')
+        .addIntegerOption(option => option.setName('volume').setDescription('Enter a volume in %').setRequired(true)),
 
 	async execute(interaction)
 	{
@@ -19,7 +19,7 @@ module.exports =
 
             if (!vol) return void interaction.reply({ content: `Current volume is **${queue.volume}**%!` });
 
-            if (vol < 0 || vol > 100) return void interaction.reply({ content: 'Volume range must be 0-100' });
+            if (vol < 0 || vol > 100) return void interaction.reply({ content: 'Volume range must be 0-100%' });
             
             const success = queue.setVolume(vol);
             return void interaction.reply({
@@ -27,7 +27,7 @@ module.exports =
             });
             
         }catch(error){
-            logger.error('Error while performing volume')
+            logger.error('Error while performing volume.')
         }
         
 	},

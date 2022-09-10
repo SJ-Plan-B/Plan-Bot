@@ -5,7 +5,7 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('skip')
-		.setDescription('skip a song'),
+		.setDescription('Skip a song.'),
 		
 	async execute(interaction)
 	{
@@ -15,7 +15,7 @@ module.exports =
   
 
 			const queue = client.player.getQueue(interaction.guild.id);
-			if (!queue || !queue.playing) return void interaction.reply({ content: '❌ | No music is being played!' });
+			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
 			const currentTrack = queue.current;
 			const success = queue.skip();
 
@@ -27,7 +27,7 @@ module.exports =
 			if(success)return void interaction.reply({ embeds: [skipEmbed],});
 
 		}catch(error){
-				logger.error('while performing skip'); 
+				logger.error('while performing skip.'); 
 		}
 	},
 };

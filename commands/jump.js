@@ -5,8 +5,8 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('jump')
-		.setDescription('jump multiple songs')
-        .addIntegerOption(option => option.setName('number').setDescription('number of songs to skip')),
+		.setDescription('Jump multiple songs.')
+        .addIntegerOption(option => option.setName('number').setDescription('Amount of songs to be skipped (will be at least 2 songs).')),
         
 	async execute(interaction)
 	{

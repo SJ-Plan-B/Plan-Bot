@@ -10,7 +10,7 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('gans')
-		.setDescription('The Holy Santa Barbara - Dance mit de Gänse'),
+		.setDescription('The Holy Santa Barbara - Dance mit de Gänse.'),
 
 	async execute(interaction)
 	{
@@ -28,14 +28,14 @@ module.exports =
 			const GansEmbed = new EmbedBuilder()
 			.setColor('#e30926')
 			.setTitle('Gans')
-			.setDescription(`${await(interaction.user.username)} wird vom fuchs gestolen.
+			.setDescription(`${await(interaction.user.username)} wird vom Fuchs gestolen.
 			So oft wurde die Gans schon vom Fuchs gestohlen: \`${newcountervalue}\``)
 			.setThumbnail(command_gans_picture_link)
 
 			const voiceEmbed = new EmbedBuilder()
 			.setColor('#e30926')
 			.setTitle('Error')
-			.setDescription(`${await(interaction.user.username)} You must be in a Voicechannel`)
+			.setDescription(`${await(interaction.user.username)} You are required to be in a voice channel.`)
 			.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
 
 			const { client } = require('../index');
@@ -49,7 +49,7 @@ module.exports =
 					console.log('he');
 				});
 				
-			if (!searchResult || !searchResult.tracks.length) return void logger.error('The Gans link is invalid');
+			if (!searchResult || !searchResult.tracks.length) return void logger.error('The gans link is invalid!');
 	
 			const queue = await client.player.createQueue(guild, {
 				ytdlOptions: {
@@ -76,7 +76,7 @@ module.exports =
 			if(counted === true)interaction.reply({ embeds: [GansEmbed] });
 
 		} catch (error) {
-			logger.error('Error while performing play')
+			logger.error('Error while performing gans.')
 		}
 	},
 };

@@ -10,7 +10,7 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('fuchs')
-		.setDescription('HBz x IIVEN x Bekkaa - Fuchs du hast die Gans gestohlen'),
+		.setDescription('HBz x IIVEN x Bekkaa - Fuchs du hast die Gans gestohlen.'),
 
 	async execute(interaction)
 	{
@@ -28,13 +28,13 @@ module.exports =
 			.setColor('#e30926')
 			.setTitle('Fuchs')
 			.setDescription(`${await(interaction.user.username)} hat die Gans gestohlen.
-							Der Fuchs hat schon zum \`${newcountervalue}\` mal die Gans gestohlen `)
+							Der Fuchs hat schon zum \`${newcountervalue}\`. Mal die Gans gestohlen.`)
 			.setThumbnail(command_fuchs_picture_link)
 
 			const voiceEmbed = new EmbedBuilder()
 			.setColor('#e30926')
 			.setTitle('Error')
-			.setDescription(`${await(interaction.user.username)} You must be in a Voicechannel`)
+			.setDescription(`${await(interaction.user.username)} You are required to be in a voice channel.`)
 			.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
 
 			const { client } = require('../index');
@@ -45,10 +45,10 @@ module.exports =
 					searchEngine: QueryType.AUTO
 				})
 				.catch(() => {
-					console.log('he');
+					console.log('Error while performing music search in fuchs.');
 				});
 				
-			if (!searchResult || !searchResult.tracks.length) return void logger.error('The fuchs link is invalid');
+			if (!searchResult || !searchResult.tracks.length) return void logger.error('The fuchs link is invalid!');
 	
 			const queue = await client.player.createQueue(guild, {
 				ytdlOptions: {
@@ -75,7 +75,7 @@ module.exports =
 			if(counted === true)interaction.reply({ embeds: [FuchsEmbed] });
 
 		} catch (error) {
-			logger.error('Error while performing play')
+			logger.error('Error while performing fuchs.')
 		}
 	},
 };

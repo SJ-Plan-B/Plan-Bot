@@ -16,19 +16,19 @@ module.exports =
 {
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('listrolereaction')
-		.setDescription('list role reaction')
+		.setDescription('List of roles in role reaction.')
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
 	async execute(interaction) // Funktion des Comands
 	{
 		try{
-          interaction.reply('Diese Roles sind in der role reaction \n'+'\`' + splitObjIntoArrayOfString(await(getrolelist())).join(`\n`) + '\`');
+          interaction.reply('Roles in role reaction: \n'+'\`' + splitObjIntoArrayOfString(await(getrolelist())).join(`\n`) + '\`');
 		}catch(error){
-			logger.error('Error while performing listrole reaction'); 
+			logger.error('Error while performing listrolereaction.'); 
 		}
 
     con.end(function(err) {
-    logger.http(`a Connection to database: ${role_reaction_DB_database} has been terminated`)})
+    logger.http(`A connection to database: ${role_reaction_DB_database} has been terminated!`)})
 	},
 };
 function getrolelist(){
@@ -43,7 +43,7 @@ function getrolelist(){
         }
       );
     } catch (error) {
-    logger.error(`Error while performing 'SELECT' in the database: ${role_reaction_DB_database}, in command listrolereaction`); 
+    logger.error(`Error while performing 'SELECT' in the database: ${role_reaction_DB_database}, in listrolereaction.`); 
     }	
 };
 

@@ -6,8 +6,8 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('play')
-		.setDescription('play a song')
-		.addStringOption(option => option.setName('song').setDescription('add a song youtube link').setRequired(true)),
+		.setDescription('Play a song!')
+		.addStringOption(option => option.setName('song').setDescription('Add a song link from youtube.').setRequired(true)),
 
 	async execute(interaction)
 	{
@@ -61,7 +61,7 @@ module.exports =
 				const playEmbed = new EmbedBuilder()
 				.setColor('#e30926')
 				.setTitle('Playing')
-				.setDescription(`the bot is now Playing ${searchResult.playlist ? 'the Playlist '+searchResult.tracks[0].playlist.title+' with '+searchResult.tracks[0].playlist.tracks.length+' songs' : 'the song '+searchResult.tracks[0].title}`)
+				.setDescription(`The bot is now playing ${searchResult.playlist ? 'the playlist '+searchResult.tracks[0].playlist.title+' with '+searchResult.tracks[0].playlist.tracks.length+' songs' : 'the song '+searchResult.tracks[0].title}`)
 				.setThumbnail('https://cdn-icons-png.flaticon.com/512/1384/1384060.png')
 		
 				await interaction.reply({ embeds: [playEmbed] });
@@ -70,7 +70,7 @@ module.exports =
 	
 
 		}catch(error){
-			logger.error('Error while performing play');
+			logger.error('Error while performing play.');
 			console.log(error)
 		}
 	}

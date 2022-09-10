@@ -14,7 +14,7 @@ module.exports =
 		try{
 			interaction.reply(`Your username: ${await(interaction.user.username)}\nYour ID: ${await(interaction.user.id)}`);
 		} catch (error) {
-			logger.error('Error while performing user-info')
+			logger.error('Error while performing user-info.')
 		}
 	},
 };

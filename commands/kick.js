@@ -7,7 +7,7 @@ module.exports =
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('kick')
 		.setDescription('Select a member and kick them (but not really).')
-		.addUserOption(option => option.setName('target').setDescription('The member to kick'))
+		.addUserOption(option => option.setName('target').setDescription('The member to kick.'))
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
 	async execute(interaction) // Funktion des Comands
@@ -17,7 +17,7 @@ module.exports =
 
 			interaction.reply({ content: `You wanted to kick: ${await(user.username)}`, ephemeral: true });
 		} catch (error) {
-			logger.error('Error while performing Kick');
+			logger.error('Error while performing Kick.');
 		}
 	},
 };

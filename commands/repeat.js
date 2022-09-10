@@ -6,13 +6,13 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('repeat')
-		.setDescription('repeat song')
+		.setDescription('Repeat a song')
 		.addIntegerOption(option =>
 			option.setName('mode')
-				.setDescription('set the Reapeat Mode')
+				.setDescription('Set the repeat mode:')
 				.setRequired(true)
 				.addChoices(
-					{ name: 'off', value: QueueRepeatMode.OFF },
+					{ name: 'Off', value: QueueRepeatMode.OFF },
 					{ name: 'Track', value: QueueRepeatMode.TRACK },
 					{ name: 'Queue', value: QueueRepeatMode.QUEUE },
 					{ name: 'Autoplay', value: QueueRepeatMode.AUTOPLAY },
@@ -29,11 +29,11 @@ module.exports =
 
 			const repeatEmbed = new EmbedBuilder()
 			.setColor('#e30926')
-			.setTitle('Repeat Mode')
+			.setTitle('Repeat mode')
 			.setDescription(whatmodeisit(loopMode))
 
 			const queue = client.player.getQueue(interaction.guild.id);
-			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being playing' });
+			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being playing!' });
 			const success = queue.setRepeatMode(loopMode);
 			if (success === true) {
 				return void interaction.reply({ embeds: [repeatEmbed] });
@@ -43,7 +43,7 @@ module.exports =
 			
 
 		}catch(error){
-				logger.error('Error while performing reapeat');
+				logger.error('Error while performing reapeat.');
 				console.log(error)
 		}
 	},
@@ -51,17 +51,16 @@ module.exports =
 
 function whatmodeisit(mode){
 	switch (mode) {
-		case 0: return 'the repeat was turnd off'
-			
-			
-		case 1: return 'repeat was put into Track mode'
+		case 0: return 'Repeat was turned off!'
+				
+		case 1: return 'Repeat was put into track mode!'
 		
-		case 2: return 'repeat was put into Queue mode'
+		case 2: return 'Repeat was put into queue mode!'
 	
-		case 3: return 'repeat was put into Autoplay mode'
+		case 3: return 'Repeat was put into autoplay mode!'
 
 	
-		default: logger.debug('Unknown Repead Mode')
+		default: logger.debug('Unknown repeat mode!')
 			break;
 	}
 

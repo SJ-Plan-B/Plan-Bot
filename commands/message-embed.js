@@ -6,7 +6,7 @@ module.exports =
 {
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('message-embed')
-		.setDescription('sendMessage')
+		.setDescription('Send Message.')
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
 	async execute(interaction) // Funktion des Comands
@@ -47,7 +47,7 @@ module.exports =
 		
 		interaction.reply({ embeds: [exampleEmbed] });
 		}catch(error){
-			logger.error('Error while performing message-embed')
+			logger.error('Error while performing message-embed.')
 		}
 	},
 };

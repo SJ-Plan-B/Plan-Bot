@@ -15,7 +15,7 @@ module.exports =
 {
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('removerolereaction')
-		.setDescription('removes role from role reaction')
+		.setDescription('Removes role from role reaction')
 		.addRoleOption(option => option.setName('role').setDescription('Select a role').setRequired(true))
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
@@ -34,21 +34,21 @@ module.exports =
 					sql = mysql.format(sql, Inserts);
 					con.query(sql, function (err, result) {
 						if (err) throw err;
-						logger.http(`Deleting role ${name} from database: ${role_reaction_DB_database}, table: roles`)
+						logger.http(`Deleting role ${name} from database: ${role_reaction_DB_database}, table: roles.`)
 						if (result.affectedRows > 0) {
-							interaction.reply(`Role \`${name}\` was removed from role reaction`);
+							interaction.reply(`Role \`${name}\` was removed from role reaction.`);
 						} else {
-							interaction.reply(`Role \`${name}\` was not in role reaction`);
+							interaction.reply(`Role \`${name}\` was not in role reaction.`);
 						}
 	
 					});
 
 				} catch (error) {
-				logger.error(`Error while performing the database: ${role_reaction_DB_database}, Conection in removerolereaction`); 
+				logger.error(`Error while performing the database: ${role_reaction_DB_database}, connection in removerolereaction.`); 
 				}
 				
 		}catch(error){
-			logger.error('Error while performing removerolereaction'); 
+			logger.error('Error while performing removerolereaction.'); 
 		}
 	},
 };

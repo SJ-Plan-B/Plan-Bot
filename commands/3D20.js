@@ -6,7 +6,7 @@ module.exports =
 	
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('3d20')
-		.setDescription('rolls 3D20 Dice'),
+		.setDescription('Rolls 3 20-sided dice.'),
 
 	async execute( interaction ) // Funktion des Comands
 	{
@@ -15,9 +15,9 @@ module.exports =
 			const rolle1 = getRandomArbitrary(1, 20)
 			const rolle2 = getRandomArbitrary(1, 20)
 			const rolle3 = getRandomArbitrary(1, 20)
-			interaction.reply({content: `you have rolled: ${rolle1} ${rolle2} ${rolle3}.`});
+			interaction.reply({content: `You have rolled: ${rolle1} ${rolle2} ${rolle3}.`});
 		}catch(error){
-			logger.error('Error while performing 3D20'); 
+			logger.error('Error while performing 3D20.'); 
 		} 
 	},
 };
@@ -30,5 +30,5 @@ module.exports =
 		return Math.floor(Math.random() * ( max - min )) + min;
 		}
 	}catch(error){
-		logger.error('Error while performing Random Calculation In 3D20');
+		logger.error('Error while performing random calculation in 3D20.');
 	}

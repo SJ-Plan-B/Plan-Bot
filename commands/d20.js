@@ -5,15 +5,15 @@ module.exports =
 {
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('d20')
-		.setDescription('Würfelt einen D20 Würfel'),
+		.setDescription('Rolls a 20-sided dice.'),
 
 	async execute(interaction) // Funktion des Comands
 	{
 		try{
 			const rolle = getRandomArbitrary(1, 20)
-			interaction.reply({ content: `you have rolled a: ${rolle}.`,});
+			interaction.reply({ content: `You have rolled a: ${rolle}.`,});
 		}catch(error){
-			logger.error('Error while performing D20');
+			logger.error('Error while performing D20.');
 		}
 	},
 };
@@ -26,5 +26,5 @@ try {
     return Math.floor(Math.random() * (max - min)) + min;
 	}
 	} catch (error) {
-		logger.error('Error while performing Random Calculation In D20');
+		logger.error('Error while performing random calculation in D20.');
 	}

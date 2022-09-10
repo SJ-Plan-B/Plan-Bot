@@ -5,7 +5,7 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('pause')
-		.setDescription('pause a song'),
+		.setDescription('Pause music.'),
         
 	async execute(interaction)
 	{
@@ -15,8 +15,8 @@ module.exports =
 
 			const pauseEmbed = new EmbedBuilder()
 			.setColor('#e30926')
-			.setTitle('Queue Paused')
-			.setDescription(`${await(interaction.user.username)} has Paused the queue`)
+			.setTitle('Music paused')
+			.setDescription(`${await(interaction.user.username)} has paused the music,`)
 
 	
 			const queue = client.player.getQueue(interaction.guild.id);
@@ -31,7 +31,7 @@ module.exports =
 			
 
 		}catch(error){
-			logger.error('Error while performing pause')
+			logger.error('Error while performing pause,')
 			console.log(error)
 		}
 	}

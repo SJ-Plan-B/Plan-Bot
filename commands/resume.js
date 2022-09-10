@@ -5,7 +5,7 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('resume')
-		.setDescription('resume song'),
+		.setDescription('Resume song.'),
 
 	async execute(interaction)
 	{
@@ -15,7 +15,7 @@ module.exports =
 			const resumEmbed = new EmbedBuilder()
 			.setColor('#e30926')
 			.setTitle('Resume')
-			.setDescription(`${await(interaction.user.username)} has Resumed the queue`)
+			.setDescription(`${await(interaction.user.username)} has resumed the queue.`)
 
 			const queue = client.player.getQueue(interaction.guild.id);
 			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
@@ -23,7 +23,7 @@ module.exports =
 			if (paused) return void interaction.reply({ embeds: [resumEmbed] });
 		
 		}catch(error){
-				logger.error('Error while performing resume');
+				logger.error('Error while performing resume.');
 		}
 	}
 };

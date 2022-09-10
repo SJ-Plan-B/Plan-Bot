@@ -10,7 +10,7 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('burger')
-		.setDescription('Hamburger Cheeseburger Bigmac Wopper'),
+		.setDescription('Hamburger, Cheeseburger, Big Mac, Whopper.'),
 
 	async execute(interaction)
 	{
@@ -29,13 +29,13 @@ module.exports =
 			.setColor('#e30926')
 			.setTitle('Burger')
 			.setDescription(`${await(interaction.user.username)} Träumt von Burgern.
-							So oft wurde schon von Burgern getäumt: \`${newcountervalue}\``)
+							So oft wurde schon von Burgern geträumt: \`${newcountervalue}\``)
 			.setThumbnail(command_burger_picture_link)
 
 			const voiceEmbed = new EmbedBuilder()
 			.setColor('#e30926')
 			.setTitle('Error')
-			.setDescription(`${await(interaction.user.username)} You must be in a Voicechannel`)
+			.setDescription(`${await(interaction.user.username)} You are required to be in a voice channel.`)
 			.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
 
 			const { client } = require('../index');
@@ -46,10 +46,10 @@ module.exports =
 					searchEngine: QueryType.AUTO
 				})
 				.catch(() => {
-					console.log('he');
+					console.log('Error while performing music search in burger');
 				});
 				
-			if (!searchResult || !searchResult.tracks.length) return void logger.error('The Coconut link is invalid');
+			if (!searchResult || !searchResult.tracks.length) return void logger.error('The burger link is invalid!');
 	
 			const queue = await client.player.createQueue(guild, {
 				ytdlOptions: {
@@ -76,7 +76,7 @@ module.exports =
 			if(counted === true)interaction.reply({ embeds: [BurgerEmbed] });
 				
 			} catch (error) {
-			logger.error('Error while performing play')
+			logger.error('Error while performing burger.')
 		}
 	},
 };

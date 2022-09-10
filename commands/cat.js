@@ -7,7 +7,7 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('cat')
-		.setDescription('Happy Cat Purring'),
+		.setDescription('Happy cat purring.'),
 
 	async execute(interaction)
 	{
@@ -18,14 +18,14 @@ module.exports =
 				const CatEmbed = new EmbedBuilder()
 				.setColor('#60a8a1')
 				.setTitle('Cat')
-				.setDescription(`${await(interaction.user.username)} is a Purring cat`)
+				.setDescription(`${await(interaction.user.username)} is a purring cat!`)
 				.setThumbnail(command_cat_picture_link)
 
 
 				const voiceEmbed = new EmbedBuilder()
 				.setColor('#e30926')
 				.setTitle('Error')
-				.setDescription(`${await(interaction.user.username)} You must be in a Voicechannel`)
+				.setDescription(`${await(interaction.user.username)} You are required to be in a voice channel.`)
 				.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
 
 				const { client } = require('../index');
@@ -39,7 +39,7 @@ module.exports =
 						console.log('he');
 					});
 					
-				if (!searchResult || !searchResult.tracks.length) return void logger.error('The Coconut link is invalid');
+				if (!searchResult || !searchResult.tracks.length) return void logger.error('The cat link is invalid!');
 
 				const queue = await client.player.createQueue(guild, {
 					ytdlOptions: {
@@ -64,7 +64,7 @@ module.exports =
 		
 
 		} catch (error) {
-			logger.error('Error while performing play')
+			logger.error('Error while performing cat.')
 		}
 	},
 };

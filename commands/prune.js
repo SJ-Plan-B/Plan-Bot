@@ -27,7 +27,7 @@ module.exports =
 		return false;
 
 		}catch(error){
-			logger.error('Error while performing prune');
+			logger.error('Error while performing prune.');
 		}
 	},
 };

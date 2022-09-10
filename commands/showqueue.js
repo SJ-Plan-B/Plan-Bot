@@ -5,8 +5,8 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('showqueue')
-		.setDescription('shows the queue')
-		.addIntegerOption(option => option.setName('page').setDescription('enter the page of queue that you want to view')),
+		.setDescription('Shows the music queue.')
+		.addIntegerOption(option => option.setName('page').setDescription('Enter the page of queue that you want to view.')),
 
 	async execute(interaction)
 	{
@@ -15,7 +15,7 @@ module.exports =
 			const { client } = require('../index');
         
 			const queue = client.player.getQueue(interaction.guild.id);
-			if (!queue || !queue.playing) return void interaction.reply({ content: '❌ | No music is being played!' });
+			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
 			if (!page) page = 1;
 			
 			const pageStart = 10 * (page - 1);
@@ -42,7 +42,7 @@ module.exports =
 			});
 
 		} catch (error) {
-			logger.error('Error while performing showqueue')
+			logger.error('Error while performing showqueue.')
 		}
 	}
 };

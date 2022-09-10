@@ -16,8 +16,8 @@ module.exports =
 {
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('addchanneldupe')
-		.setDescription('add channel to cascade')
-		.addStringOption(option => option.setName('channelid').setDescription('Enter a Voice Chanel id').setRequired(true))
+		.setDescription('Add channel to cascade.')
+		.addStringOption(option => option.setName('channelid').setDescription('Enter a voice channel ID.').setRequired(true))
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
 	async execute(interaction) // Funktion des Comands
@@ -36,20 +36,20 @@ module.exports =
 					sql = mysql.format(sql, Inserts);
 					con.query(sql, function (err, result) {
 						if (err) throw err;
-						logger.http(`Inserted ${name} into database: ${cascadingChannels_DB_database}, table: channels`)
-						interaction.reply(`Channel \`${name}\` was added to channel dupe`);
+						logger.http(`Inserted ${name} into database: ${cascadingChannels_DB_database}, table: channels.`)
+						interaction.reply(`Channel \`${name}\` was added to channel dupe.`);
 					});
 
 				} catch (error) {
-				logger.error(`Error while performing the database: ${cascadingChannels_DB_database}, Conection in addchanneldupe`); 
+				logger.error(`Error while performing the database: ${cascadingChannels_DB_database}, connection in addchanneldupe.`); 
 				}	
 
 			}else{
-				interaction.reply('The selectetd channel is no voice channel')
+				interaction.reply('The selectetd channel is no voice channel.')
 			}
 
 		}catch(error){
-			logger.error('Error while performing addchanneldupe'); 
+			logger.error('Error while performing addchanneldupe.'); 
 		}
 	},
 };

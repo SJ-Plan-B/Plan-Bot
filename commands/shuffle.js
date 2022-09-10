@@ -5,7 +5,7 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('shuffle')
-		.setDescription('shuffle song'),
+		.setDescription('Shuffle songs.'),
 
 	async execute(interaction)
 	{
@@ -15,7 +15,7 @@ module.exports =
 			const shuffleEmbed = new EmbedBuilder()
 			.setColor('#e30926')
 			.setTitle('Shuffle')
-			.setDescription(`${await(interaction.user.username)} has shuffled the queue`)
+			.setDescription(`${await(interaction.user.username)} has shuffled the queue.`)
 
 			const queue = client.player.getQueue(interaction.guild.id);
             if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
@@ -25,7 +25,7 @@ module.exports =
             return void interaction.reply({ embeds: [shuffleEmbed] });
 		
 		}catch(error){
-				logger.error('Error while performing shuffle');
+				logger.error('Error while performing shuffle.');
 		}
 	}
 };

@@ -5,7 +5,7 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('stop')
-		.setDescription('stop a song'),
+		.setDescription('Stop a song.'),
 		
 	async execute(interaction)
 	{
@@ -16,7 +16,7 @@ module.exports =
 			const stopEmbed = new EmbedBuilder()
 			.setColor('#e30926')
 			.setTitle('Stop')
-			.setDescription(`${await(interaction.user.username)} has Stopt the queue`)  
+			.setDescription(`${await(interaction.user.username)} has stopped the queue!`)  
 
 			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
 			queue.destroy();

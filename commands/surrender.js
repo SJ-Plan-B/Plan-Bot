@@ -10,7 +10,7 @@ module.exports =
 { 
 	data: new SlashCommandBuilder()
 		.setName('surrender')
-		.setDescription('surrenders (musik)'),
+		.setDescription('Surrender (musik)'),
 
 	async execute(interaction)
 	{
@@ -27,14 +27,14 @@ module.exports =
 			const surrenderEmbed = new EmbedBuilder()
 			.setColor('#e30926')
 			.setTitle('Surrender')
-			.setDescription(`${await(interaction.user.username)} hat surrenderd.
-							es wurde bereits ${newcountervalue} Aufgegeben.`)
+			.setDescription(`${await(interaction.user.username)} hat aufgegeben.
+							Es wurde bereits ${newcountervalue} aufgegeben.`)
 			.setThumbnail(command_surrender_picture_link)
 
 			const voiceEmbed = new EmbedBuilder()
 			.setColor('#e30926')
 			.setTitle('Error')
-			.setDescription(`${await(interaction.user.username)} You must be in a Voicechannel`)
+			.setDescription(`${await(interaction.user.username)} You are required to be in a voice channel.`)
 			.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
 
 			const { client } = require('../index');
@@ -45,10 +45,10 @@ module.exports =
 					searchEngine: QueryType.AUTO
 				})
 				.catch(() => {
-					console.log('he');
+					console.log('Error while performing music search in surrender.');
 				});
 				
-			if (!searchResult || !searchResult.tracks.length) return void logger.error('The Coconut link is invalid');
+			if (!searchResult || !searchResult.tracks.length) return void logger.error('The surrender link is invalid.');
 	
 			const queue = await client.player.createQueue(guild, {
 				ytdlOptions: {
@@ -75,7 +75,7 @@ module.exports =
 			if(counted === true)interaction.reply({ embeds: [surrenderEmbed] });
 					
 		} catch (error) {
-			logger.error('Error while performing surrender')
+			logger.error('Error while performing surrender.')
 		}
 	},
 };
