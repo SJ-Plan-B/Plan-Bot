@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const { PermissionFlagsBits } = require('discord-api-types/v10');
 const logger = require('../util/logger').log
 
@@ -12,9 +12,9 @@ module.exports =
 	async execute(interaction) // Funktion des Comands
 	{
 		try{
-			return interaction.reply(`Your username: ${await(interaction.user.username)}\nYour ID: ${await(interaction.user.id)}`);
+			interaction.reply(`Your username: ${await(interaction.user.username)}\nYour ID: ${await(interaction.user.id)}`);
 		} catch (error) {
-			logger.error('Error while performing user-info')
+			logger.error('Error while performing user-info.')
 		}
 	},
 };

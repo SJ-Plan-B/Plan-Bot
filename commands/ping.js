@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const logger = require('../util/logger').log
 
 module.exports = 
@@ -9,7 +9,7 @@ module.exports =
 	async execute(interaction) 
 	{
 		try{
-			return interaction.reply(`${interaction.user.username} said Ping!\nPong!`);
+			 interaction.reply(`${interaction.user.username} said Ping!\nPong!`);
 		}catch(error){
 			logger.error('Error while performing ping')
 		}

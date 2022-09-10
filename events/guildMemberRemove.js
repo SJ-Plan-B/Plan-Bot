@@ -1,4 +1,4 @@
-const {Message, MessageEmbed} = require('discord.js');
+const { EmbedBuilder, AuditLogEvent  } = require('discord.js');
 const { sendMessage } = require('../index.js')
 const logger = require('../util/logger').log
 const { message_leave_1, message_leave_2, message_leave_header, message_leave_chanel, message_leave_embed_collor } =require('../data/event.json')
@@ -10,7 +10,7 @@ module.exports = {
 
 					const auditfetch = await member.guild.fetchAuditLogs({
 						limit: 1,
-						type: 'MEMBER_KICK',
+						type: AuditLogEvent.MemberKick,
 					});
 					let aditinfo = auditfetch.entries.first();
 					let { executor, target } = aditinfo;
@@ -25,7 +25,7 @@ module.exports = {
 							let botname = member.client.user.username;
 							let boticon = member.client.user.displayAvatarURL();
 						
-							const Embed = new MessageEmbed()
+							const Embed = new EmbedBuilder()
 							.setColor(guildMemberRemoveLoggingCollore)
 							.setTitle('A user was kicked from the server')
 							.setAuthor({ name: botname,
@@ -53,7 +53,7 @@ module.exports = {
 
 				try{
 							var nickname = getname(member)
-							const newMemberEmbed = new MessageEmbed()
+							const newMemberEmbed = new EmbedBuilder()
 							.setColor(message_leave_embed_collor)
 							.setTitle(message_leave_header)
 							.setAuthor({

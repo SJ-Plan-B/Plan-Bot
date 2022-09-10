@@ -1,33 +1,48 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const logger = require('../util/logger').log
-const music = require('@koenie06/discord.js-music');
 
 module.exports = 
 {
 	data: new SlashCommandBuilder()
 		.setName('showqueue')
-		.setDescription('shows the queue'),
+		.setDescription('Shows the music queue.')
+		.addIntegerOption(option => option.setName('page').setDescription('Enter the page of queue that you want to view.')),
 
 	async execute(interaction)
 	{
 		try {
-			try{
-				var queue = []
-				var result = []
-					queue = await(music.getQueue({ interaction: interaction }));
-					for (let index = 0; index < Object.keys(queue).length; index++) {
-						const myJSON = JSON.stringify(queue[index]);
-						const myArray = myJSON.split(",")
-						const slicerdicer = myArray[0];
-						result[index] = slicerdicer.slice(17);
-						logger.debug(result)
+			let page = interaction.options.getInteger('page');
+			const { client } = require('../index');
+        
+			const queue = client.player.getQueue(interaction.guild.id);
+			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
+			if (!page) page = 1;
+			
+			const pageStart = 10 * (page - 1);
+			const pageEnd = pageStart + 10;
+
+			const currentTrack = queue.current;
+			const tracks = queue.tracks.slice(pageStart, pageEnd).map((m, i) => {
+				return `${i + pageStart + 1}. **${m.title}** ([link](${m.url}))`;
+			});
+	
+			return void interaction.reply({
+				embeds: [
+					{
+						title: 'Server Queue',
+						description: `${tracks.join('\n')}${
+							queue.tracks.length > pageEnd
+								? `\n...${queue.tracks.length - pageEnd} more track(s)`
+								: ''
+						}`,
+						color: 0xff0000,
+						fields: [{ name: 'Now Playing', value: `🎶 | **${currentTrack.title}** ([link](${currentTrack.url}))` }]
 					}
-					return interaction.reply('\`' + result.join(`\n`) + '\`');
-			}catch(error){
-				interaction.reply('no song in queue')
-			}
+				]
+			});
+
 		} catch (error) {
-			logger.error('Error while performing showqueue')
+			logger.error('Error while performing showqueue.')
 		}
 	}
 };

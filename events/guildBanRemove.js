@@ -1,6 +1,6 @@
 const logger = require('../util/logger').log
-const { MessageEmbed } = require('discord.js');
-const { sendMessage } = require('../index.js')
+const { EmbedBuilder, AuditLogEvent  } = require('discord.js');
+const { sendMessage } = require('../index.js');
 const {logchannel, guildBanRemoveLogging, guildBanRemoveLoggingCollore, ban_icon} = require('../data/logger.json')
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
 
 					let auditfetch = await guild.guild.fetchAuditLogs({
 						limit: 1,											//used to lock ad the audit log
-						type: 'MEMBER_BAN_REMOVE',
+						type: AuditLogEvent.MemberBanRemove,
 					});
 
 					let aditinfo = auditfetch.entries.first();
@@ -23,7 +23,7 @@ module.exports = {
 					let botname = guild.client.user.username;
 					let boticon = guild.client.user.displayAvatarURL();
 				
-					const exampleEmbed = new MessageEmbed()
+					const exampleEmbed = new EmbedBuilder()
 					.setColor(guildBanRemoveLoggingCollore)
 					.setTitle('A user was unbanned')
 					.setAuthor({ name: botname,

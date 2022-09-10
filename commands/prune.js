@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const { PermissionFlagsBits } = require('discord-api-types/v10');
 const logger = require('../util/logger').log
 
@@ -27,7 +27,7 @@ module.exports =
 		return false;
 
 		}catch(error){
-			logger.error('Error while performing prune');
+			logger.error('Error while performing prune.');
 		}
 	},
 };

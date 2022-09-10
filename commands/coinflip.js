@@ -1,11 +1,11 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const logger = require('../util/logger').log;
 
 module.exports = 
 {
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('coinflip')
-		.setDescription('Flip a Coin'),
+		.setDescription('Flip a coin!'),
 
 	async execute(interaction) // Funktion des Comands
 	{
@@ -18,12 +18,12 @@ module.exports =
 					break;
 				case 1: ausgabe = "Kopf"
 					break;
-				default: console.info("Fehler beim generiren der Zufals zahl")
+				default: console.info("Fehler beim Generieren der Zufallszahl.")
 			}
 				
-			  return interaction.reply({ content: `Deine Münze ist auf ${ausgabe} gelandet!`,});
+			  interaction.reply({ content: `Deine Münze ist auf ${ausgabe} gelandet!`,});
 		} catch (error) {
-			logger.warn('Error while performing coinflip'); 
+			logger.warn('Error while performing coinflip.'); 
 			logger.error(error)
 		}
 	},

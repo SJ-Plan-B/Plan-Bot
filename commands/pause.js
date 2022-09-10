@@ -1,38 +1,38 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const logger = require('../util/logger').log
-const music = require('@koenie06/discord.js-music');
 
 module.exports = 
 {
 	data: new SlashCommandBuilder()
 		.setName('pause')
-		.setDescription('pause a song'),
+		.setDescription('Pause music.'),
         
 	async execute(interaction)
 	{
 		try{
-			var queue = [] ;
 
-			try{
-				queue = await(music.getQueue({interaction: interaction})) ;	
-			}catch(error){
-				logger.error(`while get music.getQueue in RemoveFromQueue in skip`)
-			}
+			const { client } = require('../index');
 
-			var songs = Object.keys(queue).length ;
+			const pauseEmbed = new EmbedBuilder()
+			.setColor('#e30926')
+			.setTitle('Music paused')
+			.setDescription(`${await(interaction.user.username)} has paused the music,`)
+
 	
-			if(songs >= 1){
-				music.pause({interaction: interaction});
-				return interaction.reply('song paused');
-			}else{
-				if(songs < 1){ 
-					interaction.reply('not enough songs in queue');
-				}else{
-					logger.info(`${await(interaction.user.username)} destroyed the matrix while performing pause`)	
-				}
+			const queue = client.player.getQueue(interaction.guild.id);
+			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
+			const paused = queue.setPaused(true);
+			
+			if (paused === true) {
+				return void interaction.reply({ embeds: [pauseEmbed] });
+			} else {
+				return void interaction.reply({ content: 'Something went wrong!' });
 			}
+			
+
 		}catch(error){
-			logger.error('Error while performing pause')
+			logger.error('Error while performing pause,')
+			console.log(error)
 		}
 	}
 }

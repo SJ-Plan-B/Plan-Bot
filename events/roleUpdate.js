@@ -1,5 +1,5 @@
 const logger = require('../util/logger').log
-const { MessageEmbed, Permissions } = require('discord.js');
+const { EmbedBuilder, AuditLogEvent  } = require('discord.js');
 const { sendMessage } = require('../index.js')
 const {logchannel, roleUpdateLogging, roleUpdateLoggingCollore} = require('../data/logger.json')
 
@@ -12,7 +12,7 @@ module.exports = {
 					
                     let auditfetch = await oldRole.guild.fetchAuditLogs({
 						limit: 1,											//used to lock ad the audit log
-						type: 'ROLE_UPDATE',
+						type: AuditLogEvent.RoleUpdate,
 					});
              
 					let aditinfo = auditfetch.entries.first();
@@ -45,7 +45,7 @@ module.exports = {
 					let botname = oldRole.client.user.username;
 					let boticon = oldRole.client.user.displayAvatarURL();
 				
-					const Embed = new MessageEmbed()
+					const Embed = new EmbedBuilder()
 					.setColor(roleUpdateLoggingCollore)
 					.setTitle('A role has bin Updated')
 					.setAuthor({ name: botname,

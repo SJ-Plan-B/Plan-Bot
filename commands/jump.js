@@ -1,40 +1,35 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const music = require('@koenie06/discord.js-music');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const logger = require('../util/logger').log;
 
 module.exports = 
 {
 	data: new SlashCommandBuilder()
 		.setName('jump')
-		.setDescription('jump multiple songs')
-        .addIntegerOption(option => option.setName('number').setDescription('number of songs')),
+		.setDescription('Jump multiple songs.')
+        .addIntegerOption(option => option.setName('number').setDescription('Amount of songs to be skipped (will be at least 2 songs).')),
         
 	async execute(interaction)
 	{
 		try{
-			const number = interaction.options.getInteger('number');
-			var queue = [] ;
+			let tracks = interaction.options.getInteger('number');
 
-			try{
-				queue = await(music.getQueue({ interaction: interaction })) ;	
-			}catch(error){
-				logger.error('Error while get musich.getQueue in jump');
-			}
+			const jumpEmbed = new EmbedBuilder()
+			.setColor('#e30926')
+			.setTitle('Queue Jumped')
+			.setDescription(`${await(interaction.user.username)} has skipped ${tracks} songs`)
 
-			var songs = Object.keys(queue).length;
+			const { client } = require('../index');
 	
-			if(number < songs && songs > 1){
-				music.jump({interaction: interaction,number: number});
-				interaction.reply('jump ' +number+ ' songs');
-			}else{
-				if(songs < 2){
-					interaction.reply( 'not enough songs in queue' );
-				}else{
-					interaction.reply( 'max jumps: ' + (songs-1) );	
-				}
-				
-			}
-		
+			if (!tracks || tracks<2) tracks = 2;
+			
+			const queue = client.player.getQueue(interaction.guild.id);
+			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
+			
+			const trackIndex = tracks - 1;
+			const trackName = queue.tracks[trackIndex].title;
+			queue.jump(trackIndex);
+	
+			interaction.reply({ embeds: [jumpEmbed] });
 		} catch (error) {
 			logger.error('Error while performing jump');
 		}

@@ -1,38 +1,33 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder,EmbedBuilder } = require('discord.js');
 const logger = require('../util/logger').log
-const music = require('@koenie06/discord.js-music');
 
 module.exports = 
 {
 	data: new SlashCommandBuilder()
 		.setName('skip')
-		.setDescription('skip a song'),
+		.setDescription('Skip a song.'),
 		
 	async execute(interaction)
 	{
 		try{
-			var queue = [] ;
-			
-			try{
-				queue = await(music.getQueue({ interaction: interaction })) ;	
-			}catch (error){
-				logger.error('error while get music.getQueue in RemoveFromQueue in skip')
-			}
+			const { client } = require('../index');
 
-			var songs = Object.keys(queue).length ;
-	
-			if(songs >= 1){
-				music.skip({ interaction: interaction });
-				return interaction.reply('music skipped');
-			}else{
-				if(songs < 1){ 
-					interaction.reply('not enough songs in queue');
-				}else{
-					logger.info( `${await(interaction.user.username)} destroyed the matrix while performing skip` )	
-				}
-			}
+  
+
+			const queue = client.player.getQueue(interaction.guild.id);
+			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
+			const currentTrack = queue.current;
+			const success = queue.skip();
+
+			const skipEmbed = new EmbedBuilder()
+			.setColor('#e30926')
+			.setTitle('Skip')
+			.setDescription(`${await(interaction.user.username)} has skip the song:\n${currentTrack}`)      
+
+			if(success)return void interaction.reply({ embeds: [skipEmbed],});
+
 		}catch(error){
-				logger.error('while performing skip'); 
+				logger.error('while performing skip.'); 
 		}
 	},
 };

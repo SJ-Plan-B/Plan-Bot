@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders'); 
-const { MessageEmbed } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js'); 
 const fs = require('fs');
 const path = require('path');
 const cfs = require('../util/customfunctions.js')
@@ -11,8 +10,8 @@ module.exports =
 	
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('sprichdeutsch')
-		.setDescription('sag jemandem das er Deutsch Sprechen soll')
-        .addUserOption(option => option.setName('target').setDescription('der, der nicht deutsch spricht').setRequired(true)),
+		.setDescription('Sagt jemandem, dass er deutsch sprechen soll!')
+        .addUserOption(option => option.setName('target').setDescription('Der, der nicht deutsch spricht.').setRequired(true)),
 
 	async execute( interaction ) // Funktion des Comands
 	{
@@ -27,9 +26,9 @@ module.exports =
 
 		try{
      
-            const Embed = new MessageEmbed()
+            const Embed = new EmbedBuilder()
             .setColor('#e30926')
-            .setTitle('Sprich Deutsch du Huren Sohn')
+            .setTitle('Sprich deutsch du Hurensohn!')
             .setAuthor({
                     name: user.username,
                     iconURL: user.displayAvatarURL()
@@ -46,7 +45,7 @@ module.exports =
 
 
 		}catch(error){
-			logger.error('Error while performing sprichdeutsch'); 
+			logger.error('Error while performing sprichdeutsch.'); 
             console.log(error)
 		} 
 	},

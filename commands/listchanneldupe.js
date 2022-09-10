@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const { PermissionFlagsBits } = require('discord-api-types/v10');
 const logger = require('../util/logger').log;
 const { cascadingChannels_DB_host, cascadingChannels_DB_port, cascadingChannels_DB_user, cascadingChannels_DB_password, cascadingChannels_DB_database } =require('../data/db.json')
@@ -16,17 +16,21 @@ module.exports =
 {
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('listchanneldupe')
-		.setDescription('list channel dupe')
+		.setDescription('List of channels to be duplicated.')
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
 	async execute(interaction) // Funktion des Comands
 	{
 		try{
-           return interaction.reply('Diese Channel werden dupliziert \n'+'\`' + splitObjIntoArrayOfString(await(getchannellist())).join(`\n`) + '\`');
+          interaction.reply('Channels to be duplicated: \n'+'\`' + splitObjIntoArrayOfString(await(getchannellist())).join(`\n`) + '\`');
 		}catch(error){
-			logger.error('Error while performing listchanneldupe'); 
+			logger.error('Error while performing listchanneldupe.'); 
 		}
-	},
+
+    con.end(function(err) {
+		logger.http(`A connection to database: ${cascadingChannels_DB_database} has been terminated.`)})
+  
+  },
 };
 function getchannellist(){
     try {
@@ -40,7 +44,7 @@ function getchannellist(){
         }
       );
     } catch (error) {
-    logger.error(`Error while performing 'SELECT' in the database: ${cascadingChannels_DB_database}, in command listchanneldupe`); 
+    logger.error(`Error while performing 'SELECT' in the database: ${cascadingChannels_DB_database}, in listchanneldupe.`); 
     }	
 };
 

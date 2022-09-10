@@ -1,6 +1,5 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const music = require('@koenie06/discord.js-music');
-const { MessageEmbed } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { QueryType } = require('discord-player');
 const fs = require('fs');
 const path = require('path');
 const cfs = require('../util/customfunctions.js')
@@ -11,7 +10,7 @@ module.exports =
 {
 	data: new SlashCommandBuilder()
 		.setName('coconut')
-		.setDescription('Coconut Nut is a Giant Nut'),
+		.setDescription('Coconut is a giant nut!'),
 
 	async execute(interaction)
 	{
@@ -25,35 +24,58 @@ module.exports =
 			let jsonvariable = 'coconutcounter'
 			let newcountervalue = coconutcounter+1
 
-			const CoconutEmbed = new MessageEmbed()
+			const CoconutEmbed = new EmbedBuilder()
 			.setColor('#e30926')
 			.setTitle('Coconut')
-			.setDescription(`${await(interaction.user.username)} ist von ner Kokosnuss erschlagen worden.
-							\`${newcountervalue}\` leute sind schon von Kokosnüssen erschlagen.`)
+			.setDescription(`${await(interaction.user.username)} ist von 'ner Kokosnuss erschlagen worden.
+							\`${newcountervalue}\` Personen wurden schon von Kokosnüssen erschlagen.`)
 			.setThumbnail(command_coconut_picture_link)
 
-			switch(true){
-				case(channel === null):
-					interaction.reply('You must be in a Voicechannel');
-					break;
-	
-				case(song === null):
-					interaction.reply('no song in Queue');
-					break;
-	
-				default:
-					try{
-						let output = Number((fuchscounter));
-						let counted = cfs.writetojsonvariabl(jsonvariable, output, jsonfile, jsonsubfolder);
+			const voiceEmbed = new EmbedBuilder()
+			.setColor('#e30926')
+			.setTitle('Error')
+			.setDescription(`${await(interaction.user.username)} You are required to be in a voice channel.`)
+			.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
 
-						music.play({ interaction: interaction, channel: channel, song: song});
-						if(counted === true)interaction.reply({ embeds: [CoconutEmbed] })
-					}catch(error){
-						logger.info('Error while performing play')
-						interaction.reply('Invalide Song Link');
-					}}
+			const { client } = require('../index');
+			const guild = interaction.guild
+			const searchResult = await client.player
+				.search(song, {
+					requestedBy: interaction.user.username,
+					searchEngine: QueryType.AUTO
+				})
+				.catch(() => {
+					console.log('he');
+				});
+				
+			if (!searchResult || !searchResult.tracks.length) return void logger.error('The coconut link is invalid.');
+	
+			const queue = await client.player.createQueue(guild, {
+				ytdlOptions: {
+					filter: 'audioonly',
+					highWaterMark: 1 << 30,
+					dlChunkSize: 0,
+				},
+				metadata: channel
+			});
+
+			try {
+				if (!queue.connection) await queue.connect(channel);
+			} catch {
+				void client.player.deleteQueue(guild.id);
+				return void interaction.reply({ embeds: [voiceEmbed] });
+			}
+
+			searchResult.playlist ? queue.addTracks(searchResult.tracks) : queue.addTrack(searchResult.tracks[0]);
+			if (!queue.playing) await queue.play();
+
+			let output = Number((newcountervalue))
+			let counted = cfs.writetojsonvariabl(jsonvariable, output, jsonfile, jsonsubfolder)
+
+			if(counted === true)interaction.reply({ embeds: [CoconutEmbed] });
+
 		} catch (error) {
-			logger.error('Error while performing play')
+			logger.error('Error while performing coconut.')
 		}
 	},
 };

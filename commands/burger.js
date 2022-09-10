@@ -1,35 +1,36 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { QueryType } = require('discord-player');
+const logger = require('../util/logger').log;
+const { command_burger_song_link, command_burger_picture_link } =require('../data/comand.json')
 const fs = require('fs');
 const path = require('path');
 const cfs = require('../util/customfunctions.js')
-const logger = require('../util/logger').log;
-const { command_fuchs_song_link, command_fuchs_picture_link } =require('../data/comand.json')
 
 module.exports = 
 {
 	data: new SlashCommandBuilder()
-		.setName('fuchs')
-		.setDescription('HBz x IIVEN x Bekkaa - Fuchs du hast die Gans gestohlen.'),
+		.setName('burger')
+		.setDescription('Hamburger, Cheeseburger, Big Mac, Whopper.'),
 
 	async execute(interaction)
 	{
 		try {
 			var datei = path.join(__dirname, '..', 'data', 'counter.json')
-			var { fuchscounter } = JSON.parse(fs.readFileSync(datei, 'utf8'))
+			var { burgercounter } = JSON.parse(fs.readFileSync(datei, 'utf8'))
 			let channel = interaction.member.voice.channel;
-			let song = command_fuchs_song_link
+			let song = command_burger_song_link
 			let jsonfile = 'counter.json'
 			let jsonsubfolder = 'data'
-			let jsonvariable = 'fuchscounter'
-			let newcountervalue = fuchscounter+1
+			let jsonvariable = 'burgercounter'
+			let newcountervalue = burgercounter+1
+		
 
-			const FuchsEmbed = new EmbedBuilder()
+			const BurgerEmbed = new EmbedBuilder()
 			.setColor('#e30926')
-			.setTitle('Fuchs')
-			.setDescription(`${await(interaction.user.username)} hat die Gans gestohlen.
-							Der Fuchs hat schon zum \`${newcountervalue}\`. Mal die Gans gestohlen.`)
-			.setThumbnail(command_fuchs_picture_link)
+			.setTitle('Burger')
+			.setDescription(`${await(interaction.user.username)} Träumt von Burgern.
+							So oft wurde schon von Burgern geträumt: \`${newcountervalue}\``)
+			.setThumbnail(command_burger_picture_link)
 
 			const voiceEmbed = new EmbedBuilder()
 			.setColor('#e30926')
@@ -45,10 +46,10 @@ module.exports =
 					searchEngine: QueryType.AUTO
 				})
 				.catch(() => {
-					console.log('Error while performing music search in fuchs.');
+					console.log('Error while performing music search in burger');
 				});
 				
-			if (!searchResult || !searchResult.tracks.length) return void logger.error('The fuchs link is invalid!');
+			if (!searchResult || !searchResult.tracks.length) return void logger.error('The burger link is invalid!');
 	
 			const queue = await client.player.createQueue(guild, {
 				ytdlOptions: {
@@ -72,10 +73,10 @@ module.exports =
 			let output = Number((newcountervalue))
 			let counted = cfs.writetojsonvariabl(jsonvariable, output, jsonfile, jsonsubfolder)
 
-			if(counted === true)interaction.reply({ embeds: [FuchsEmbed] });
-
-		} catch (error) {
-			logger.error('Error while performing fuchs.')
+			if(counted === true)interaction.reply({ embeds: [BurgerEmbed] });
+				
+			} catch (error) {
+			logger.error('Error while performing burger.')
 		}
 	},
 };

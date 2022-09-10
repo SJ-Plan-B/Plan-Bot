@@ -4,6 +4,7 @@ const { cascadingChannels_DB } = require('./util/cascadingChannels_DB.js');
 const { role_reaction_DB } = require('./util/role_reaction_DB.js');
 const logger = require('./util/logger').log;
 
+
 // Send Comands to Discord API
 logger.info('Deploying Bot');
 deploybot()

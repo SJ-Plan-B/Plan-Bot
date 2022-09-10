@@ -1,4 +1,4 @@
-const {Message, MessageEmbed} = require('discord.js');
+const { EmbedBuilder, AuditLogEvent  } = require('discord.js');
 const logger = require('../util/logger').log
 const { message_welcome ,message_welcome_header, message_welcome_chanel, message_welcome_embed_collor } =require('../data/event.json')
 
@@ -8,7 +8,7 @@ module.exports = {
 	async execute(member) {
 		var nickname = getname(member)
 		try {
-			const newMemberEmbed = new MessageEmbed()
+			const newMemberEmbed = new EmbedBuilder()
 			.setColor(message_welcome_embed_collor)
 			.setTitle(message_welcome_header)
 			.setAuthor({

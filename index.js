@@ -2,29 +2,36 @@ const fs = require('node:fs');
 const path = require('node:path');
 const {Worker} = require("worker_threads");
 const logger = require('./util/logger').log;
-const {Client, Collection, Intents, Message, Channel, MessageEmbed, GuildMember, } = require('discord.js');
-const {token, guildId} = require('./data/config.json');
+const {Client, GatewayIntentBits, Partials, Collection, InteractionType} = require('discord.js');
+const {token} = require('./data/config.json');
+const { Player } = require('discord-player');
+const { registerPlayerEvents } = require('./events');
 
 
 const client = new Client(
 	{intents: [
-				Intents.FLAGS.GUILDS,
-				Intents.FLAGS.GUILD_VOICE_STATES,
-				Intents.FLAGS.GUILD_MESSAGES,
-				Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-				Intents.FLAGS.DIRECT_MESSAGES,
-				Intents.FLAGS.GUILD_MEMBERS,
-				Intents.FLAGS.GUILD_BANS,
+				GatewayIntentBits.Guilds,
+				GatewayIntentBits.GuildVoiceStates,
+				GatewayIntentBits.GuildMessages,
+				GatewayIntentBits.GuildMessageReactions,
+				GatewayIntentBits.DirectMessages,
+				GatewayIntentBits.GuildMembers,
+				GatewayIntentBits.GuildBans,
 			  ],
 	partials: [
-				'MESSAGE',
-				'CHANNEL',
-				'REACTION',
-				'GUILD_MEMBER',
-				'User',
+				Partials.Message,
+				Partials.Channel,
+				Partials.Reaction,
+				Partials.GuildMember,
+				Partials.User,
 			]});
 
+	client.player = new Player(client);
+	registerPlayerEvents(client.player);
+
 module.exports = {
+
+	client,
 	
 	async startbot(){
 
@@ -40,10 +47,7 @@ module.exports = {
 			const event = require(filePath);
 			if (event.once) {
 				client.once(event.name, (...args) => event.execute(...args));	
-			}/*else if(event.name === 'JoinLeave'){
-				let returnvalue = await event.execute();
-				console.log('return '+returnvalue);
-			}*/else{
+			}else{
 				client.on(event.name, (...args) => event.execute(...args));
 			}
 		}
@@ -65,7 +69,7 @@ module.exports = {
 
 
 		client.on('interactionCreate', async interaction => {
-			if (!interaction.isCommand()) return;
+			if (!interaction.type === InteractionType.ApplicationCommand) return;
 			const command = client.commands.get(interaction.commandName);
 			const channelID = interaction.channel.id;
 			const channel = interaction.channel;
@@ -96,7 +100,7 @@ module.exports = {
 				}
 
 			} catch (error) {
-				logger.error(error);
+				console.error(error);
 				await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 			}
 		});

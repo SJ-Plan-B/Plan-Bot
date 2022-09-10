@@ -1,58 +1,77 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const logger = require('../util/logger').log
-const music = require('@koenie06/discord.js-music');
+const { QueryType } = require('discord-player');
 
 module.exports = 
 {
 	data: new SlashCommandBuilder()
 		.setName('play')
-		.setDescription('play a song')
-		.addStringOption(option => option.setName('song').setDescription('add a song youtube link').setRequired(true)),
+		.setDescription('Play a song!')
+		.addStringOption(option => option.setName('song').setDescription('Add a song link from youtube.').setRequired(true)),
 
 	async execute(interaction)
 	{
+
 		try{
+			const { client } = require('../index');
 			const channel = interaction.member.voice.channel;
 			const song = interaction.options.getString('song');
 
-			const playEmbed = new MessageEmbed()
-				.setColor('#e30926')
-				.setTitle('Playing')
-				.setDescription(`${await(interaction.user.username)} plays \n ${song} `)
-				.setThumbnail('https://cdn-icons-png.flaticon.com/512/1384/1384060.png')
-
-				const nosongEmbed = new MessageEmbed()
+				const nosongEmbed = new EmbedBuilder()
 				.setColor('#e30926')
 				.setTitle('Error')
-				.setDescription(`${await(interaction.user.username)} no song in Queue`)
+				.setDescription(`${await(interaction.user.username)} no song in link`)
 				.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
 
-				const voiceEmbed = new MessageEmbed()
+				const voiceEmbed = new EmbedBuilder()
 				.setColor('#e30926')
 				.setTitle('Error')
 				.setDescription(`${await(interaction.user.username)} You must be in a Voicechannel`)
 				.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
 
+				const guild = interaction.guild
+				const searchResult = await client.player
+					.search(song, {
+						requestedBy: interaction.user.username,
+						searchEngine: QueryType.AUTO
+					})
+					.catch(() => {
+						console.log('he');
+					});
+					
+				if (!searchResult || !searchResult.tracks.length) return void interaction.reply({ embeds: [nosongEmbed] });
+		
+				const queue = await client.player.createQueue(guild, {
+					ytdlOptions: {
+						filter: 'audioonly',
+						highWaterMark: 1 << 30,
+						dlChunkSize: 0,
+					},
+					metadata: channel
+				});
 
-			switch(true){
-				case(channel === null):
-					interaction.reply({ embeds: [voiceEmbed] });
-					break;
+				try {
+					if (!queue.connection) await queue.connect(channel);
+				} catch {
+					void client.player.deleteQueue(guild.id);
+					return void interaction.reply({ embeds: [voiceEmbed] });
+				}
+
+				
+				const playEmbed = new EmbedBuilder()
+				.setColor('#e30926')
+				.setTitle('Playing')
+				.setDescription(`The bot is now playing ${searchResult.playlist ? 'the playlist '+searchResult.tracks[0].playlist.title+' with '+searchResult.tracks[0].playlist.tracks.length+' songs' : 'the song '+searchResult.tracks[0].title}`)
+				.setThumbnail('https://cdn-icons-png.flaticon.com/512/1384/1384060.png')
+		
+				await interaction.reply({ embeds: [playEmbed] });
+				searchResult.playlist ? queue.addTracks(searchResult.tracks) : queue.addTrack(searchResult.tracks[0]);
+				if (!queue.playing) await queue.play();
 	
-				case(song === null):
-					interaction.reply({ embeds: [nosongEmbed] });
-					break;
-	
-				default:
-					try{
-						music.play({ interaction: interaction, channel: channel, song: song});
-						return interaction.reply({ embeds: [playEmbed] });
-					}catch(error){
-						interaction.reply('Invalide Song Link');
-					}}
+
 		}catch(error){
-			logger.error('Error while performing ping');
+			logger.error('Error while performing play.');
+			console.log(error)
 		}
 	}
 };

@@ -1,44 +1,67 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const logger = require('../util/logger').log
-const music = require('@koenie06/discord.js-music');
+const { QueueRepeatMode } = require('discord-player');
 
 module.exports = 
 {
 	data: new SlashCommandBuilder()
 		.setName('repeat')
-		.setDescription('repeat song')
-        .addBooleanOption(option => option.setName('onoff').setDescription('repeat a song').setRequired(true)),
-
+		.setDescription('Repeat a song')
+		.addIntegerOption(option =>
+			option.setName('mode')
+				.setDescription('Set the repeat mode:')
+				.setRequired(true)
+				.addChoices(
+					{ name: 'Off', value: QueueRepeatMode.OFF },
+					{ name: 'Track', value: QueueRepeatMode.TRACK },
+					{ name: 'Queue', value: QueueRepeatMode.QUEUE },
+					{ name: 'Autoplay', value: QueueRepeatMode.AUTOPLAY },
+	
+				)),
+        
 	async execute(interaction)
 	{
 		try{
-			const OnOrOff = interaction.options.getBoolean('onoff');
-			var queue = [] ;
-
-			try{
-				queue = await(music.getQueue({ interaction: interaction }));	
-			}catch(error){
-				logger.error('Error while get music.getQueue in reapeat')
-			}
-
-			var songs = Object.keys(queue).length ;
+			const loopMode = interaction.options.getInteger('mode');
+			console.log(whatmodeisit(loopMode))
 			
-			if(songs >= 1){
-				music.repeat({
-					interaction: interaction,
-					value: OnOrOff
-				});
-				return interaction.reply('repeat music '+OnOrOff);
-			}else{
-				if(songs < 1){ 
-					interaction.reply('no song in queue');
-				}else{
-					logger.info(`${await(interaction.user.username)} destroyed the matrix while performing reapeat`)	
-				}
-				
+			const { client } = require('../index');
+
+			const repeatEmbed = new EmbedBuilder()
+			.setColor('#e30926')
+			.setTitle('Repeat mode')
+			.setDescription(whatmodeisit(loopMode))
+
+			const queue = client.player.getQueue(interaction.guild.id);
+			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being playing!' });
+			const success = queue.setRepeatMode(loopMode);
+			if (success === true) {
+				return void interaction.reply({ embeds: [repeatEmbed] });
+			} else {
+				return void logger.debug('Could not update reapeat mode!')
 			}
+			
+
 		}catch(error){
-				logger.error('Error while performing reapeat');
+				logger.error('Error while performing reapeat.');
+				console.log(error)
 		}
 	},
 };
+
+function whatmodeisit(mode){
+	switch (mode) {
+		case 0: return 'Repeat was turned off!'
+				
+		case 1: return 'Repeat was put into track mode!'
+		
+		case 2: return 'Repeat was put into queue mode!'
+	
+		case 3: return 'Repeat was put into autoplay mode!'
+
+	
+		default: logger.debug('Unknown repeat mode!')
+			break;
+	}
+
+}

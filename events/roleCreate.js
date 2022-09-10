@@ -1,5 +1,5 @@
 const logger = require('../util/logger').log
-const { MessageEmbed, Permissions } = require('discord.js');
+const { EmbedBuilder, AuditLogEvent  } = require('discord.js');
 const { sendMessage } = require('../index.js')
 const {logchannel, roleCreateLogging, roleCreateLoggingCollore} = require('../data/logger.json')
 
@@ -10,7 +10,7 @@ module.exports = {
 				
 					let auditfetch = await role.guild.fetchAuditLogs({
 						limit: 1,											//used to lock ad the audit log
-						type: 'ROLE_CREATE',
+						type: AuditLogEvent.RoleCreate,
 					});
 
 					let aditinfo = auditfetch.entries.first();
@@ -21,7 +21,7 @@ module.exports = {
 					let botname = role.client.user.username;
 					let boticon = role.client.user.displayAvatarURL();
 				
-					const Embed = new MessageEmbed()
+					const Embed = new EmbedBuilder()
 					.setColor(roleCreateLoggingCollore)
 					.setTitle('A role has bin Created')
 					.setAuthor({ name: botname,

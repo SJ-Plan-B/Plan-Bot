@@ -59,7 +59,7 @@ module.exports = {
               logger.warn('Cannot identify join/leave Event')
         }
 
-		} catch (error) {
+		}catch (error) {
 			logger.error('Error while performing JoinLeave')
 		}
 	},

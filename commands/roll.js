@@ -1,13 +1,13 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const logger = require('../util/logger').log
 
 module.exports = 
 {
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('roll')
-		.setDescription('roll a Dice')
-        .addIntegerOption(option => option.setName('anzahl').setDescription('anzahl der würfe').setRequired(true))
-        .addIntegerOption(option => option.setName('seitenzahl').setDescription('Seitenzahl des würfels').setRequired(true)),
+		.setDescription('Roll a Dice')
+        .addIntegerOption(option => option.setName('anzahl').setDescription('Amount of rolls:').setRequired(true))
+        .addIntegerOption(option => option.setName('seitenzahl').setDescription('Sides of dice:').setRequired(true)),
 
 	async execute(interaction) // Funktion des Comands
 	{
@@ -22,10 +22,10 @@ module.exports =
                 }
             try{
                     let ausgabe = ergebnis.join(', ');  
-                    return interaction.reply({ content: `you have rolled : \`${ausgabe}\`.`,});
+                    interaction.reply({ content: `You have rolled : \`${ausgabe}\`.`,});
             }catch(error) 
                 {
-                    logger.error('Error while joining array in roll Command')
+                    logger.error('Error while joining array in roll.')
                 }
             
 		}catch(error){
@@ -41,5 +41,5 @@ try {
     return Math.floor(Math.random() * (max - min)) + min;
     }		
 } catch (error) {
-    console.error('Error while performing Random Calculation in roll Command')
+    console.error('Error while performing random calculation in roll.')
 }
