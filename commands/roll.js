@@ -6,15 +6,15 @@ module.exports =
 	data: new SlashCommandBuilder() // Comand REG
 		.setName('roll')
 		.setDescription('Roll a Dice')
-        .addIntegerOption(option => option.setName('anzahl').setDescription('Amount of rolls:').setRequired(true))
-        .addIntegerOption(option => option.setName('seitenzahl').setDescription('Sides of dice:').setRequired(true)),
+        .addIntegerOption(option => option.setName('amount').setDescription('Amount of rolls:').setRequired(true))
+        .addIntegerOption(option => option.setName('sides').setDescription('Sides of dice:').setRequired(true)),
 
 	async execute(interaction) // Funktion des Comands
 	{
         try{
             var ergebnis = []
-            const anzahl  = interaction.options.getInteger('anzahl');
-            const seitenzahl = interaction.options.getInteger('seitenzahl');
+            const anzahl  = interaction.options.getInteger('amount');
+            const seitenzahl = interaction.options.getInteger('sides');
 
             for(let index = 0; index < anzahl; index++)
                 {
