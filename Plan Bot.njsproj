@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4173718d-04ed-4955-a79c-0f895070ae5b}</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectView>ShowAllFiles</ProjectView>
+    <StartupFile>start.js</StartupFile>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">17.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <StartWebBrowser>False</StartWebBrowser>
+    <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Content Include=".gitattributes" />
+    <Content Include=".gitignore" />
+    <Content Include="CONTRIBUTING.md" />
+    <Content Include="deploy-commands.js" />
+    <Content Include="events.js" />
+    <Content Include="index.js" />
+    <Content Include="LICENSE.md" />
+    <Content Include="package-lock.json" />
+    <Content Include="package.json" />
+    <Content Include="Plan Bot.njsproj" />
+    <Content Include="README.md" />
+    <Content Include="start.js" />
+    <Content Include="commands\3D20.js" />
+    <Content Include="commands\addchanneldupe.js" />
+    <Content Include="commands\addrolereaction.js" />
+    <Content Include="commands\avatar.js" />
+    <Content Include="commands\beep.js" />
+    <Content Include="commands\burger.js" />
+    <Content Include="commands\cat.js" />
+    <Content Include="commands\coconut.js" />
+    <Content Include="commands\coinflip.js" />
+    <Content Include="commands\d20.js" />
+    <Content Include="commands\d4.js" />
+    <Content Include="commands\d6.js" />
+    <Content Include="commands\fuchs.js" />
+    <Content Include="commands\gans.js" />
+    <Content Include="commands\jump.js" />
+    <Content Include="commands\kick.js" />
+    <Content Include="commands\listchanneldupe.js" />
+    <Content Include="commands\listrolereaction.js" />
+    <Content Include="commands\message-embed.js" />
+    <Content Include="commands\options-info.js" />
+    <Content Include="commands\pause.js" />
+    <Content Include="commands\ping.js" />
+    <Content Include="commands\play.js" />
+    <Content Include="commands\prune.js" />
+    <Content Include="commands\removechanneldupe.js" />
+    <Content Include="commands\removerolereaction.js" />
+    <Content Include="commands\repeat.js" />
+    <Content Include="commands\resume.js" />
+    <Content Include="commands\roll.js" />
+    <Content Include="commands\sendrolereaction.js" />
+    <Content Include="commands\server.js" />
+    <Content Include="commands\showqueue.js" />
+    <Content Include="commands\shuffle.js" />
+    <Content Include="commands\skip.js" />
+    <Content Include="commands\sprichdeutsch.js" />
+    <Content Include="commands\stop.js" />
+    <Content Include="commands\surrender.js" />
+    <Content Include="commands\user-info.js" />
+    <Content Include="commands\volume.js" />
+    <Content Include="data\counter.json" />
+    <Content Include="data\example.comand.json" />
+    <Content Include="data\example.config.json" />
+    <Content Include="data\example.db.json" />
+    <Content Include="data\example.event.json" />
+    <Content Include="data\example.logger.json" />
+    <Content Include="deprecated\duplicatechannel.js" />
+    <Content Include="deprecated\removefromqueue" />
+    <Content Include="events\channelCreate.js" />
+    <Content Include="events\channelDelete.js" />
+    <Content Include="events\disconnect.js" />
+    <Content Include="events\guildBanAdd.js" />
+    <Content Include="events\guildBanRemove.js" />
+    <Content Include="events\guildMemberAdd.js" />
+    <Content Include="events\guildMemberRemove.js" />
+    <Content Include="events\interactionCreate.js" />
+    <Content Include="events\JoinLeave.js" />
+    <Content Include="events\messageCreate.js" />
+    <Content Include="events\messageDelete.js" />
+    <Content Include="events\ready.js" />
+    <Content Include="events\reconnecting.js" />
+    <Content Include="events\roleCreate.js" />
+    <Content Include="events\roleDelete.js" />
+    <Content Include="events\roleUpdate.js" />
+    <Content Include="information\discordjs-Events" />
+    <Content Include="information\interaction.js" />
+    <Content Include="information\music" />
+    <Content Include="information\test.sql" />
+    <Content Include="information\usercount.txt" />
+    <Content Include="util\cascadingChannels_DB.js" />
+    <Content Include="util\customfunctions.js" />
+    <Content Include="util\logger.js" />
+    <Content Include="util\role_reaction_DB.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="commands" />
+    <Folder Include="data" />
+    <Folder Include="deprecated" />
+    <Folder Include="events" />
+    <Folder Include="information" />
+    <Folder Include="util" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

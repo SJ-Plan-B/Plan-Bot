@@ -1,0 +1,3 @@
+I:\GIT\Plan-Bot\obj\Debug\Plan Bot.njsproj.AssemblyReference.cache
+I:\GIT\Plan-Bot\obj\Debug\Plan Bot.njsproj.CoreCompileInputs.cache
+I:\GIT\Plan-Bot\bin\Microsoft.NodejsTools.WebRole.dll
