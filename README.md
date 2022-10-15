@@ -49,3 +49,4 @@ This bot should have all the functions that all servers need: <br>
  - [zlib-sync](https://www.npmjs.com/package/zlib-sync "zlib-sync npm site")
  - [erlpack](https://github.com/discord/erlpack "erlpack github site")
  - [edit-json-file](https://www.npmjs.com/package/edit-json-file "edit-json-file npm site")
+ - [zlib-sync](https://www.npmjs.com/package/zlib-sync "zlib-sync npm site")
