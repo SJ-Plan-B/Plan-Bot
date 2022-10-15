@@ -4,11 +4,11 @@
   "description": "Discord-Bot",
   "main": "start.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./start.js"
   },
   "repository": {
     "type": "git",
-    "url": "Plan-Bot"
+    "url": "https://github.com/SJ-Plan-B/Plan-Bot"
   },
   "author": "Sidney Schmidt, Joshua Leon Keggenhoff",
   "license": "Apache License 2.0",
