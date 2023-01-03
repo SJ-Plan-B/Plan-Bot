@@ -40,13 +40,14 @@ module.exports =
 					 value: 'Some value here', inline: true 
 					},
 			)
-			.addField('Inline field title', 'Some value here', true)
+			.addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
 			.setImage('https://i.imgur.com/AfFp7pu.png')
 			.setTimestamp(Date.now())
 			.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 		
 		interaction.reply({ embeds: [exampleEmbed] });
 		}catch(error){
+			console.log(error)
 			logger.error('Error while performing message-embed.')
 		}
 	},

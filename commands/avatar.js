@@ -13,9 +13,11 @@ module.exports =
 		try{
 			const user = interaction.options.getUser('target');
 
-			if(user)
-			return interaction.reply(`${await(user.username)}'s avatar: ${await(user.displayAvatarURL({ dynamic: true }))}`);
-			return interaction.reply(`Your avatar: ${await(interaction.user.displayAvatarURL({ dynamic: true }))}`);
+			if(user){
+			await interaction.reply(`${await(user.username)}'s avatar: ${await(user.displayAvatarURL({ dynamic: true }))}`)
+			} else {
+			await interaction.reply(`Your avatar: ${await(interaction.user.displayAvatarURL({ dynamic: true }))}`)
+		}
 		}catch(error){
 			logger.error('Error while performing avatar.'); 
 		}

@@ -1,14 +1,9 @@
 const logger = require('../util/logger').log
-const { cascadingChannels_DB_host, cascadingChannels_DB_port, cascadingChannels_DB_user, cascadingChannels_DB_password, cascadingChannels_DB_database } =require('../data/db.json')
+const { cascadingChannels_DB_database } =require('../data/db.json')
 var mysql = require('mysql');
+var db = require('../util/cascadingChannels_DB')
 
-var con = mysql.createConnection({
-    host: cascadingChannels_DB_host, 
-    port: cascadingChannels_DB_port,
-    user: cascadingChannels_DB_user, 
-    password: cascadingChannels_DB_password,
-    database: cascadingChannels_DB_database,
-});
+var pool = db.pool
 
 module.exports = {
 	name: "voiceStateUpdate",
@@ -17,7 +12,7 @@ module.exports = {
 
         var newUserChannel = newState.channelId //new channel
         var oldUserChannel = oldState.channelId //old channel
-        
+
         if(oldUserChannel === null && newUserChannel !== null) {
 
             // User Joins a voice channel
@@ -38,17 +33,29 @@ module.exports = {
 
         } else if(oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel){
             // User change a voice channel
-            if (toString(await querychannelcount(newUserChannel)) === 1 && toString(await querychannelcount(oldUserChannel)) === 0){
-              channeldupe(newState)
+            if (toString(await querychannelcount(newUserChannel)) === 0 && toString(await querychannelcount(oldUserChannel)) === 0){
+              
+            // irelvent zu irelevant
+
             }else if(toString(await querychannelcount(newUserChannel)) === 0 && toString(await querychannelcount(oldUserChannel)) === 1){
-              channeldupe(oldState)
+              
+             channeldupe(oldState)
+
+            }else if(toString(await querychannelcount(newUserChannel)) === 1 && toString(await querychannelcount(oldUserChannel)) === 0){
+
+              channeldupe(newState)
+
             }else if (toString((await querychannelcount(oldUserChannel)) === 1 && toString(await querychannelcount(newUserChannel)) === 1) && oldState.channel.name !== newState.channel.name){
+
               channeldupe(newState)
               channeldupe(oldState)
+
             }else if(toString((await querychannelcount(oldUserChannel)) === 1 && toString(await querychannelcount(newUserChannel)) === 1) && oldState.channel.name == newState.channel.name){
-             channeldupe(oldState)
+
+              channeldupe(oldState)
+
             }else{
-             //irrelevant channel 
+              logger.error('JoinLeave check invalide ')
             }
 
         }else if(oldUserChannel === newUserChannel){
@@ -67,7 +74,7 @@ module.exports = {
 
 async function channeldupe(voiceState){
   try {  
-
+  if (await(checkForCloneOf(voiceState.channel.name) !== null)){ 
    var channelIds = splitObjIntoArrayOfString(await(checkForCloneOf(voiceState.channel.name)))
    var emptyChannelsId = []
 
@@ -76,7 +83,7 @@ async function channeldupe(voiceState){
       emptyChannelsId[index] = channelIds[index]
     } else {
       //Not Relevent
-    }  
+    } 
    }
 
    var emptyChannelsId = emptyChannelsId.filter(function (el) {return el != null;});
@@ -91,7 +98,7 @@ async function channeldupe(voiceState){
     }
   }else {
     logger.error("strange channel behaivor in JoinLeave")
-   }
+   }} 
 
   } catch (error) {
     logger.error("Error while performing channeldupe in JoinLeave")
@@ -104,11 +111,13 @@ function querychannelcount(channelId){
           var Inserts = [channelId]
           sql = mysql.format(sql, Inserts);
           return new Promise((resolve, reject) => {
-            con.query(sql, (err, result) => {
-                return err ? reject(err) : resolve(result);
+            pool.query(sql, (err, result) => {
+                return err ? reject(err) : resolve(result) ;
               }
             );
+
           }
+          
         );
       } catch (error) {
       logger.error(`Error while performing 'SELECT' in the database: ${cascadingChannels_DB_database}, in Event JoinLeave`); 
@@ -121,7 +130,7 @@ function checkForCloneOf(channelName){
         var Inserts = [channelName]
         sql = mysql.format(sql, Inserts);
         return new Promise((resolve, reject) => {
-          con.query(sql, (err, result) => {
+          pool.query(sql, (err, result) => {
               return err ? reject(err) : resolve(result);
             }
           );
@@ -137,7 +146,7 @@ function addChannel(name, channelid){
     var sql = "INSERT INTO  channels (name, id) SELECT * FROM ( SELECT ? AS channelName, ?) AS dataQuery ON DUPLICATE KEY UPDATE name=channelName";
     var Inserts = [name, channelid,]
     sql = mysql.format(sql, Inserts);
-    con.query(sql, function (err, result) {
+    pool.query(sql, function (err, result) {
       if (err) throw err;
       logger.http(`Inserted a new chanel into database: ${cascadingChannels_DB_database}, table: channels`)
           }
@@ -153,7 +162,7 @@ function removeChannel(channelid){
       var Inserts = [channelid]
       sql = mysql.format(sql, Inserts);
       return new Promise((resolve, reject) => {
-        con.query(sql, (err, result) => {
+        pool.query(sql, (err, result) => {
             return err ? reject(err) : resolve(result);
           }
         );

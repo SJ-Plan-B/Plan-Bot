@@ -24,7 +24,7 @@ module.exports = {
     
                 file.set(variablenname, wertdervariable);
 
-                logger.http(`\"${variablenname}\" has been changed \"${wertdervariable}\" in the file \"${jsondateiname}\".`);
+                logger.http(`"${variablenname}" has been changed "${wertdervariable}" in the file "${jsondateiname}".`);
                 return true
             } catch (error) {
                 logger.error('Error while performing writetojson in customfunctions');

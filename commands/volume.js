@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
+const { useQueue } = require('discord-player')
 const logger = require('../util/logger').log
 
 module.exports = 
@@ -14,20 +15,24 @@ module.exports =
             const { client } = require('../index');
             const vol  = interaction.options.getInteger('volume');
         
-            const queue = client.player.getQueue(interaction.guild.id);
-            if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
+            const queue = useQueue(interaction.guild.id);
 
-            if (!vol) return void interaction.reply({ content: `Current volume is **${queue.volume}**%!` });
+			await interaction.deferReply();
 
-            if (vol < 0 || vol > 100) return void interaction.reply({ content: 'Volume range must be 0-100%' });
+            if (!queue || !queue.node.isPlaying()) return void interaction.editReply({ content: 'No music is being played!' });
+
+            if (!vol) return void interaction.editReply({ content: `Current volume is **${client.player.volume}**%!` });
+
+            if (vol < 0 || vol > 100) return void interaction.editReply({ content: 'Volume range must be 0-100%' });
             
-            const success = queue.setVolume(vol);
-            return void interaction.reply({
+            const success = queue.node.setVolume(vol);
+            return void interaction.editReply({
                 content: success ? `Volume set to **${vol}%**!` : 'Something went wrong!'
             });
             
         }catch(error){
             logger.error('Error while performing volume.')
+            console.log(error)
         }
         
 	},

@@ -17,10 +17,13 @@ module.exports =
 			.setTitle('Resume')
 			.setDescription(`${await(interaction.user.username)} has resumed the queue.`)
 
-			const queue = client.player.getQueue(interaction.guild.id);
-			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
-			const paused = queue.setPaused(false);
-			if (paused) return void interaction.reply({ embeds: [resumEmbed] });
+			const queue = client.player.nodes.get(interaction.guild.id);
+
+			await interaction.deferReply();
+
+			if (!queue || !queue.node.isPlaying()) return void interaction.editReply({ content: 'No music is being played!' });
+			const paused = queue.node.pause();
+			if (paused) return void interaction.editReply({ embeds: [resumEmbed] });
 		
 		}catch(error){
 				logger.error('Error while performing resume.');

@@ -5,6 +5,7 @@ const logger = require('./util/logger').log;
 const {Client, GatewayIntentBits, Partials, Collection, InteractionType} = require('discord.js');
 const {token} = require('./data/config.json');
 const { Player } = require('discord-player');
+const { SoundCloudExtractor, YouTubeExtractor } = require('@discord-player/extractor');
 const { registerPlayerEvents } = require('./events');
 
 
@@ -28,6 +29,7 @@ const client = new Client(
 			]});
 
 	client.player = new Player(client);
+	client.player.extractors.register(YouTubeExtractor, {});
 	registerPlayerEvents(client.player);
 
 module.exports = {
@@ -40,6 +42,7 @@ module.exports = {
 		//
 		// event-handling
 		//
+
 		const eventsPath = path.join(__dirname, 'events');
 		const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
@@ -57,6 +60,7 @@ module.exports = {
 		//
 		// command-handling
 		//
+
 		client.commands = new Collection();
 		const commandsPath = path.join(__dirname, 'commands');
 		const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
@@ -70,13 +74,13 @@ module.exports = {
 
 
 		client.on('interactionCreate', async interaction => {
+			try {
 			if (!interaction.type === InteractionType.ApplicationCommand) return;
 			const command = client.commands.get(interaction.commandName);
 			const channelID = interaction.channel.id;
-			const channel = interaction.channel;
 			if (!command) return;
 
-			try {
+			
 				if (interaction.partial){
 					interaction.reply("please try again")
 				}else if (interaction.commandName === 'prune') {
@@ -87,17 +91,7 @@ module.exports = {
 
 				}else{
 					const worker = new Worker('./commands/'+interaction.commandName+'.js', {workerData: await(command.execute(interaction))});
-
-					//worker.postMessage(interaction);
-
-					worker.on('message', result => {logger.debug('worker'+ result)});
-			
 					worker.on('error', error => {logger.error('worker error'+ error)});
-			
-					worker.on('exit', exitCode => {
-					if(exitCode != 0)
-					{logger.verbose(exitCode)}
-					;})
 				}
 
 			} catch (error) {
@@ -110,6 +104,7 @@ module.exports = {
 		//
 		//Login
 		//
+		
 		client.login(token);
 	},
 
@@ -123,7 +118,7 @@ module.exports = {
 				client.channels.cache.get(channel).send(message);	
 			} catch (error) {
 				logger.error('Error while performing sendMessage in Index')
-				console.log(error)
+				console.error(error)
 			}
 	}
 

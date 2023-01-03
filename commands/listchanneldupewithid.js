@@ -10,14 +10,17 @@ var pool = db.pool
 module.exports = 
 {
 	data: new SlashCommandBuilder() // Comand REG
-		.setName('listchanneldupe')
-		.setDescription('List of channels to be duplicated.')
+		.setName('listchanneldupewithid')
+		.setDescription('List of channels to be duplicated by id.')
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
 	async execute(interaction) // Funktion des Comands
 	{
 		try{
-          interaction.reply('Channels to be duplicated: \n'+'\`' + splitObjIntoArrayOfString(await(getchannellist())).join(`\n`) + '\`');
+          await interaction.deferReply()
+          //console.log(await(getchannellist()))
+          await interaction.editReply('Channels to be duplicated: \n'+'\`' + splitObjIntoArrayOfString(await(getchannellist())).join("") + '\`');
+          
 		}catch(error){
 			logger.error('Error while performing listchanneldupe.'); 
 		}
@@ -26,7 +29,7 @@ module.exports =
 };
 function getchannellist(){
     try {
-        var sql = "SELECT DISTINCT name FROM channels";
+        var sql = "SELECT name, id FROM channels order by name";
         sql = mysql.format(sql);
         return new Promise((resolve, reject) => {
           pool.query(sql, (err, result) => {
@@ -40,6 +43,7 @@ function getchannellist(){
     }	
 };
 
+
 function splitObjIntoArrayOfString(obj){
 
     let myJSON = JSON.stringify(obj);
@@ -47,7 +51,10 @@ function splitObjIntoArrayOfString(obj){
   
     for (let index = 0; index < Object.keys(myArray).length; index++) {
         myArray[index] = myArray[index].replace(/{"name":"/, '')
-        myArray[index] = myArray[index].replace(/"}/g, '')
+        myArray[index] = myArray[index].replace(/"/g, '')
+        myArray[index] = myArray[index].replace(/id:/, ' : ')
+        myArray[index] = myArray[index].replace(/}/g, '')
+        if(index%2==1){myArray[index] = myArray[index].concat(`\n`)}
     }
   
     myArray[0] = myArray[0].replace('[', '')

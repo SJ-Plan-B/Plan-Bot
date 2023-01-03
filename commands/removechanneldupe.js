@@ -1,16 +1,11 @@
 const { SlashCommandBuilder, ChannelType } = require('discord.js');
 const { PermissionFlagsBits } = require('discord-api-types/v10');
 const logger = require('../util/logger').log;
-const { cascadingChannels_DB_host, cascadingChannels_DB_port, cascadingChannels_DB_user, cascadingChannels_DB_password, cascadingChannels_DB_database } =require('../data/db.json')
+const { cascadingChannels_DB_database } =require('../data/db.json')
 var mysql = require('mysql');
+var db = require('../util/cascadingChannels_DB')
 
-var con = mysql.createConnection({
-    host: cascadingChannels_DB_host, 
-    port: cascadingChannels_DB_port,
-    user: cascadingChannels_DB_user, 
-    password: cascadingChannels_DB_password,
-    database: cascadingChannels_DB_database,
-});
+var pool = db.pool
 
 module.exports = 
 {
@@ -34,7 +29,7 @@ module.exports =
 					var sql = "DELETE FROM channels Where name = ?";
 					var Inserts = [name]
 					sql = mysql.format(sql, Inserts);
-					con.query(sql, function (err, result) {
+					pool.query(sql, function (err, result) {
 						if (err) throw err;
 						logger.http(`Deleting channel ${name} from database: ${cascadingChannels_DB_database}, table: channels.`)
 						if (result.affectedRows > 0) {
@@ -52,9 +47,6 @@ module.exports =
 			}else{
 				interaction.reply('The selected channel is not a voice channel.')
 			}
-
-			con.end(function(err) {
-			logger.http(`A connection to database: ${cascadingChannels_DB_database} has been terminated!`)})
 
 		}catch(error){
 			logger.error('Error while performing removechanneldupe'); 

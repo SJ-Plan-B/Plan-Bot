@@ -1,6 +1,6 @@
 const winston = require('winston');
 require('winston-daily-rotate-file');
-const {console_log_lvl} = require('../data/config.json')
+const console_log_lvl = "silly"
 
 
 var transportallevents = new (winston.transports.DailyRotateFile)({
