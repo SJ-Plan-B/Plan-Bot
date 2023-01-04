@@ -57,16 +57,16 @@ module.exports =
 					return void interaction.reply({ embeds: [voiceEmbed] });
 				}
 
-				
 				const playEmbed = new EmbedBuilder()
 				.setColor('#e30926')
 				.setTitle('Playing')
 				.setDescription(`The bot is now playing ${searchResult.playlist ? 'the playlist '+searchResult.tracks[0].playlist.title+' with '+searchResult.tracks[0].playlist.tracks.length+' songs' : 'the song '+searchResult.tracks[0].title}`)
 				.setThumbnail('https://cdn-icons-png.flaticon.com/512/1384/1384060.png')
-		
+				
 				await interaction.reply({ embeds: [playEmbed] });
 				searchResult.playlist ? queue.addTracks(searchResult.tracks) : queue.addTrack(searchResult.tracks[0]);
 				if (!queue.playing) await queue.play();
+				if(queue.playing) queue.setVolume(5);
 	
 
 		}catch(error){
