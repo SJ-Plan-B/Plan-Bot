@@ -12,14 +12,14 @@ module.exports =
 	async execute(interaction)
 	{
 		try {
-				const song = command_cat_song_link
+				const song = command_geisterbahn_song_link
 				const channel = interaction.member.voice.channel;
 
 				const geisterbahnEmbed = new EmbedBuilder()
 				.setColor('#60a8a1')
 				.setTitle('Geisterbahn')
 				.setDescription(`${await(interaction.user.username)} Fährt mit der geisterbahn`)
-				.setThumbnail(command_cat_picture_link)
+				.setThumbnail(command_geisterbahn_picture_link)
 
 
 				const voiceEmbed = new EmbedBuilder()
