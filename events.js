@@ -15,7 +15,6 @@ module.exports.registerPlayerEvents = (player) => {
 
     player.on("connectionCreate", (queue, track) => {
         queue.setVolume(3)
-        //queue.metadata.send(`Track **${track.title}** queued!`);
     });
 
     player.on("botDisconnect", (queue) => {
