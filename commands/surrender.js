@@ -68,12 +68,13 @@ module.exports =
 
 			searchResult.playlist ? queue.addTracks(searchResult.tracks) : queue.addTrack(searchResult.tracks[0]);
 			if (!queue.playing) await queue.play();
-			if(queue.playing) await queue.setVolume(1);
+			
  
 			let output = Number((newcountervalue))
 			let counted = cfs.writetojsonvariabl(jsonvariable, output, jsonfile, jsonsubfolder)
 
 			if(counted === true)interaction.reply({ embeds: [surrenderEmbed] });
+			if(queue.playing) await queue.setVolume(1);
 					
 		} catch (error) {
 			logger.error('Error while performing surrender.')
