@@ -66,7 +66,6 @@ module.exports =
 				await interaction.reply({ embeds: [playEmbed] });
 				searchResult.playlist ? queue.addTracks(searchResult.tracks) : queue.addTrack(searchResult.tracks[0]);
 				if (!queue.playing) await queue.play();
-				if(queue.playing) await queue.setVolume(1);
 	
 
 		}catch(error){

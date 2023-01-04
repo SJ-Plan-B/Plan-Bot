@@ -1,4 +1,6 @@
 const logger = require('./util/logger').log;
+const { Standart_Volumen } = require ('./data/comand.json');
+
 module.exports.registerPlayerEvents = (player) => {
 
     player.on("error", (queue, error) => {
@@ -10,12 +12,11 @@ module.exports.registerPlayerEvents = (player) => {
 
     player.on("trackStart", (queue, track) => {
         queue.metadata.send(`Der Bot spielt jetzt **${track.title}** in dem Channel **${queue.connection.channel.name}**!`)
-        queue.setVolume(3)
+        queue.setVolume(Standart_Volumen)
     });
 
     player.on("connectionCreate", (queue, track) => {
-        queue.setVolume(3)
-        //queue.metadata.send(`Track **${track.title}** queued!`);
+        queue.setVolume(Standart_Volumen)
     });
 
     player.on("botDisconnect", (queue) => {
