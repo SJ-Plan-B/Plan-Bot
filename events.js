@@ -9,7 +9,8 @@ module.exports.registerPlayerEvents = (player) => {
     });
 
     player.on("trackStart", (queue, track) => {
-        queue.metadata.send(`Der Bot spielt jetzt **${track.title}** in dem Channel **${queue.connection.channel.name}**!`);
+        queue.metadata.send(`Der Bot spielt jetzt **${track.title}** in dem Channel **${queue.connection.channel.name}**!`)
+        queue.setVolume(1)
     });
 
     player.on("trackAdd", (queue, track) => {
