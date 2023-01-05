@@ -10,5 +10,8 @@
     "message_leave_embed_collor" : "Color Hex code",
     "message_leave_header" : "New Member!",
     "message_leave_1" : "Philip und Korbi Haben ",
-    "message_leave_2" : "Vertriben!"
+    "message_leave_2" : "Vertriben!",
+
+    "enable_defalt_roll" : false,
+    "default" : ""
 }
