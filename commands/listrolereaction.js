@@ -3,14 +3,9 @@ const { PermissionFlagsBits } = require('discord-api-types/v10');
 const logger = require('../util/logger').log;
 const { role_reaction_DB_host, role_reaction_DB_port, role_reaction_DB_user, role_reaction_DB_password, role_reaction_DB_database } =require('../data/db.json')
 var mysql = require('mysql');
+var db = require('../util/role_reaction_DB')
 
-var con = mysql.createConnection({
-    host: role_reaction_DB_host, 
-    port: role_reaction_DB_port,
-    user: role_reaction_DB_user, 
-    password: role_reaction_DB_password,
-    database: role_reaction_DB_database,
-});
+var pool = db.pool
 
 module.exports = 
 {
@@ -27,8 +22,6 @@ module.exports =
 			logger.error('Error while performing listrolereaction.'); 
 		}
 
-    con.end(function(err) {
-    logger.http(`A connection to database: ${role_reaction_DB_database} has been terminated!`)})
 	},
 };
 function getrolelist(){
@@ -36,7 +29,7 @@ function getrolelist(){
         var sql = "SELECT DISTINCT name FROM roles";
         sql = mysql.format(sql);
         return new Promise((resolve, reject) => {
-          con.query(sql, (err, result) => {
+          pool.query(sql, (err, result) => {
               return err ? reject(err) : resolve(result);
             }
           );

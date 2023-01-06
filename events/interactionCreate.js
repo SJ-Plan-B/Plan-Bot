@@ -1,14 +1,9 @@
 const logger = require('../util/logger').log
 const { role_reaction_DB_host, role_reaction_DB_port, role_reaction_DB_user, role_reaction_DB_password, role_reaction_DB_database } =require('../data/db.json')
 var mysql = require('mysql');
+var db = require('../util/role_reaction_DB')
 
-var con = mysql.createConnection({
-    host: role_reaction_DB_host, 
-    port: role_reaction_DB_port,
-    user: role_reaction_DB_user, 
-    password: role_reaction_DB_password,
-    database: role_reaction_DB_database,
-})
+var pool = db.pool
 
 module.exports = {
 	name: 'interactionCreate',
@@ -54,7 +49,7 @@ function getroleID(rollid){
 		var Inserts = [rollid]
 		sql = mysql.format(sql, Inserts);
 		return new Promise((resolve, reject) => {
-		  con.query(sql, (err, result) => {
+		  pool.query(sql, (err, result) => {
 			  return err ? reject(err) : resolve(result);
 			}
 		  );
