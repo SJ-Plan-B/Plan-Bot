@@ -8,11 +8,11 @@ module.exports = {
 	async execute(member) {
 		var nickname = getname(member)
 		welcomen_message(member, nickname)
-		standart_role(member, nickname, default_roll_id, enable_defalt_roll)
+		standart_role(member, default_roll_id, enable_defalt_roll)
 	}
 }
 
-function standart_role(member, nickname, rollid, enable){
+function standart_role(member, rollid, enable){
 		
 		if (enable === true){
 			member.roles.set([rollid])

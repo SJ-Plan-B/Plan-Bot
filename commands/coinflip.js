@@ -10,7 +10,7 @@ module.exports =
 	async execute(interaction) // Funktion des Comands
 	{
 		try{
-			const zahl = getRandomArbitrary(2)
+			const zahl = getRandomArbitrary()
 			let ausgabe;
 			switch(zahl)
 			{
@@ -29,9 +29,9 @@ module.exports =
 	},
 };
 try {
-	function getRandomArbitrary(max) 
+	function getRandomArbitrary() 
 	{
-	return Math.floor(Math.random() * max);
+	return Math.round(Math.random());
 	}
 } catch (error) {
 	logger.error('Error while performing Random Calculation In coinflip');

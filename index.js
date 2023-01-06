@@ -40,6 +40,7 @@ module.exports = {
 		//
 		// event-handling
 		//
+
 		const eventsPath = path.join(__dirname, 'events');
 		const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
@@ -57,6 +58,7 @@ module.exports = {
 		//
 		// command-handling
 		//
+
 		client.commands = new Collection();
 		const commandsPath = path.join(__dirname, 'commands');
 		const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
@@ -73,7 +75,6 @@ module.exports = {
 			if (!interaction.type === InteractionType.ApplicationCommand) return;
 			const command = client.commands.get(interaction.commandName);
 			const channelID = interaction.channel.id;
-			const channel = interaction.channel;
 			if (!command) return;
 
 			try {
@@ -110,6 +111,7 @@ module.exports = {
 		//
 		//Login
 		//
+		
 		client.login(token);
 	},
 
@@ -123,7 +125,7 @@ module.exports = {
 				client.channels.cache.get(channel).send(message);	
 			} catch (error) {
 				logger.error('Error while performing sendMessage in Index')
-				console.log(error)
+				console.error(error)
 			}
 	}
 

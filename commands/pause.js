@@ -17,7 +17,6 @@ module.exports =
 			.setColor('#e30926')
 			.setTitle('Music paused')
 			.setDescription(`${await(interaction.user.username)} has paused the music,`)
-
 	
 			const queue = client.player.getQueue(interaction.guild.id);
 			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
@@ -28,7 +27,6 @@ module.exports =
 			} else {
 				return void interaction.reply({ content: 'Something went wrong!' });
 			}
-			
 
 		}catch(error){
 			logger.error('Error while performing pause,')
