@@ -3,14 +3,9 @@ const { PermissionFlagsBits } = require('discord-api-types/v10');
 const logger = require('../util/logger').log;
 const { cascadingChannels_DB_host, cascadingChannels_DB_port, cascadingChannels_DB_user, cascadingChannels_DB_password, cascadingChannels_DB_database } =require('../data/db.json')
 var mysql = require('mysql');
+var db = require('../util/cascadingChannels_DB')
 
-var con = mysql.createConnection({
-    host: cascadingChannels_DB_host, 
-    port: cascadingChannels_DB_port,
-    user: cascadingChannels_DB_user, 
-    password: cascadingChannels_DB_password,
-    database: cascadingChannels_DB_database,
-});
+var pool = db.pool
 
 module.exports = 
 {
@@ -34,7 +29,7 @@ module.exports =
 					var sql = "INSERT INTO  channels (name, id) SELECT * FROM ( SELECT ? AS channelName, ?) AS dataQuery ON DUPLICATE KEY UPDATE name=channelName";
 					var Inserts = [name, channelid,]
 					sql = mysql.format(sql, Inserts);
-					con.query(sql, function (err, result) {
+					pool.query(sql, function (err, result) {
 						if (err) throw err;
 						logger.http(`Inserted ${name} into database: ${cascadingChannels_DB_database}, table: channels.`)
 						interaction.reply(`Channel \`${name}\` was added to channel dupe.`);
