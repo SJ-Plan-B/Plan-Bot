@@ -126,7 +126,7 @@ module.exports = {
 				client.channels.cache.get(channel).send(message);	
 			} catch (error) {
 				logger.error('Error while performing sendMessage in Index')
-				console.log(error)
+				console.error(error)
 			}
 	}
 
