@@ -75,7 +75,6 @@ module.exports = {
 			if (!interaction.type === InteractionType.ApplicationCommand) return;
 			const command = client.commands.get(interaction.commandName);
 			const channelID = interaction.channel.id;
-			const channel = interaction.channel;
 			if (!command) return;
 
 			try {

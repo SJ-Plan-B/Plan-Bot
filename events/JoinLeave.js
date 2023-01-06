@@ -1,5 +1,5 @@
 const logger = require('../util/logger').log
-const { cascadingChannels_DB_host, cascadingChannels_DB_port, cascadingChannels_DB_user, cascadingChannels_DB_password, cascadingChannels_DB_database } =require('../data/db.json')
+const { cascadingChannels_DB_database } =require('../data/db.json')
 var mysql = require('mysql');
 var db = require('../util/cascadingChannels_DB')
 
@@ -62,7 +62,7 @@ module.exports = {
 
 async function channeldupe(voiceState){
   try {  
-
+  if (await(checkForCloneOf(voiceState.channel.name) === null)){ return; }
    var channelIds = splitObjIntoArrayOfString(await(checkForCloneOf(voiceState.channel.name)))
    var emptyChannelsId = []
 

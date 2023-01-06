@@ -3,7 +3,7 @@ const { PermissionFlagsBits } = require('discord-api-types/v10');
 const { sendMessage } = require('../index.js')
 var mysql = require('mysql');
 const logger = require('../util/logger').log
-const { role_reaction_DB_host, role_reaction_DB_port, role_reaction_DB_user, role_reaction_DB_password, role_reaction_DB_database } =require('../data/db.json')
+const { role_reaction_DB_database } =require('../data/db.json')
 const { rollereact_title, rollereact_collor, rollereact_text } =require('../data/comand.json')
 var db = require('../util/role_reaction_DB')
 

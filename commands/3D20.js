@@ -12,10 +12,7 @@ module.exports =
 	{
 		
 		try{
-			const rolle1 = getRandomArbitrary(1, 20)
-			const rolle2 = getRandomArbitrary(1, 20)
-			const rolle3 = getRandomArbitrary(1, 20)
-			interaction.reply({content: `You have rolled: ${rolle1} ${rolle2} ${rolle3}.`});
+			interaction.reply({content: `You have rolled: ${getRandomArbitrary(1, 20)} ${getRandomArbitrary(1, 20)} ${getRandomArbitrary(1, 20)}.`});
 		}catch(error){
 			logger.error('Error while performing 3D20.'); 
 		} 
@@ -25,8 +22,6 @@ module.exports =
 	try {
 		function getRandomArbitrary(min, max)
 		{
-		min = Math.ceil(min);
-		max = Math.floor(max);
 		return Math.floor(Math.random() * ( max - min )) + min;
 		}
 	}catch(error){

@@ -26,7 +26,6 @@ module.exports =
 			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
 			
 			const trackIndex = tracks - 1;
-			const trackName = queue.tracks[trackIndex].title;
 			queue.jump(trackIndex);
 	
 			interaction.reply({ embeds: [jumpEmbed] });

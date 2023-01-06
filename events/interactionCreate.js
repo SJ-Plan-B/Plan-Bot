@@ -1,5 +1,5 @@
 const logger = require('../util/logger').log
-const { role_reaction_DB_host, role_reaction_DB_port, role_reaction_DB_user, role_reaction_DB_password, role_reaction_DB_database } =require('../data/db.json')
+const { role_reaction_DB_database } =require('../data/db.json')
 var mysql = require('mysql');
 var db = require('../util/role_reaction_DB')
 
