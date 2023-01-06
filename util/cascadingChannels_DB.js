@@ -14,6 +14,7 @@ var pool  = mysql.createPool({
   });
 
 module.exports = {
+    pool,
     cascadingChannels_DB(){
         pool.getConnection(function(err, connection) {
             if (err) throw err;
