@@ -1,6 +1,6 @@
 {
   "name": "plan-bot",
-  "version": "1.4.6.3",
+  "version": "1.4.6.5",
   "description": "Discord-Bot",
   "main": "start.js",
   "scripts": {
