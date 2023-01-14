@@ -47,7 +47,8 @@ module.exports =
 						highWaterMark: 1 << 30,
 						dlChunkSize: 0,
 					},
-					metadata: channel
+					metadata: channel,
+					disableEqualizer: true
 				});
 
 				try {
