@@ -72,12 +72,13 @@ module.exports = {
 
 
 		client.on('interactionCreate', async interaction => {
+			try {
 			if (!interaction.type === InteractionType.ApplicationCommand) return;
 			const command = client.commands.get(interaction.commandName);
 			const channelID = interaction.channel.id;
 			if (!command) return;
 
-			try {
+			
 				if (interaction.partial){
 					interaction.reply("please try again")
 				}else if (interaction.commandName === 'prune') {
@@ -88,17 +89,7 @@ module.exports = {
 
 				}else{
 					const worker = new Worker('./commands/'+interaction.commandName+'.js', {workerData: await(command.execute(interaction))});
-
-					//worker.postMessage(interaction);
-
-					worker.on('message', result => {logger.debug('worker'+ result)});
-			
 					worker.on('error', error => {logger.error('worker error'+ error)});
-			
-					worker.on('exit', exitCode => {
-					if(exitCode != 0)
-					{logger.verbose(exitCode)}
-					;})
 				}
 
 			} catch (error) {
