@@ -51,13 +51,18 @@ module.exports =
 			if (!searchResult || !searchResult.tracks.length) return void logger.error('The fuchs link is invalid!');
 	
 			const queue = await client.player.createQueue(guild, {
+				leaveOnEnd: true,
+				leaveOnStop: true,
+				leaveOnEmpty: true,
+				leaveOnEmptyCooldown: 300000,
+				disableEqualizer: true,
 				ytdlOptions: {
-					filter: 'audioonly',
+					filter: "audioonly",
+					opusEncoded: true,
+					quality: "highestaudio",
 					highWaterMark: 1 << 30,
-					dlChunkSize: 0,
 				},
 				metadata: channel,
-				disableEqualizer: true
 			});
 
 			try {
