@@ -63,9 +63,6 @@ module.exports =
 					return void interaction.reply({ embeds: [voiceEmbed] });
 				}
 
-
-				searchResult.playlist ? await queue.addTracks(searchResult.tracks) : await queue.addTrack(searchResult.tracks[0]);
-				if (!queue.playing) await queue.play();
 				const playEmbed = new EmbedBuilder()
 				.setColor('#e30926')
 				.setTitle('Playing')
@@ -73,6 +70,10 @@ module.exports =
 				.setThumbnail('https://cdn-icons-png.flaticon.com/512/1384/1384060.png')
 				
 				await interaction.reply({ embeds: [playEmbed] });
+
+				searchResult.playlist ? await queue.addTracks(searchResult.tracks) : await queue.addTrack(searchResult.tracks[0]);
+				if (!queue.playing) await queue.play();
+
 		}catch(error){
 			logger.error('Error while performing play.');
 			console.log(error)
