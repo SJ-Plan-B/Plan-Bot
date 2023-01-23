@@ -29,7 +29,7 @@
     "mysql": "^2.18.1",
     "opusscript": "^0.0.8",
     "sodium": "^3.0.2",
-    "utf-8-validate": "^6.0.0",
+    "utf-8-validate": "^6.0.1",
     "winston": "^3.8.2",
     "winston-daily-rotate-file": "^4.7.1",
     "ytdl-core": "^4.11.2",
