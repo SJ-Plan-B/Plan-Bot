@@ -13,7 +13,6 @@ module.exports =
 	{
 
 		try{
-			const { client } = require('../index');
 			const channel = interaction.member.voice.channel;
 			const song = interaction.options.getString('song');
 
@@ -28,7 +27,8 @@ module.exports =
 				.setTitle('Error')
 				.setDescription(`${await(interaction.user.username)} You must be in a Voicechannel`)
 				.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
-
+				
+				const { client } = require('../index');
 				const guild = interaction.guild
 				const searchResult = await client.player
 					.search(song, {
@@ -42,15 +42,20 @@ module.exports =
 				if (!searchResult || !searchResult.tracks.length) return void interaction.reply({ embeds: [nosongEmbed] });
 		
 				const queue = await client.player.createQueue(guild, {
+					leaveOnEnd: true,
+					leaveOnStop: true,
+					leaveOnEmpty: true,
+					leaveOnEmptyCooldown: 300000,
+					disableEqualizer: true,
 					ytdlOptions: {
-						filter: 'audioonly',
+						filter: "audioonly",
+						opusEncoded: true,
+						quality: "highestaudio",
 						highWaterMark: 1 << 30,
-						dlChunkSize: 0,
 					},
 					metadata: channel,
-					disableEqualizer: true
-				});
-
+					
+				});				
 				try {
 					if (!queue.connection) await queue.connect(channel);
 				} catch {
@@ -65,7 +70,8 @@ module.exports =
 				.setThumbnail('https://cdn-icons-png.flaticon.com/512/1384/1384060.png')
 				
 				await interaction.reply({ embeds: [playEmbed] });
-				searchResult.playlist ? queue.addTracks(searchResult.tracks) : queue.addTrack(searchResult.tracks[0]);
+
+				searchResult.playlist ? await queue.addTracks(searchResult.tracks) : await queue.addTrack(searchResult.tracks[0]);
 				if (!queue.playing) await queue.play();
 
 		}catch(error){
