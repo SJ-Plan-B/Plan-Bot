@@ -18,7 +18,7 @@ module.exports =
 			.setTitle('Music paused')
 			.setDescription(`${await(interaction.user.username)} has paused the music,`)
 	
-			const queue = client.player.getQueue(interaction.guild.id);
+			const queue = client.player.nodes.get(interaction.guild.id);
 			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
 			const paused = queue.setPaused(true);
 			

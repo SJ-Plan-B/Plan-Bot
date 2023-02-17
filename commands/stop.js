@@ -11,7 +11,7 @@ module.exports =
 	{
 		try{
 			const { client } = require('../index');
-			const queue = client.player.getQueue(interaction.guild.id);
+			const queue = client.player.nodes.get(interaction.guild.id);
 			const stopEmbed = new EmbedBuilder()
 			.setColor('#e30926')
 			.setTitle('Stop')

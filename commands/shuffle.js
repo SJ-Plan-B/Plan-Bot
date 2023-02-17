@@ -17,7 +17,7 @@ module.exports =
 			.setTitle('Shuffle')
 			.setDescription(`${await(interaction.user.username)} has shuffled the queue.`)
 
-			const queue = client.player.getQueue(interaction.guild.id);
+			const queue = client.player.nodes.get(interaction.guild.id);
             if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
         
             await queue.shuffle();
