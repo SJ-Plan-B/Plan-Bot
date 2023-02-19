@@ -57,8 +57,9 @@ module.exports =
 					
 				});				
 				try {
-					if (!queue.connection) await queue.connect(channel);
-				} catch {
+					await queue.connect(interaction.member.voice.channel);
+				} catch(error) {
+					console.log(error)
 					void client.player.deleteQueue(guild.id);
 					return void interaction.reply({ embeds: [voiceEmbed] });
 				}
