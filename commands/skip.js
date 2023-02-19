@@ -14,7 +14,7 @@ module.exports =
 
   
 
-			const queue = client.player.nodes.get(interaction.guild.id);
+			const queue = client.player.getQueue(interaction.guild.id);
 			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
 			const currentTrack = queue.current;
 			const success = queue.skip();

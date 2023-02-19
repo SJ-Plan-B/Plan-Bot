@@ -17,7 +17,7 @@ module.exports =
 			.setTitle('Resume')
 			.setDescription(`${await(interaction.user.username)} has resumed the queue.`)
 
-			const queue = client.player.nodes.get(interaction.guild.id);
+			const queue = client.player.getQueue(interaction.guild.id);
 			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
 			const paused = queue.setPaused(false);
 			if (paused) return void interaction.reply({ embeds: [resumEmbed] });

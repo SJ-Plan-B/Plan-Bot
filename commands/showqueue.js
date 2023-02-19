@@ -14,7 +14,7 @@ module.exports =
 			let page = interaction.options.getInteger('page');
 			const { client } = require('../index');
         
-			const queue = client.player.nodes.get(interaction.guild.id);
+			const queue = client.player.getQueue(interaction.guild.id);
 			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
 			if (!page) page = 1;
 			

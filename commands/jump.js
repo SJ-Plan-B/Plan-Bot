@@ -22,7 +22,7 @@ module.exports =
 	
 			if (!tracks || tracks<2) tracks = 2;
 			
-			const queue = client.player.nodes.get(interaction.guild.id);
+			const queue = client.player.getQueue(interaction.guild.id);
 			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
 			
 			const trackIndex = tracks - 1;

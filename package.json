@@ -36,7 +36,6 @@
     "utf-8-validate": "^6.0.2",
     "winston": "^3.8.2",
     "winston-daily-rotate-file": "^4.7.1",
-    "ytdl-core": "^4.11.2",
     "zlib-sync": "^0.1.8"
   }
 }

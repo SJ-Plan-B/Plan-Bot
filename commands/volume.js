@@ -14,7 +14,7 @@ module.exports =
             const { client } = require('../index');
             const vol  = interaction.options.getInteger('volume');
         
-            const queue = client.player.nodes.get(interaction.guild.id);
+            const queue = client.player.getQueue(interaction.guild.id);
             if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
 
             if (!vol) return void interaction.reply({ content: `Current volume is **${queue.volume}**%!` });

@@ -32,7 +32,7 @@ module.exports =
 			.setTitle('Repeat mode')
 			.setDescription(whatmodeisit(loopMode))
 
-			const queue = client.player.nodes.get(interaction.guild.id);
+			const queue = client.player.getQueue(interaction.guild.id);
 			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being playing!' });
 			const success = queue.setRepeatMode(loopMode);
 			if (success === true) {
