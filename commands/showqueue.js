@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const logger = require('../util/logger').log
 
 module.exports = 
@@ -11,38 +11,38 @@ module.exports =
 	async execute(interaction)
 	{
 		try {
-			let page = interaction.options.getInteger('page');
+			let pagesNum = interaction.options.getInteger('page');
 			const { client } = require('../index');
         
-			const queue = client.player.getQueue(interaction.guild.id);
-			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
-			if (!page) page = 1;
-			
-			const pageStart = 10 * (page - 1);
-			const pageEnd = pageStart + 10;
+			const queue = client.player.nodes.get(interaction.guild.id);
 
-			const currentTrack = queue.current;
-			const tracks = queue.tracks.slice(pageStart, pageEnd).map((m, i) => {
-				return `${i + pageStart + 1}. **${m.title}** ([link](${m.url}))`;
-			});
+			await interaction.deferReply();
+
+			if (!queue || !queue.node.isPlaying()) return void interaction.editReply({ content: 'No music is being played!' });
+			if (!pagesNum || pagesNum <= 0) pagesNum = 1;
+			
+			const tracks = queue.tracks.toArray().map((track, idx) => `**${++idx})** [${track.title}](${track.url})`);
 	
-			return void interaction.reply({
-				embeds: [
-					{
-						title: 'Server Queue',
-						description: `${tracks.join('\n')}${
-							queue.tracks.length > pageEnd
-								? `\n...${queue.tracks.length - pageEnd} more track(s)`
-								: ''
-						}`,
-						color: 0xff0000,
-						fields: [{ name: 'Now Playing', value: `🎶 | **${currentTrack.title}** ([link](${currentTrack.url}))` }]
-					}
-				]
+			if (pagesNum > 25) pagesNum = 25;
+	
+			for (let i = 0; i < pagesNum; i++) {
+			var list = tracks.slice(i * 5, i * 5 + 5).join('\n');
+			var out = i
+			}
+			const qeueembed = new EmbedBuilder()
+			.setColor('#e30926')
+			.setTitle('Server Queue')
+			.setDescription(await list || '**No more queued songs**')
+			.addFields([{ name: 'Now Playing', value: `[${queue.currentTrack?.title}](${queue.currentTrack?.url})` }])
+			.setFooter({
+				text: `Page ${out + 1} of ${pagesNum} | Total ${queue.tracks.size} tracks`
 			});
+
+				return void interaction.editReply({embeds: [qeueembed]})
 
 		} catch (error) {
 			logger.error('Error while performing showqueue.')
+			console.log(error)
 		}
 	}
 };
