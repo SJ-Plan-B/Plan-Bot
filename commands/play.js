@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const logger = require('../util/logger').log
 const { QueryType } = require('discord-player');
+const { Standart_Volumen } = require ('../data/comand.json');
 
 module.exports = 
 {
@@ -15,64 +16,54 @@ module.exports =
 		try{
 			const channel = interaction.member.voice.channel;
 			const song = interaction.options.getString('song');
+			const { client } = require('../index');
 
-				const nosongEmbed = new EmbedBuilder()
-				.setColor('#e30926')
-				.setTitle('Error')
-				.setDescription(`${await(interaction.user.username)} no song in link`)
-				.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
+			const voiceEmbed = new EmbedBuilder()
+			.setColor('#e30926')
+			.setTitle('Error')
+			.setDescription(`${await(interaction.user.username)} You must be in a Voicechannel`)
+			.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
 
-				const voiceEmbed = new EmbedBuilder()
-				.setColor('#e30926')
-				.setTitle('Error')
-				.setDescription(`${await(interaction.user.username)} You must be in a Voicechannel`)
-				.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
-				
-				const { client } = require('../index');
-				const guild = interaction.guild
+			if (!channel) return interaction.reply({ embeds: [voiceEmbed] }); 
+
+			await interaction.deferReply();	
+			try {
+				await client.player.play(channel, song, {
+										nodeOptions: {
+										metadata: {
+										channel: interaction.channel,
+										client: interaction.guild.members.me,
+										requestedBy: interaction.user,
+										},
+										selfDeaf: true,
+										volume: Standart_Volumen,
+										leaveOnEmpty: true,
+										leaveOnEmptyCooldown: 300000,
+										leaveOnEnd: true,
+										leaveOnEndCooldown: 300000,
+										},
+										});
+				} catch (error) {
+					return interaction.editReply(`Something went wrong: ${error}`);
+				}
+
 				const searchResult = await client.player
 					.search(song, {
 						requestedBy: interaction.user.username,
 						searchEngine: QueryType.AUTO
 					})
 					.catch(() => {
-						console.log('he');
+						console.log('error during resolve of the song in play function');
 					});
-					
-				if (!searchResult || !searchResult.tracks.length) return void interaction.reply({ embeds: [nosongEmbed] });
-		
-				const queue = await client.player.createQueue(guild, {
-					leaveOnEnd: true,
-					leaveOnStop: true,
-					leaveOnEmpty: true,
-					leaveOnEmptyCooldown: 300000,
-					disableEqualizer: true,
-					ytdlOptions: {
-						filter: "audioonly",
-						opusEncoded: true,
-						quality: "highestaudio",
-						highWaterMark: 1 << 30,
-					},
-					metadata: channel,
-					
-				});				
-				try {
-					if (!queue.connection) await queue.connect(channel);
-				} catch {
-					void client.player.deleteQueue(guild.id);
-					return void interaction.reply({ embeds: [voiceEmbed] });
-				}
-
-				const playEmbed = new EmbedBuilder()
-				.setColor('#e30926')
-				.setTitle('Playing')
-				.setDescription(`The bot is now playing ${searchResult.playlist ? 'the playlist '+searchResult.tracks[0].playlist.title+' with '+searchResult.tracks[0].playlist.tracks.length+' songs' : 'the song '+searchResult.tracks[0].title}`)
-				.setThumbnail('https://cdn-icons-png.flaticon.com/512/1384/1384060.png')
 				
-				await interaction.reply({ embeds: [playEmbed] });
 
-				searchResult.playlist ? await queue.addTracks(searchResult.tracks) : await queue.addTrack(searchResult.tracks[0]);
-				if (!queue.playing) await queue.play();
+			const playEmbed = new EmbedBuilder()
+			.setColor('#e30926')
+			.setTitle('Playing')
+			.setDescription(`The bot is now playing ${searchResult.playlist ? 'the playlist '+searchResult.tracks[0].playlist.title+' with '+searchResult.tracks[0].playlist.tracks.length+' songs' : 'the song '+searchResult.tracks[0].title}`)
+			.setThumbnail('https://cdn-icons-png.flaticon.com/512/1384/1384060.png')
+			
+			await interaction.editReply({ embeds: [playEmbed] });
 
 		}catch(error){
 			logger.error('Error while performing play.');

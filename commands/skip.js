@@ -12,19 +12,21 @@ module.exports =
 		try{
 			const { client } = require('../index');
 
-  
+			const queue = client.player.nodes.get(interaction.guild.id);
 
-			const queue = client.player.getQueue(interaction.guild.id);
-			if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
-			const currentTrack = queue.current;
-			const success = queue.skip();
+			await interaction.deferReply();
+
+			if (!queue || !queue.node.isPlaying()) return void interaction.editReply({ content: 'No music is being played!' });
+
+			const currentTrack = queue.currentTrack;
+			const success = queue.node.skip();
 
 			const skipEmbed = new EmbedBuilder()
 			.setColor('#e30926')
 			.setTitle('Skip')
 			.setDescription(`${await(interaction.user.username)} has skip the song:\n${currentTrack}`)      
 
-			if(success)return void interaction.reply({ embeds: [skipEmbed],});
+			if(success)return void interaction.editReply({ embeds: [skipEmbed],});
 
 		}catch(error){
 				logger.error('while performing skip.'); 

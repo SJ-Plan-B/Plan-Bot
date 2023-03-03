@@ -1,34 +1,21 @@
 const logger = require('./util/logger').log;
-const { Standart_Volumen } = require ('./data/comand.json');
+const { VoiceConnectionStatus } = require('@discordjs/voice');
 
 module.exports.registerPlayerEvents = (player) => {
 
-    player.on("error", (queue, error) => {
+    player.events.on("error", (queue, error) => {
         logger.error(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);
     });
-    player.on("connectionError", (queue, error) => {
+    player.events.on("playerError", (queue, error) => {
         logger.error(`[${queue.guild.name}] Error emitted from the connection: ${error.message}`);
     });
-
-    player.on("trackStart", (queue, track) => {
-        queue.metadata.send(`Der Bot spielt jetzt **${track.title}** in dem Channel **${queue.connection.channel.name}**!`)
-        queue.setVolume(Standart_Volumen)
-    });
-
-    player.on("connectionCreate", (queue, track) => {
-        queue.setVolume(Standart_Volumen)
-    });
-
-    player.on("botDisconnect", (queue) => {
-        //queue.metadata.send(" I was manually disconnected from the voice channel, clearing queue!");
-    });
-
-    player.on("channelEmpty", (queue) => {
-        //queue.metadata.send("Nobody is in the voice channel, leaving...");
-    });
-
-    player.on("queueEnd", (queue) => {
-        queue.metadata.send("Die Queue ist zuende");
-    });
-
+    player.events.on('connection', (queue) => {
+        queue.dispatcher.voiceConnection.on('stateChange', (oldState, newState) => {
+            if (oldState.status === VoiceConnectionStatus.Ready && newState.status === VoiceConnectionStatus.Connecting) {
+                queue.dispatcher.voiceConnection.configureNetworking();
+            }
+        });});
 };
+
+
+

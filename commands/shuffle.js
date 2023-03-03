@@ -12,17 +12,20 @@ module.exports =
 		try{
 			const { client } = require('../index');
 
+			const queue = client.player.nodes.get(interaction.guild.id);
+
+			await interaction.deferReply();
+
 			const shuffleEmbed = new EmbedBuilder()
 			.setColor('#e30926')
 			.setTitle('Shuffle')
 			.setDescription(`${await(interaction.user.username)} has shuffled the queue.`)
 
-			const queue = client.player.getQueue(interaction.guild.id);
-            if (!queue || !queue.playing) return void interaction.reply({ content: 'No music is being played!' });
+            if (!queue || !queue.node.isPlaying()) return void interaction.editReply({ content: 'No music is being played!' });
         
-            await queue.shuffle();
+            await queue.tracks.shuffle();
 
-            return void interaction.reply({ embeds: [shuffleEmbed] });
+            return void interaction.editReply({ embeds: [shuffleEmbed] });
 		
 		}catch(error){
 				logger.error('Error while performing shuffle.');

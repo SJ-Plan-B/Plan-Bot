@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { QueryType } = require('discord-player');
+const { Standart_Volumen } = require ('../data/comand.json');
 const fs = require('fs');
 const path = require('path');
 const cfs = require('../util/customfunctions.js')
@@ -38,47 +38,35 @@ module.exports =
 			.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Generic_error_message.png/250px-Generic_error_message.png')
 
 			const { client } = require('../index');
-			const guild = interaction.guild
-			const searchResult = await client.player
-				.search(song, {
-					requestedBy: interaction.user.username,
-					searchEngine: QueryType.AUTO
-				})
-				.catch(() => {
-					console.log('he');
-				});
-				
-			if (!searchResult || !searchResult.tracks.length) return void logger.error('The coconut link is invalid.');
-	
-			const queue = await client.player.createQueue(guild, {
-				leaveOnEnd: true,
-				leaveOnStop: true,
-				leaveOnEmpty: true,
-				leaveOnEmptyCooldown: 300000,
-				disableEqualizer: true,
-				ytdlOptions: {
-					filter: "audioonly",
-					opusEncoded: true,
-					quality: "highestaudio",
-					highWaterMark: 1 << 30,
-				},
-				metadata: channel,
-			});
 
+			if (!channel) return interaction.reply({ embeds: [voiceEmbed] }); 
+
+			await interaction.deferReply();	
+			
 			try {
-				if (!queue.connection) await queue.connect(channel);
-			} catch {
-				void client.player.deleteQueue(guild.id);
-				return void interaction.reply({ embeds: [voiceEmbed] });
-			}
-
-			searchResult.playlist ? queue.addTracks(searchResult.tracks) : queue.addTrack(searchResult.tracks[0]);
-			if (!queue.playing) await queue.play();
+				await client.player.play(channel, song, {
+										nodeOptions: {
+										metadata: {
+										channel: interaction.channel,
+										client: interaction.guild.members.me,
+										requestedBy: interaction.user,
+										},
+										selfDeaf: true,
+										volume: Standart_Volumen,
+										leaveOnEmpty: true,
+										leaveOnEmptyCooldown: 300000,
+										leaveOnEnd: true,
+										leaveOnEndCooldown: 300000,
+										},
+										});
+				} catch (error) {
+					return interaction.editReply(`Something went wrong: ${error}`);
+				}
 
 			let output = Number((newcountervalue))
 			let counted = cfs.writetojsonvariabl(jsonvariable, output, jsonfile, jsonsubfolder)
 
-			if(counted === true)interaction.reply({ embeds: [CoconutEmbed] });
+			if(counted === true)interaction.editReply({ embeds: [CoconutEmbed] });
 
 		} catch (error) {
 			logger.error('Error while performing coconut.')
