@@ -15,8 +15,8 @@ module.exports =
 	async execute(interaction)
 	{
 		try {
-			var datei = path.join(__dirname, '..', 'data', 'counter.json')
-			var { burgercounter } = JSON.parse(fs.readFileSync(datei, 'utf8'))
+			let datei = path.join(__dirname, '..', 'data', 'counter.json')
+			let { burgercounter } = JSON.parse(fs.readFileSync(datei, 'utf8'))
 			let channel = interaction.member.voice.channel;
 			let song = command_burger_song_link
 			let jsonfile = 'counter.json'
