@@ -23,7 +23,7 @@
     "@types/yt-search": "^2.3.2",
     "bufferutil": "^4.0.7",
     "discord-api-types": "^0.37.35",
-    "discord-player": "^6.0.0-dev.5",
+    "discord-player": "^6.1.0",
     "discord.js": "^14.7.1",
     "edit-json-file": "^1.7.0",
     "erlpack": "github:discord/erlpack",
