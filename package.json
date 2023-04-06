@@ -17,14 +17,14 @@
     "@discord-player/equalizer": "^0.2.1",
     "@discord-player/extractor": "^4.1.2",
     "@discordjs/opus": "^0.9.0",
-    "@discordjs/rest": "^1.6.0",
-    "@discordjs/voice": "^0.15.0",
+    "@discordjs/rest": "^1.7.0",
+    "@discordjs/voice": "^0.16.0",
     "@distube/ytdl-core": "^4.11.7",
     "@types/yt-search": "^2.3.2",
     "bufferutil": "^4.0.7",
     "discord-api-types": "^0.37.37",
     "discord-player": "^6.1.1",
-    "discord.js": "^14.8.0",
+    "discord.js": "^14.9.0",
     "edit-json-file": "^1.7.0",
     "erlpack": "github:discord/erlpack",
     "ffmpeg": "^0.0.4",
@@ -37,7 +37,7 @@
     "utf-8-validate": "^6.0.3",
     "winston": "^3.8.2",
     "winston-daily-rotate-file": "^4.7.1",
-    "ytdl-core": "^4.11.2",
+    "ytdl-core": "^4.11.3",
     "zlib-sync": "^0.1.8"
   }
 }
