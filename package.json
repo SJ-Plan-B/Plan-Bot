@@ -19,7 +19,7 @@
     "@discordjs/opus": "^0.9.0",
     "@discordjs/rest": "^1.7.0",
     "@discordjs/voice": "^0.16.0",
-    "@distube/ytdl-core": "^4.11.7",
+    "@distube/ytdl-core": "^4.11.8",
     "@types/yt-search": "^2.3.2",
     "bufferutil": "^4.0.7",
     "discord-api-types": "^0.37.37",
@@ -37,7 +37,6 @@
     "utf-8-validate": "^6.0.3",
     "winston": "^3.8.2",
     "winston-daily-rotate-file": "^4.7.1",
-    "ytdl-core": "^4.11.3",
     "zlib-sync": "^0.1.8"
   }
 }
