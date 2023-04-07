@@ -11,7 +11,7 @@ module.exports =
 	async execute(interaction) // Funktion des Comands
 	{
 		try{
-			interaction.reply('Boop!');
+			await interaction.reply('Boop!');
 		}catch (error){
 			logger.error('Error while performing Beep!');
 		}
