@@ -30,7 +30,6 @@ const client = new Client(
 
 	client.player = new Player(client);
 	client.player.extractors.register(YouTubeExtractor, {});
-	client.player.extractors.register(SoundCloudExtractor, {});
 	registerPlayerEvents(client.player);
 
 module.exports = {
