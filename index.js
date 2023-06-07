@@ -5,6 +5,7 @@ const logger = require('./util/logger').log;
 const {Client, GatewayIntentBits, Partials, Collection, InteractionType} = require('discord.js');
 const {token} = require('./data/config.json');
 const { Player } = require('discord-player');
+const { SoundCloudExtractor, YouTubeExtractor } = require('@discord-player/extractor');
 const { registerPlayerEvents } = require('./events');
 
 
@@ -28,6 +29,8 @@ const client = new Client(
 			]});
 
 	client.player = new Player(client);
+	client.player.extractors.register(YouTubeExtractor, {});
+	client.player.extractors.register(SoundCloudExtractor, {});
 	registerPlayerEvents(client.player);
 
 module.exports = {
