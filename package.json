@@ -4,7 +4,7 @@
   "description": "Discord-Bot",
   "main": "start.js",
   "scripts": {
-    "start": "npm i && node ./start.js"
+    "start": "npm i && node ./build.js && node ./start.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "erlpack": "github:discord/erlpack",
     "ffmpeg": "^0.0.4",
     "ffmpeg-static": "^5.1.0",
+    "js-yaml": "^4.1.0",
     "libsodium-wrappers": "^0.7.11",
     "mysql": "^2.18.1",
     "opusscript": "^0.0.8",

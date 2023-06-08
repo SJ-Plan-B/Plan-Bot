@@ -1,3 +1,4 @@
+const fs = require('fs');
 const { deploybot } = require('./deploy-commands.js');
 const { startbot } = require('./index.js');
 const { cascadingChannels_DB } = require('./util/cascadingChannels_DB.js');

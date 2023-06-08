@@ -1,0 +1,104 @@
+--- # configuration
+use_yaml_config: true
+
+# General config
+clientid: ""
+guildid: ""
+token: ""
+
+#db Config (mariadb/mysql)  
+
+cascadingChannels_DB_host: ""
+cascadingChannels_DB_port: ""
+cascadingChannels_DB_user: ""
+cascadingChannels_DB_password: ""
+cascadingChannels_DB_database: ""
+
+role_reaction_DB_host: ""
+role_reaction_DB_port: ""
+role_reaction_DB_user: ""
+role_reaction_DB_password: ""
+role_reaction_DB_database: ""
+
+# event
+
+log_messages_in_consol: ""
+
+message_welcome_chanel: ""
+message_welcome_embed_collor: ""
+message_welcome_header: ""
+message_welcome: ""
+
+message_leave_chanel: ""
+message_leave_embed_collor: ""
+message_leave_header: ""
+message_leave_1: ""
+message_leave_2: ""
+
+enable_defalt_roll: false
+default_roll_id: ""
+
+# commands alle values must be filled out
+
+Standart_Volumen: 1
+
+command_cat_song_link: ""
+command_cat_picture_link: ""
+
+command_surrender_song_link: ""
+command_surrender_picture_link: ""
+
+command_gans_song_link: ""
+command_gans_picture_link: ""
+
+command_fuchs_song_link: ""
+command_fuchs_picture_link: ""
+
+command_geisterbahn_song_link: ""
+command_geisterbahn_picture_link: ""
+
+command_coconut_song_link: ""
+command_coconut_picture_link: ""
+
+command_burger_song_link: ""
+command_burger_picture_link: ""
+
+rollereact_title : ""
+rollereact_collor : ""
+rollereact_text : ""
+
+# Logger
+
+logchannel : ""
+
+bot_icon : ""
+bot_nickname : ""
+
+ban_icon : ""
+
+guildBanRemoveLogging : false
+guildBanRemoveLoggingCollore : ""
+
+guildBanAddLogging : false
+guildBanAddLoggingCollore : ""
+
+guildMemberRemoveLogging : false
+guildMemberRemoveLoggingCollore : ""
+
+roleCreateLogging : false
+roleCreateLoggingCollore : ""
+
+roleDeleteLogging : false
+roleDeleteLoggingCollore : ""
+
+roleUpdateLogging : false
+roleUpdateLoggingCollore : ""
+
+channelCreateLogging : false
+channelCreateLoggingCollore : ""
+
+channelDeleteLogging : false
+channelDeleteLoggingCollore : ""
+
+messageDeleteLogging : false
+messageDeleteLoggingCollore : ""
