@@ -39,7 +39,7 @@ message_leave_2: ""
 enable_defalt_roll: false
 default_roll_id: ""
 
-# commands
+# commands alle values must be filled out
 
 Standart_Volumen: 1
 
@@ -67,3 +67,39 @@ command_burger_picture_link: ""
 rollereact_title : ""
 rollereact_collor : ""
 rollereact_text : ""
+
+# Logger
+
+logchannel : ""
+
+bot_icon : ""
+bot_nickname : ""
+
+ban_icon : ""
+
+guildBanRemoveLogging : false
+guildBanRemoveLoggingCollore : ""
+
+guildBanAddLogging : false
+guildBanAddLoggingCollore : ""
+
+guildMemberRemoveLogging : false
+guildMemberRemoveLoggingCollore : ""
+
+roleCreateLogging : false
+roleCreateLoggingCollore : ""
+
+roleDeleteLogging : false
+roleDeleteLoggingCollore : ""
+
+roleUpdateLogging : false
+roleUpdateLoggingCollore : ""
+
+channelCreateLogging : false
+channelCreateLoggingCollore : ""
+
+channelDeleteLogging : false
+channelDeleteLoggingCollore : ""
+
+messageDeleteLogging : false
+messageDeleteLoggingCollore : ""

@@ -1,6 +1,0 @@
-{
-    "clientId": "Your Client ID",
-	"guildId": "Server ID",
-    "token" : "Your Acces Token",
-    "console-log-lvl" : "info"
-}
