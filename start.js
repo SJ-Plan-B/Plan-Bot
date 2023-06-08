@@ -1,12 +1,10 @@
+const fs = require('fs');
 const { deploybot } = require('./deploy-commands.js');
 const { startbot } = require('./index.js');
 const { cascadingChannels_DB } = require('./util/cascadingChannels_DB.js');
 const { role_reaction_DB } = require('./util/role_reaction_DB.js');
-const { setconfig } = require('./util/yaml-converter');
 const logger = require('./util/logger').log;
 
-
-setconfig()
 
 // Send Comands to Discord API
 logger.info('Deploying Bot');

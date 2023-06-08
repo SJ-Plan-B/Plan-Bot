@@ -5,7 +5,6 @@ use_yaml_config: true
 clientid: ""
 guildid: ""
 token: ""
-console_log_lvl: ""
 
 #db Config (mariadb/mysql)  
 

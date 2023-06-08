@@ -9,9 +9,11 @@ module.exports = {
         let configuration = readyamlfile('./config.yaml', 'utf8' )
         if (configuration[0].use_yaml_config === true) {
             setinjason(configuration)
+            logger.info('all configs are phrased')
+            return true;
         } else {
             logger.info("Configuration YAML is skipt")
-            return;
+            return true;
         }
   
     }
@@ -25,8 +27,14 @@ async function setinjason(inputconfiguration){
     // db Config
     writjson("data","db.json",templates.dbconfig(inputconfiguration[2])) 
     
-    //Command 
+    // event Config
+    writjson("data","event.json",templates.eventconfig(inputconfiguration[3])) 
+
+    // Command Config
     writjson("data","comand.json",templates.commandconfig(inputconfiguration[4]))    
+
+    // logger Config
+    writjson("data","logger.json",templates.loggerconfig(inputconfiguration[5]))  
     
     
 }
@@ -38,6 +46,7 @@ function writjson(configfolder, configname, contents){
     fs.writeFile(filelocation, contents, function (err) {
         if (err) throw err;})
     
+    fs.readFileSync(filelocation, 'utf8')
     logger.info(`set configuration in ${configname}`)
     
 }
