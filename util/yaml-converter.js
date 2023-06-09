@@ -46,7 +46,6 @@ function writjson(configfolder, configname, contents){
     fs.writeFile(filelocation, contents, function (err) {
         if (err) throw err;})
     
-    fs.readFileSync(filelocation, 'utf8')
     logger.info(`set configuration in ${configname}`)
     
 }
