@@ -9,8 +9,8 @@ Dieser Bot soll alle Funktionen bekommen, die alle Server brauchen: <br>
 
 ## Installation DE
 1. Zur Installation der Abhängigkeiten einfach **`npm ci`** im Verzeichnis des Bots ausführen. <br>
-2. Trage deine Konfigurationen in die **`.json`** Dateien im **`data`** Ordner ein. <br>
-3. Entferne das **`example.`** am Anfang der **`.json`** Dateien im **`data`** Ordner. <br>
+2. Kopiren sie die **`config.yaml.example`** und bennenen die kopie um in **`config.yaml`** <br>
+3. Trage deine Konfiguratios daten in die **`config.yaml`** Datei ein. <br>
 4. Zum Starten des Bots **`npm start`**  im Verzeichnis des Bots ausführen.  <br>
 
 # Plan-Bot EN
@@ -24,8 +24,8 @@ This bot should have all the functions that all servers need: <br>
 
 ## Installation EN
 1. To install the dependencies, simply run **`npm ci`** in the bot's directory. <br>
-2. Enter your configurations in the **`.json`** Files in the **`data`** directory. <br>
-3. Remove the **`example.`** at the beginning of the **`.json`** Files in the **`data`** directory. <br>
+2. Copy the  **`config.yaml.example`** file and rename the copy to **`config.yaml`** <br>
+3. Enter your configuration data in the **`config.yaml`** File. <br>
 4. To start the bot, run **`npm start`** in the bot's directory.  <br>
 
 ## Dependencies
