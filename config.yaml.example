@@ -6,7 +6,7 @@ clientid: ""
 guildid: ""
 token: ""
 
-#db Config (mariadb/mysql)  
+--- #db Config (mariadb/mysql)  
 
 cascadingChannels_DB_host: ""
 cascadingChannels_DB_port: ""
@@ -20,7 +20,7 @@ role_reaction_DB_user: ""
 role_reaction_DB_password: ""
 role_reaction_DB_database: ""
 
-# event
+--- # event
 
 log_messages_in_consol: ""
 
@@ -38,7 +38,7 @@ message_leave_2: ""
 enable_defalt_roll: false
 default_roll_id: ""
 
-# commands alle values must be filled out
+--- # commands alle values must be filled out
 
 Standart_Volumen: 1
 
@@ -67,7 +67,7 @@ rollereact_title : ""
 rollereact_collor : ""
 rollereact_text : ""
 
-# Logger
+--- # Logger
 
 logchannel : ""
 
