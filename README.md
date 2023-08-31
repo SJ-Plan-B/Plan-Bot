@@ -1,11 +1,10 @@
 # Plan-Bot DE
 Plan Bot ist der Discord Bot, der sie alle vereinen soll ! <br>
 Dieser Bot soll alle Funktionen bekommen, die alle Server brauchen: <br>
-- selbst duplizierende Kanäle
+- duplizierende Kanäle
 - Begrüßung und Vorabscheidung von Nutzern
-- einen Musikbot
-- einen Würfelbot
-- und vieles mehr
+- Musikbot
+- Würfelbot
 
 ## Installation DE
 1. Zur Installation der Abhängigkeiten einfach **`npm ci`** im Verzeichnis des Bots ausführen. <br>
@@ -16,11 +15,10 @@ Dieser Bot soll alle Funktionen bekommen, die alle Server brauchen: <br>
 # Plan-Bot EN
 Plan bot is the discord bot that should unite them all ! <br>
 This bot should have all the functions that all servers need: <br>
-- self replicating Channel
+- replicating Channel
 - greeting and farewell of users
-- a music bot
-- a dice bot
-- and much more
+- music bot
+- dice bot
 
 ## Installation EN
 1. To install the dependencies, simply run **`npm ci`** in the bot's directory. <br>
