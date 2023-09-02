@@ -1,12 +1,12 @@
 --- # configuration
 use_yaml_config: true
 
-# General config
+--- # General config
 clientid: ""
 guildid: ""
 token: ""
 
---- #db Config (mariadb/mysql)  
+--- # db Config (mariadb/mysql)  
 
 cascadingChannels_DB_host: ""
 cascadingChannels_DB_port: ""
