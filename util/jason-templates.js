@@ -61,28 +61,7 @@ module.exports = {
 
         let filecontence = {
             "Standart_Volumen": input.Standart_Volumen,
-
-            "command_cat_song_link": input.command_cat_song_link,
-            "command_cat_picture_link": input.command_cat_picture_link,
-        
-            "command_surrender_song_link": input.command_surrender_song_link,
-            "command_surrender_picture_link": input.command_surrender_picture_link,
-        
-            "command_gans_song_link": input.command_gans_song_link,
-            "command_gans_picture_link": input.command_gans_picture_link,
-        
-            "command_fuchs_song_link": input.command_fuchs_song_link,
-            "command_fuchs_picture_link": input.command_fuchs_picture_link,
-        
-            "command_geisterbahn_song_link": input.command_geisterbahn_song_link,
-            "command_geisterbahn_picture_link": input.command_geisterbahn_picture_link,
-        
-            "command_coconut_song_link": input.command_coconut_song_link,
-            "command_coconut_picture_link": input.command_coconut_picture_link,
-        
-            "command_burger_song_link": input.command_burger_song_link,
-            "command_burger_picture_link": input.command_burger_picture_link,
-        
+       
             "rollereact_title" : input.rollereact_title,
             "rollereact_collor" : input.rollereact_collor,
             "rollereact_text" : input.rollereact_text
