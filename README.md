@@ -1,30 +1,26 @@
-# Plan-Bot DE
-Plan Bot ist der Discord Bot, der sie alle vereinen soll ! <br>
-Dieser Bot soll alle Funktionen bekommen, die alle Server brauchen: <br>
-- duplizierende Kanäle
-- Begrüßung und Vorabscheidung von Nutzern
-- Musikbot
-- Würfelbot
-
-## Installation DE
-1. Zur Installation der Abhängigkeiten einfach **`npm ci`** im Verzeichnis des Bots ausführen. <br>
-2. Kopiren sie die **`config.yaml.example`** und bennenen die kopie um in **`config.yaml`** <br>
-3. Trage deine Konfiguratios daten in die **`config.yaml`** Datei ein. <br>
-4. Zum Starten des Bots **`npm start`**  im Verzeichnis des Bots ausführen.  <br>
 
 # Plan-Bot EN
-Plan bot is the discord bot that should unite them all ! <br>
-This bot should have all the functions that all servers need: <br>
-- replicating Channel
-- greeting and farewell of users
+Plan bot is the discord bot that will unite them all ! <br>
+
+## Set of features
+- duplicating Voice
 - music bot
-- dice bot
+- role assignment
+- dice roller
+- tossing coins
+- welcome and
+- user welcome and goodbye
+- event logging
+
 
 ## Installation EN
 1. To install the dependencies, simply run **`npm ci`** in the bot's directory. <br>
 2. Copy the  **`config.yaml.example`** file and rename the copy to **`config.yaml`** <br>
 3. Enter your configuration data in the **`config.yaml`** File. <br>
 4. To start the bot, run **`npm start`** in the bot's directory.  <br>
+
+## Wiki
+https://github.com/SJ-Plan-B/Plan-Bot.wiki.git
 
 ## Dependencies
  - [Discord.js](https://discord.js.org/ "Discord.js site")
