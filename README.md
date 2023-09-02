@@ -8,7 +8,6 @@ Plan bot is the discord bot that will unite them all ! <br>
 - role assignment
 - dice roller
 - tossing coins
-- welcome and
 - user welcome and goodbye
 - event logging
 
