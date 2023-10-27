@@ -8,7 +8,6 @@ Plan bot is the discord bot that will unite them all ! <br>
 - role assignment
 - dice roller
 - tossing coins
-- welcome and
 - user welcome and goodbye
 - event logging
 
@@ -20,7 +19,7 @@ Plan bot is the discord bot that will unite them all ! <br>
 4. To start the bot, run **`npm start`** in the bot's directory.  <br>
 
 ## Wiki
-https://github.com/SJ-Plan-B/Plan-Bot.wiki.git
+[Plan-Bot Wiki](https://github.com/SJ-Plan-B/Plan-Bot/wiki)
 
 ## Dependencies
  - [Discord.js](https://discord.js.org/ "Discord.js site")
