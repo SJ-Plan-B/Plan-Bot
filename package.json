@@ -23,7 +23,7 @@
     "@discordjs/voice": "^0.16.0",
     "@types/yt-search": "^2.10.2",
     "bufferutil": "^4.0.8",
-    "discord-api-types": "^0.37.61",
+    "discord-api-types": "^0.37.69",
     "discord-player": "^6.6.6",
     "discord.js": "^14.13.0",
     "edit-json-file": "^1.7.0",
