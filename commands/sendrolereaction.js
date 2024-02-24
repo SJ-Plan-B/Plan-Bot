@@ -35,24 +35,33 @@ module.exports =
 						.setStyle('Primary'),
 				)
 				if ((index !==0) && ((index+1)%5 ==0) && first === true) {
-				const embed = new EmbedBuilder()
-					.setColor(rollereact_collor)
-					.setTitle(rollereact_title)
-					.setDescription(rollereact_text);
-		
-				
-				let message = { content: ' ', embeds: [embed], components: [row] }
-				await sendMessage(channelId,message)
-				first = false
-				row.components.splice(0,5)
+					const embed = new EmbedBuilder()
+						.setColor(rollereact_collor)
+						.setTitle(rollereact_title)
+						.setDescription(rollereact_text);
+			
+					
+					let message = { content: ' ', embeds: [embed], components: [row] }
+					await sendMessage(channelId,message)
+					first = false
+					row.components.splice(0,5)
+
 				}else if((index !==0) && ((index+1)%5 ==0) && first === false){
-				let message = { content: ' ', embeds: [], components: [row] }
-				await sendMessage(channelId,message)
+
+					let message = { content: ' ', embeds: [], components: [row] }
+
+					await sendMessage(channelId,message)
+					row.components.splice(0,5)
+
 				}else{
 					if (counter === Object.keys(roles).length) {
-
+												
 						let message = { content: ' ', embeds: [], components: [row] }
+
 						sendMessage(channelId, message)
+
+						row.components.splice(0,5)
+						
 					} else {
 					}
 				}
